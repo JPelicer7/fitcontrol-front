@@ -19,7 +19,7 @@ export function LoginForm() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
+    
     const { error } = await signIn.email({
       email,
       password,

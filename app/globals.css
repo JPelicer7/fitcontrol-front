@@ -44,7 +44,7 @@
 }
 
 @layer base {
-  /* Aplica o tema verde escuro independente de estar no modo claro ou escuro */
+  
   :root, .dark {
     --background: 220 20% 10%;
     --foreground: 210 20% 92%;
@@ -68,6 +68,7 @@
     --accent-foreground: 160 84% 80%;
 
     --destructive: 0 72% 51%;
+    /* //--destructive: 60 100% 100%; */
     --destructive-foreground: 0 0% 98%;
 
     --warning: 38 92% 50%;
