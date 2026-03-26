@@ -39,6 +39,7 @@ export type CreateUserBody = {
   plano: CreateUserBodyPlano;
   role: CreateUserBodyRole;
   Status: CreateUserBodyStatus;
+  telefone?: string;
 };
 
 export type CreateUser201 = {
@@ -56,9 +57,29 @@ export type CreateUser404 = {
   code: string;
 };
 
+export type CreateUser409 = {
+  error: string;
+  code: string;
+};
+
 export type CreateUser500 = {
   error: string;
   code: string;
+};
+
+export type GetUsersParams = {
+  name?: string;
+  Status?: unknown;
+  plano?: unknown;
+  /**
+   * @minimum 1
+   */
+  page?: number;
+  /**
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
 };
 
 export type GetUsers201UsersItemStatus =
@@ -91,6 +112,8 @@ export type GetUsers201UsersItem = {
 
 export type GetUsers201 = {
   totalUsers: number;
+  totalPages: number;
+  currentPage: number;
   users: GetUsers201UsersItem[];
 };
 
@@ -423,6 +446,11 @@ export type createUserResponse404 = {
   status: 404;
 };
 
+export type createUserResponse409 = {
+  data: CreateUser409;
+  status: 409;
+};
+
 export type createUserResponse500 = {
   data: CreateUser500;
   status: 500;
@@ -434,6 +462,7 @@ export type createUserResponseSuccess = createUserResponse201 & {
 export type createUserResponseError = (
   | createUserResponse401
   | createUserResponse404
+  | createUserResponse409
   | createUserResponse500
 ) & {
   headers: Headers;
@@ -495,14 +524,27 @@ export type getUsersResponseError = (
 
 export type getUsersResponse = getUsersResponseSuccess | getUsersResponseError;
 
-export const getGetUsersUrl = () => {
-  return `/user/`;
+export const getGetUsersUrl = (params?: GetUsersParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/user/?${stringifiedParams}`
+    : `/user/`;
 };
 
 export const getUsers = async (
+  params?: GetUsersParams,
   options?: RequestInit,
 ): Promise<getUsersResponse> => {
-  return customFetch<getUsersResponse>(getGetUsersUrl(), {
+  return customFetch<getUsersResponse>(getGetUsersUrl(params), {
     ...options,
     method: "GET",
   });
