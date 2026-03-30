@@ -2,6 +2,7 @@ import { ArrowLeft, Plus, Ruler, Weight, Activity, Calendar } from "lucide-react
 import Link from "next/link";
 
 import { getUser } from "@/app/_lib/api/fetch-generated";
+import BotaoNovaMedicao from "../_components/BotaoNovaMedicao";
 
 export default async function StudentProfilePage({
   params,
@@ -36,7 +37,7 @@ export default async function StudentProfilePage({
   // Helper para formatar os valores numéricos vindos do backend
   const formatNum = (num?: number | null, suffix = "") => {
     if (num === undefined || num === null) return "-";
-    return `${num.toFixed(1)} ${suffix}`;
+    return `${num.toFixed(2)} ${suffix}`;
   };
 
   
@@ -62,7 +63,7 @@ export default async function StudentProfilePage({
     { 
       label: "Altura", 
       value: formatNum(currentMedida?.alturaCentimetros ? currentMedida.alturaCentimetros / 100 : null, "m"), 
-      change: "-", // Altura não costuma mudar
+      change: "-", 
       icon: Ruler 
     },
     { 
@@ -115,7 +116,7 @@ export default async function StudentProfilePage({
         <div className="flex-1">
           <h1 className="text-3xl font-bold text-foreground">{user.name}</h1>
           <p className="text-muted-foreground mt-1 capitalize">
-            {/* Como a idade está na medida, pegamos da mais recente */}
+            {}
             {currentMedida?.idade ? `${currentMedida.idade} anos • ` : ""}
             Plano {user.plano}
           </p>
@@ -128,10 +129,11 @@ export default async function StudentProfilePage({
             {user.status}
           </span>
           
-          <button className="flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors">
+          {/* <button className="flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors">
             <Plus className="w-4 h-4" />
             Nova Medição
-          </button>
+          </button> */}
+          <BotaoNovaMedicao usuarioId={id} />
         </div>
       </div>
 
