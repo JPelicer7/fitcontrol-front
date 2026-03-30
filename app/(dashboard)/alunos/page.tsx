@@ -218,6 +218,7 @@ export default async function AlunosPage({
               alunos.map((student, index) => (
                 <tr key={index} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors">
                   <td className="py-3.5 px-5">
+                  <Link href={`/alunos/${student.id}`} className="flex items-center gap-3 group cursor-pointer">
                     <div className="flex items-center gap-3 group">
                       <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center text-primary font-bold text-sm">
                         {getIniciais(student.name)}
@@ -231,6 +232,7 @@ export default async function AlunosPage({
                         </p>
                       </div>
                     </div>
+                    </Link>
                   </td>
                   <td className="py-3.5 px-5">
                     <span className="text-sm text-secondary-foreground">{student.plano}</span>

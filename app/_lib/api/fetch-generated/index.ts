@@ -102,6 +102,7 @@ export const GetUsers201UsersItemPlano = {
 
 export type GetUsers201UsersItem = {
   name: string;
+  id: string;
   Status: GetUsers201UsersItemStatus;
   plano: GetUsers201UsersItemPlano;
   /** @nullable */
@@ -348,6 +349,8 @@ export type CreateMedidasBody = {
   antebraco_esq?: number;
   coxa_dir?: number;
   coxa_esq?: number;
+  panturrilha_dir?: number;
+  panturrilha_esq?: number;
   dobra_triceps?: number;
   dobra_supraescapular?: number;
   dobra_suprailica?: number;
