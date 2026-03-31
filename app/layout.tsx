@@ -35,7 +35,7 @@
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Toaster } from "sonner"; // 1. Importamos o Toaster aqui
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -49,7 +49,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FitControl | Login", // Nome atualizado na aba do navegador
+  title: "FitControl | Login", 
   description: "Sistema de gestão para sua academia",
 };
 
@@ -61,12 +61,12 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      // 2. Adicionamos a classe "dark" no final desta string 👇
+      
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
       <body className="min-h-full flex flex-col">
         {children}
-        {/* 3. Colocamos o Toaster no final do body */}
+        {}
         <Toaster richColors position="top-right" />
       </body>
     </html>

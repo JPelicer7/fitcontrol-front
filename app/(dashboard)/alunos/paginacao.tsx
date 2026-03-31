@@ -15,7 +15,7 @@ export function AlunosPaginacao({ currentPage, totalPages }: PaginacaoProps) {
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
-  // Se não tem alunos suficientes para dar mais de 1 página, nem renderizamos os botões
+  
   if (totalPages <= 1) return null;
 
   const handlePageChange = (newPage: number) => {
