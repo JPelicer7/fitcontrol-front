@@ -547,6 +547,35 @@ export type GetTransactions500 = {
   code: string;
 };
 
+export type FechaMes201 = {
+  message: string;
+};
+
+export type FechaMes401 = {
+  error: string;
+  code: string;
+};
+
+export type FechaMes404 = {
+  error: string;
+  code: string;
+};
+
+export type FechaMes405 = {
+  error: string;
+  code: string;
+};
+
+export type FechaMes409 = {
+  error: string;
+  code: string;
+};
+
+export type FechaMes500 = {
+  error: string;
+  code: string;
+};
+
 /**
  * @summary Create User
  */
@@ -1002,5 +1031,66 @@ export const getTransactions = async (
   return customFetch<getTransactionsResponse>(getGetTransactionsUrl(), {
     ...options,
     method: "GET",
+  });
+};
+
+/**
+ * @summary Fechamento do Mês
+ */
+export type fechaMesResponse201 = {
+  data: FechaMes201;
+  status: 201;
+};
+
+export type fechaMesResponse401 = {
+  data: FechaMes401;
+  status: 401;
+};
+
+export type fechaMesResponse404 = {
+  data: FechaMes404;
+  status: 404;
+};
+
+export type fechaMesResponse405 = {
+  data: FechaMes405;
+  status: 405;
+};
+
+export type fechaMesResponse409 = {
+  data: FechaMes409;
+  status: 409;
+};
+
+export type fechaMesResponse500 = {
+  data: FechaMes500;
+  status: 500;
+};
+
+export type fechaMesResponseSuccess = fechaMesResponse201 & {
+  headers: Headers;
+};
+export type fechaMesResponseError = (
+  | fechaMesResponse401
+  | fechaMesResponse404
+  | fechaMesResponse405
+  | fechaMesResponse409
+  | fechaMesResponse500
+) & {
+  headers: Headers;
+};
+
+export type fechaMesResponse = fechaMesResponseSuccess | fechaMesResponseError;
+
+export const getFechaMesUrl = () => {
+  return `/financeiro/fechaMes`;
+};
+
+export const fechaMes = async (
+  options?: RequestInit,
+): Promise<fechaMesResponse> => {
+  return customFetch<fechaMesResponse>(getFechaMesUrl(), {
+    ...options,
+    method: "POST",
   });
 };
