@@ -143,14 +143,6 @@ export const UpdateUserBodyPlano = {
   Anual: "Anual",
 } as const;
 
-export type UpdateUserBodyRole =
-  (typeof UpdateUserBodyRole)[keyof typeof UpdateUserBodyRole];
-
-export const UpdateUserBodyRole = {
-  Dono: "Dono",
-  Aluno: "Aluno",
-} as const;
-
 export type UpdateUserBodyStatus =
   (typeof UpdateUserBodyStatus)[keyof typeof UpdateUserBodyStatus];
 
@@ -162,8 +154,8 @@ export const UpdateUserBodyStatus = {
 export type UpdateUserBody = {
   name?: string;
   plano?: UpdateUserBodyPlano;
-  role?: UpdateUserBodyRole;
   Status?: UpdateUserBodyStatus;
+  telefone?: string;
 };
 
 export type UpdateUser201Plano =
@@ -174,14 +166,6 @@ export const UpdateUser201Plano = {
   Trimestral: "Trimestral",
   Semestral: "Semestral",
   Anual: "Anual",
-} as const;
-
-export type UpdateUser201Role =
-  (typeof UpdateUser201Role)[keyof typeof UpdateUser201Role];
-
-export const UpdateUser201Role = {
-  Dono: "Dono",
-  Aluno: "Aluno",
 } as const;
 
 export type UpdateUser201Status =
@@ -195,8 +179,9 @@ export const UpdateUser201Status = {
 export type UpdateUser201 = {
   name: string;
   plano: UpdateUser201Plano;
-  role: UpdateUser201Role;
   Status: UpdateUser201Status;
+  /** @nullable */
+  telefone?: string | null;
 };
 
 export type UpdateUser401 = {
@@ -271,6 +256,10 @@ export type GetUser200MedidasTodasItem = {
   coxa_dir: number | null;
   /** @nullable */
   coxa_esq: number | null;
+  /** @nullable */
+  panturrilha_dir: number | null;
+  /** @nullable */
+  panturrilha_esq: number | null;
   /** @nullable */
   dobra_triceps: number | null;
   /** @nullable */
@@ -427,6 +416,133 @@ export type UpdateMedidas404 = {
 };
 
 export type UpdateMedidas500 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTransactionBodyType =
+  (typeof CreateTransactionBodyType)[keyof typeof CreateTransactionBodyType];
+
+export const CreateTransactionBodyType = {
+  Receita: "Receita",
+  Despesa: "Despesa",
+} as const;
+
+export type CreateTransactionBodyCategoria =
+  (typeof CreateTransactionBodyCategoria)[keyof typeof CreateTransactionBodyCategoria];
+
+export const CreateTransactionBodyCategoria = {
+  Mensalidade: "Mensalidade",
+  Aluguel: "Aluguel",
+  Equipamentos: "Equipamentos",
+  Energia: "Energia",
+  Agua: "Agua",
+  Manutencao: "Manutencao",
+  Outros: "Outros",
+} as const;
+
+export type CreateTransactionBodyStatus =
+  (typeof CreateTransactionBodyStatus)[keyof typeof CreateTransactionBodyStatus];
+
+export const CreateTransactionBodyStatus = {
+  Pago: "Pago",
+  Pendente: "Pendente",
+  Cancelado: "Cancelado",
+} as const;
+
+export type CreateTransactionBody = {
+  type: CreateTransactionBodyType;
+  categoria: CreateTransactionBodyCategoria;
+  status: CreateTransactionBodyStatus;
+  descricao: string;
+  valor: number;
+  data_pagamento: unknown;
+  data_vencimento?: unknown;
+};
+
+export type CreateTransaction201 = {
+  id: string;
+  userId: string;
+};
+
+export type CreateTransaction401 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTransaction404 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTransaction409 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTransaction500 = {
+  error: string;
+  code: string;
+};
+
+export type GetTransactions201GraficoDespesasItem = {
+  categoria: string;
+  valor: number;
+};
+
+export type GetTransactions201TransactionsItemType =
+  (typeof GetTransactions201TransactionsItemType)[keyof typeof GetTransactions201TransactionsItemType];
+
+export const GetTransactions201TransactionsItemType = {
+  Receita: "Receita",
+  Despesa: "Despesa",
+} as const;
+
+export type GetTransactions201TransactionsItemCategoria =
+  (typeof GetTransactions201TransactionsItemCategoria)[keyof typeof GetTransactions201TransactionsItemCategoria];
+
+export const GetTransactions201TransactionsItemCategoria = {
+  Mensalidade: "Mensalidade",
+  Aluguel: "Aluguel",
+  Equipamentos: "Equipamentos",
+  Energia: "Energia",
+  Agua: "Agua",
+  Manutencao: "Manutencao",
+  Outros: "Outros",
+} as const;
+
+export type GetTransactions201TransactionsItem = {
+  type: GetTransactions201TransactionsItemType;
+  categoria: GetTransactions201TransactionsItemCategoria;
+  descricao: string;
+  valor: number;
+  data_pagamento: string;
+};
+
+export type GetTransactions201 = {
+  receitaTotal: number;
+  despesaTotal: number;
+  lucroLiquido: number;
+  graficoDespesas: GetTransactions201GraficoDespesasItem[];
+  transactions: GetTransactions201TransactionsItem[];
+};
+
+export type GetTransactions401 = {
+  error: string;
+  code: string;
+};
+
+export type GetTransactions404 = {
+  error: string;
+  code: string;
+};
+
+export type GetTransactions409 = {
+  error: string;
+  code: string;
+};
+
+export type GetTransactions500 = {
   error: string;
   code: string;
 };
@@ -770,4 +886,121 @@ export const updateMedidas = async (
       body: JSON.stringify(updateMedidasBody),
     },
   );
+};
+
+/**
+ * @summary Create Transaction
+ */
+export type createTransactionResponse201 = {
+  data: CreateTransaction201;
+  status: 201;
+};
+
+export type createTransactionResponse401 = {
+  data: CreateTransaction401;
+  status: 401;
+};
+
+export type createTransactionResponse404 = {
+  data: CreateTransaction404;
+  status: 404;
+};
+
+export type createTransactionResponse409 = {
+  data: CreateTransaction409;
+  status: 409;
+};
+
+export type createTransactionResponse500 = {
+  data: CreateTransaction500;
+  status: 500;
+};
+
+export type createTransactionResponseSuccess = createTransactionResponse201 & {
+  headers: Headers;
+};
+export type createTransactionResponseError = (
+  | createTransactionResponse401
+  | createTransactionResponse404
+  | createTransactionResponse409
+  | createTransactionResponse500
+) & {
+  headers: Headers;
+};
+
+export type createTransactionResponse =
+  | createTransactionResponseSuccess
+  | createTransactionResponseError;
+
+export const getCreateTransactionUrl = () => {
+  return `/financeiro/`;
+};
+
+export const createTransaction = async (
+  createTransactionBody: CreateTransactionBody,
+  options?: RequestInit,
+): Promise<createTransactionResponse> => {
+  return customFetch<createTransactionResponse>(getCreateTransactionUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(createTransactionBody),
+  });
+};
+
+/**
+ * @summary Get Transactions
+ */
+export type getTransactionsResponse201 = {
+  data: GetTransactions201;
+  status: 201;
+};
+
+export type getTransactionsResponse401 = {
+  data: GetTransactions401;
+  status: 401;
+};
+
+export type getTransactionsResponse404 = {
+  data: GetTransactions404;
+  status: 404;
+};
+
+export type getTransactionsResponse409 = {
+  data: GetTransactions409;
+  status: 409;
+};
+
+export type getTransactionsResponse500 = {
+  data: GetTransactions500;
+  status: 500;
+};
+
+export type getTransactionsResponseSuccess = getTransactionsResponse201 & {
+  headers: Headers;
+};
+export type getTransactionsResponseError = (
+  | getTransactionsResponse401
+  | getTransactionsResponse404
+  | getTransactionsResponse409
+  | getTransactionsResponse500
+) & {
+  headers: Headers;
+};
+
+export type getTransactionsResponse =
+  | getTransactionsResponseSuccess
+  | getTransactionsResponseError;
+
+export const getGetTransactionsUrl = () => {
+  return `/financeiro/dashboard`;
+};
+
+export const getTransactions = async (
+  options?: RequestInit,
+): Promise<getTransactionsResponse> => {
+  return customFetch<getTransactionsResponse>(getGetTransactionsUrl(), {
+    ...options,
+    method: "GET",
+  });
 };
