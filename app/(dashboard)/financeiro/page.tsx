@@ -1,26 +1,33 @@
-import { getTransactions } from "@/app/_lib/api/fetch-generated";
-import type { GetTransactions201 } from "@/app/_lib/api/fetch-generated";
+// app/(dashboard)/financeiro/page.tsx
+import { getTransactions, getFinanceiroHistory } from "@/app/_lib/api/fetch-generated";
 import { FinanceiroDashboardClient } from "./_components/FinanceiroDashboardClient";
 
+
 export default async function FinanceiroPage() {
-  const response = await getTransactions();
+  const [resTransactions, resHistory] = await Promise.all([
+    getTransactions(),
+    getFinanceiroHistory()
+  ]);
 
-
-  let dashboardData: GetTransactions201 = {
-    receitaTotal: 0,
-    despesaTotal: 0,
-    lucroLiquido: 0,
-    graficoDespesas: [],
-    transactions: [],
+ 
+  const dashboardData = resTransactions.status === 201 ? resTransactions.data : {
+    receitaTotal: 0, despesaTotal: 0, lucroLiquido: 0, graficoDespesas: [], transactions: []
   };
 
-  if (response.status === 201) {
-    dashboardData = response.data;
+  let historyData: any[] = [];
+
+  if (resHistory.status === 201) {
+    historyData = Array.isArray(resHistory.data) 
+      ? resHistory.data 
+      : (resHistory.data as any).historico || []; 
   }
 
   return (
     <div className="space-y-6">
-      <FinanceiroDashboardClient initialData={dashboardData} />
+      <FinanceiroDashboardClient 
+        initialData={dashboardData} 
+        history={historyData} 
+      />
     </div>
   );
 }

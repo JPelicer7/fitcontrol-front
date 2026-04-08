@@ -576,6 +576,44 @@ export type FechaMes500 = {
   code: string;
 };
 
+export type GetFinanceiroHistory201HistoricoItem = {
+  receitaTotal: number;
+  despesaTotal: number;
+  lucroLiquido: number;
+  mes: number;
+  ano: number;
+  fechadoEm: string;
+};
+
+export type GetFinanceiroHistory201 = {
+  historico: GetFinanceiroHistory201HistoricoItem[];
+};
+
+export type GetFinanceiroHistory401 = {
+  error: string;
+  code: string;
+};
+
+export type GetFinanceiroHistory404 = {
+  error: string;
+  code: string;
+};
+
+export type GetFinanceiroHistory405 = {
+  error: string;
+  code: string;
+};
+
+export type GetFinanceiroHistory409 = {
+  error: string;
+  code: string;
+};
+
+export type GetFinanceiroHistory500 = {
+  error: string;
+  code: string;
+};
+
 /**
  * @summary Create User
  */
@@ -1093,4 +1131,71 @@ export const fechaMes = async (
     ...options,
     method: "POST",
   });
+};
+
+/**
+ * @summary Get Historico de meses fechados
+ */
+export type getFinanceiroHistoryResponse201 = {
+  data: GetFinanceiroHistory201;
+  status: 201;
+};
+
+export type getFinanceiroHistoryResponse401 = {
+  data: GetFinanceiroHistory401;
+  status: 401;
+};
+
+export type getFinanceiroHistoryResponse404 = {
+  data: GetFinanceiroHistory404;
+  status: 404;
+};
+
+export type getFinanceiroHistoryResponse405 = {
+  data: GetFinanceiroHistory405;
+  status: 405;
+};
+
+export type getFinanceiroHistoryResponse409 = {
+  data: GetFinanceiroHistory409;
+  status: 409;
+};
+
+export type getFinanceiroHistoryResponse500 = {
+  data: GetFinanceiroHistory500;
+  status: 500;
+};
+
+export type getFinanceiroHistoryResponseSuccess =
+  getFinanceiroHistoryResponse201 & {
+    headers: Headers;
+  };
+export type getFinanceiroHistoryResponseError = (
+  | getFinanceiroHistoryResponse401
+  | getFinanceiroHistoryResponse404
+  | getFinanceiroHistoryResponse405
+  | getFinanceiroHistoryResponse409
+  | getFinanceiroHistoryResponse500
+) & {
+  headers: Headers;
+};
+
+export type getFinanceiroHistoryResponse =
+  | getFinanceiroHistoryResponseSuccess
+  | getFinanceiroHistoryResponseError;
+
+export const getGetFinanceiroHistoryUrl = () => {
+  return `/financeiro/getHistory`;
+};
+
+export const getFinanceiroHistory = async (
+  options?: RequestInit,
+): Promise<getFinanceiroHistoryResponse> => {
+  return customFetch<getFinanceiroHistoryResponse>(
+    getGetFinanceiroHistoryUrl(),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
 };

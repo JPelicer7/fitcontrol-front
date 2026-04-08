@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation"; 
 import { 
   DollarSign, TrendingUp, TrendingDown, Plus, 
-  ArrowUpRight, ArrowDownRight, Lock, Calendar, Loader2 
+  ArrowUpRight, ArrowDownRight, Lock, Calendar, Loader2,
+  ChevronRight
 } from "lucide-react";
 import { 
   PieChart, Pie, Cell, ResponsiveContainer, Tooltip 
@@ -17,15 +18,16 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 import { executeFechaMesAction } from "../actions";
-import type { GetTransactions201 } from "@/app/_lib/api/fetch-generated";
+import type { GetTransactions201, GetFinanceiroHistory201HistoricoItem } from "@/app/_lib/api/fetch-generated";
 
 interface Props {
   initialData: GetTransactions201;
+  history: GetFinanceiroHistory201HistoricoItem[];
 }
 
 const COLORS = ["#10b981", "#ef4444", "#3b82f6", "#f59e0b", "#8b5cf6"];
 
-export function FinanceiroDashboardClient({ initialData }: Props) {
+export function FinanceiroDashboardClient({ initialData, history }: Props) {
   const router = useRouter();
   const [showCloseDialog, setShowCloseDialog] = useState(false);
   const [isClosing, setIsClosing] = useState(false); 
@@ -42,6 +44,10 @@ export function FinanceiroDashboardClient({ initialData }: Props) {
     year: "numeric" 
   });
 
+  
+  const getMonthName = (month: number, year: number) => {
+    return new Date(year, month - 1).toLocaleString('pt-BR', { month: 'long' });
+  };
   
   const handleCloseMonth = async () => {
     try {
@@ -141,7 +147,7 @@ export function FinanceiroDashboardClient({ initialData }: Props) {
           </div>
           <div className="divide-y divide-border">
             {initialData.transactions.length === 0 ? (
-              <div className="p-10 text-center text-muted-foreground">Nenhuma transação neste período.</div>
+              <div className="p-10 text-center text-muted-foreground text-sm">Nenhuma transação neste período.</div>
             ) : (
               initialData.transactions.map((t: any, i: number) => (
                 <div key={i} className="flex items-center justify-between px-5 py-3.5 hover:bg-muted/30 transition-colors">
@@ -201,6 +207,67 @@ export function FinanceiroDashboardClient({ initialData }: Props) {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* SEÇÃO DE HISTÓRICO*/}
+      <div className="metric-card glow-border p-0 overflow-hidden bg-card rounded-xl border border-border">
+        <div className="px-5 py-4 border-b border-border bg-muted/20 flex justify-between items-center">
+          <div>
+            <h3 className="text-lg font-semibold text-foreground">Histórico de Meses Fechados</h3>
+            <p className="text-xs text-muted-foreground">Consolidado de meses anteriores</p>
+          </div>
+          <div className="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
+            {history.length} Registros
+          </div>
+        </div>
+        
+        <div className="divide-y divide-border">
+          {history.length === 0 ? (
+            <div className="p-10 text-center text-muted-foreground text-sm italic">
+              Nenhum histórico de fechamento encontrado.
+            </div>
+          ) : (
+            history.map((mes, index) => (
+              <div key={index} className="flex items-center justify-between px-5 py-4 hover:bg-muted/30 transition-colors group">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center border border-border group-hover:border-primary/30 group-hover:bg-primary/5 transition-all">
+                    <Calendar className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-foreground capitalize">
+                      {getMonthName(mes.mes, mes.ano)} / {mes.ano}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground uppercase">
+                      Fechado em: {new Date(mes.fechadoEm).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-6">
+                  <div className="hidden md:block text-right">
+                    <p className="text-[10px] text-muted-foreground uppercase">Receita</p>
+                    <p className="text-sm font-medium text-primary">{formatCurrency(mes.receitaTotal)}</p>
+                  </div>
+                  <div className="hidden md:block text-right">
+                    <p className="text-[10px] text-muted-foreground uppercase">Despesa</p>
+                    <p className="text-sm font-medium text-destructive">{formatCurrency(mes.despesaTotal)}</p>
+                  </div>
+                  
+                  <div className="text-right min-w-[100px]">
+                    <p className="text-[10px] text-muted-foreground uppercase font-bold">Lucro</p>
+                    <p className={`text-sm font-bold ${mes.lucroLiquido >= 0 ? 'text-foreground' : 'text-destructive'}`}>
+                      {formatCurrency(mes.lucroLiquido)}
+                    </p>
+                  </div>
+
+                  <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary">
+                    <ChevronRight className="w-5 h-5" />
+                  </Button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
