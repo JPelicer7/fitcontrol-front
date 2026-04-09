@@ -19,6 +19,7 @@ import { toast } from "sonner";
 
 import { executeFechaMesAction } from "../actions";
 import type { GetTransactions201, GetFinanceiroHistory201HistoricoItem } from "@/app/_lib/api/fetch-generated";
+import { NewTransactionDialog } from "./NewTransactionDialog";
 
 interface Props {
   initialData: GetTransactions201;
@@ -30,13 +31,28 @@ const COLORS = ["#10b981", "#ef4444", "#3b82f6", "#f59e0b", "#8b5cf6"];
 export function FinanceiroDashboardClient({ initialData, history }: Props) {
   const router = useRouter();
   const [showCloseDialog, setShowCloseDialog] = useState(false);
-  const [isClosing, setIsClosing] = useState(false); 
+  const [isClosing, setIsClosing] = useState(false);
+  const [showNewTxDialog, setShowNewTxDialog] = useState(false);
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
     }).format(value);
+  };
+
+  const formatLocalDate = (dateString: string) => {
+    if (!dateString) return '';
+    
+    
+    const dateOnly = dateString.split('T')[0];
+    
+    const [year, month, day] = dateOnly.split('-').map(Number);
+    
+    if (isNaN(year) || isNaN(month) || isNaN(day)) return 'Data inválida';
+    
+    const date = new Date(year, month - 1, day);
+    return date.toLocaleDateString('pt-BR');
   };
 
   const currentMonthLabel = new Date().toLocaleDateString("pt-BR", { 
@@ -82,7 +98,7 @@ export function FinanceiroDashboardClient({ initialData, history }: Props) {
           <p className="text-muted-foreground mt-1 text-sm">Controle de receitas e despesas</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button onClick={() => setShowNewTxDialog(true)} className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
             <Plus className="w-4 h-4" />
             Nova Transação
           </Button>
@@ -134,7 +150,11 @@ export function FinanceiroDashboardClient({ initialData, history }: Props) {
             </div>
             <ArrowUpRight className="w-4 h-4 text-primary" />
           </div>
-          <p className="text-2xl font-bold text-primary">{formatCurrency(initialData.lucroLiquido)}</p>
+          {/* <p className="text-2xl font-bold text-primary">{formatCurrency(initialData.lucroLiquido)}</p> */}
+          {/* <p className="text-xs text-muted-foreground mt-1">Lucro Líquido</p> */}
+          <p className={`text-2xl font-bold ${initialData.lucroLiquido < 0 ? 'text-red-600' : 'text-primary'}`}>
+            {formatCurrency(initialData.lucroLiquido)}
+          </p>
           <p className="text-xs text-muted-foreground mt-1">Lucro Líquido</p>
         </div>
       </div>
@@ -157,7 +177,8 @@ export function FinanceiroDashboardClient({ initialData, history }: Props) {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-foreground">{t.descricao}</p>
-                      <p className="text-xs text-muted-foreground">{new Date(t.data_pagamento).toLocaleDateString()}</p>
+                      <p className="text-xs text-muted-foreground">{formatLocalDate(t.data_pagamento)}</p>
+                      {/* <p className="text-xs text-muted-foreground">{new Date(t.data_pagamento).toLocaleDateString('pt-BR')}</p> */}
                     </div>
                   </div>
                   <div className="text-right">
@@ -314,6 +335,11 @@ export function FinanceiroDashboardClient({ initialData, history }: Props) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <NewTransactionDialog 
+        open={showNewTxDialog} 
+        onOpenChange={setShowNewTxDialog} 
+      />
     </div>
   );
 }
