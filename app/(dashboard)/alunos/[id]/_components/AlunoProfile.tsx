@@ -4,15 +4,18 @@ import { useState} from "react";
 import { Pencil, Check, X, Weight, Ruler, Activity, Calendar } from "lucide-react";
 import { toast } from "sonner";
 import { updateMedidaAction } from "../actions"; 
+import { EvolutionCharts } from "./EvolutionCharts";
+
 
 interface Props {
   initialUser: any;
   initialMedidas: any;
+  initialHistory: any;
   medidaId: string;
   userId: string; 
 }
 
-export default function StudentProfileClient({ initialMedidas, medidaId, userId }: Props) {
+export default function StudentProfileClient({ initialMedidas, initialHistory, medidaId, userId }: Props) {
   const [currentMedida, setCurrentMedida] = useState(initialMedidas.todas[0]);
   const [editingField, setEditingField] = useState<string | null>(null);
   const [draftValue, setDraftValue] = useState("");
@@ -23,9 +26,9 @@ export default function StudentProfileClient({ initialMedidas, medidaId, userId 
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value;
-    val = val.replace(/[^0-9.,]/g, ""); // Remove letras
+    val = val.replace(/[^0-9.,]/g, "");
     const dots = val.match(/[.,]/g);
-    if (dots && dots.length > 1) return; // Impede múltiplos pontos/vírgulas
+    if (dots && dots.length > 1) return;
     setDraftValue(val);
   };
 
@@ -160,6 +163,11 @@ export default function StudentProfileClient({ initialMedidas, medidaId, userId 
           </div>
         ))}
       </div>
+
+      {/* 2. GRÁFICOS DE EVOLUÇÃO*/}
+      {initialHistory && initialHistory.length > 0 && (
+        <EvolutionCharts data={initialHistory} />
+      )}
 
       <div className="metric-card glow-border overflow-hidden p-0 bg-card rounded-xl border border-border">
         <div className="px-5 py-4 border-b border-border flex items-center justify-between">

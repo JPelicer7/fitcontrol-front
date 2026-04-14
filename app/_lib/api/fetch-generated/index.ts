@@ -311,12 +311,47 @@ export type GetUser401 = {
   code: string;
 };
 
+export type GetUser403 = {
+  error: string;
+  code: string;
+};
+
 export type GetUser404 = {
   error: string;
   code: string;
 };
 
 export type GetUser500 = {
+  error: string;
+  code: string;
+};
+
+export type GetGrafico200HistoricoItem = {
+  createdAt: string;
+  peso: number;
+  percentual_gordura: number;
+};
+
+export type GetGrafico200 = {
+  historico: GetGrafico200HistoricoItem[];
+};
+
+export type GetGrafico401 = {
+  error: string;
+  code: string;
+};
+
+export type GetGrafico403 = {
+  error: string;
+  code: string;
+};
+
+export type GetGrafico404 = {
+  error: string;
+  code: string;
+};
+
+export type GetGrafico500 = {
   error: string;
   code: string;
 };
@@ -804,6 +839,11 @@ export type getUserResponse401 = {
   status: 401;
 };
 
+export type getUserResponse403 = {
+  data: GetUser403;
+  status: 403;
+};
+
 export type getUserResponse404 = {
   data: GetUser404;
   status: 404;
@@ -819,6 +859,7 @@ export type getUserResponseSuccess = getUserResponse200 & {
 };
 export type getUserResponseError = (
   | getUserResponse401
+  | getUserResponse403
   | getUserResponse404
   | getUserResponse500
 ) & {
@@ -836,6 +877,64 @@ export const getUser = async (
   options?: RequestInit,
 ): Promise<getUserResponse> => {
   return customFetch<getUserResponse>(getGetUserUrl(userId), {
+    ...options,
+    method: "GET",
+  });
+};
+
+/**
+ * @summary Get Grafico
+ */
+export type getGraficoResponse200 = {
+  data: GetGrafico200;
+  status: 200;
+};
+
+export type getGraficoResponse401 = {
+  data: GetGrafico401;
+  status: 401;
+};
+
+export type getGraficoResponse403 = {
+  data: GetGrafico403;
+  status: 403;
+};
+
+export type getGraficoResponse404 = {
+  data: GetGrafico404;
+  status: 404;
+};
+
+export type getGraficoResponse500 = {
+  data: GetGrafico500;
+  status: 500;
+};
+
+export type getGraficoResponseSuccess = getGraficoResponse200 & {
+  headers: Headers;
+};
+export type getGraficoResponseError = (
+  | getGraficoResponse401
+  | getGraficoResponse403
+  | getGraficoResponse404
+  | getGraficoResponse500
+) & {
+  headers: Headers;
+};
+
+export type getGraficoResponse =
+  | getGraficoResponseSuccess
+  | getGraficoResponseError;
+
+export const getGetGraficoUrl = (userId: string) => {
+  return `/user/${userId}/getGrafico`;
+};
+
+export const getGrafico = async (
+  userId: string,
+  options?: RequestInit,
+): Promise<getGraficoResponse> => {
+  return customFetch<getGraficoResponse>(getGetGraficoUrl(userId), {
     ...options,
     method: "GET",
   });
