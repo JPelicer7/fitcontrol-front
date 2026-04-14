@@ -194,7 +194,7 @@ export function FinanceiroDashboardClient({ initialData, history }: Props) {
         </div>
 
         {/* Gráfico de Pizza */}
-        <div className="metric-card glow-border p-6 bg-card rounded-xl border border-border">
+        <div className="h-fit metric-card glow-border p-6 bg-card rounded-xl border border-border">
           <h3 className="text-lg font-semibold text-foreground mb-4">Despesas por Categoria</h3>
           <div className="h-[200px] w-full">
             <ResponsiveContainer width="100%" height="100%">
