@@ -649,6 +649,301 @@ export type GetFinanceiroHistory500 = {
   code: string;
 };
 
+export type CreateExercicioBody = {
+  nome: string;
+  grupoMuscular?: string;
+  videoUrl?: string;
+};
+
+export type CreateExercicio201 = {
+  id: string;
+};
+
+export type CreateExercicio401 = {
+  error: string;
+  code: string;
+};
+
+export type CreateExercicio403 = {
+  error: string;
+  code: string;
+};
+
+export type CreateExercicio404 = {
+  error: string;
+  code: string;
+};
+
+export type CreateExercicio409 = {
+  error: string;
+  code: string;
+};
+
+export type CreateExercicio500 = {
+  error: string;
+  code: string;
+};
+
+export type GetExercicios201ExerciciosItem = {
+  id: string;
+  nome: string;
+  grupoMuscular?: string;
+  videoUrl?: string;
+};
+
+export type GetExercicios201 = {
+  exercicios: GetExercicios201ExerciciosItem[];
+};
+
+export type GetExercicios401 = {
+  error: string;
+  code: string;
+};
+
+export type GetExercicios403 = {
+  error: string;
+  code: string;
+};
+
+export type GetExercicios404 = {
+  error: string;
+  code: string;
+};
+
+export type GetExercicios409 = {
+  error: string;
+  code: string;
+};
+
+export type GetExercicios500 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinoDetalhado201ExerciciosItemNomeTreino = {
+  nome: string;
+};
+
+export type GetTreinoDetalhado201ExerciciosItem = {
+  series: number;
+  repeticoes: string;
+  carga?: string;
+  nomeTreino: GetTreinoDetalhado201ExerciciosItemNomeTreino;
+};
+
+export type GetTreinoDetalhado201 = {
+  nome: string;
+  exercicios: GetTreinoDetalhado201ExerciciosItem[];
+};
+
+export type GetTreinoDetalhado401 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinoDetalhado403 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinoDetalhado404 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinoDetalhado409 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinoDetalhado500 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreinoBody = {
+  nome: string;
+  descricao?: string;
+};
+
+export type CreateTreino201 = {
+  id: string;
+};
+
+export type CreateTreino401 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreino403 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreino404 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreino409 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreino500 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinos201TreinosItem = {
+  id: string;
+  nome: string;
+  descricao?: string;
+  qtdExercicios: number;
+  qtdAlunos: number;
+};
+
+export type GetTreinos201 = {
+  treinos: GetTreinos201TreinosItem[];
+};
+
+export type GetTreinos401 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinos403 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinos404 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinos409 = {
+  error: string;
+  code: string;
+};
+
+export type GetTreinos500 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreinoExercioBody = {
+  exercicioId: string;
+  series: number;
+  repeticoes: string;
+  carga?: string;
+  ordem?: number;
+};
+
+export type CreateTreinoExercio201 = {
+  id: string;
+};
+
+export type CreateTreinoExercio401 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreinoExercio403 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreinoExercio404 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreinoExercio409 = {
+  error: string;
+  code: string;
+};
+
+export type CreateTreinoExercio500 = {
+  error: string;
+  code: string;
+};
+
+export type CreateAlunoTreinoBody = {
+  userId: string;
+};
+
+export type CreateAlunoTreino201 = {
+  id: string;
+};
+
+export type CreateAlunoTreino401 = {
+  error: string;
+  code: string;
+};
+
+export type CreateAlunoTreino403 = {
+  error: string;
+  code: string;
+};
+
+export type CreateAlunoTreino404 = {
+  error: string;
+  code: string;
+};
+
+export type CreateAlunoTreino409 = {
+  error: string;
+  code: string;
+};
+
+export type CreateAlunoTreino500 = {
+  error: string;
+  code: string;
+};
+
+export type GetAlunosTreino201AlunosItemStatus =
+  (typeof GetAlunosTreino201AlunosItemStatus)[keyof typeof GetAlunosTreino201AlunosItemStatus];
+
+export const GetAlunosTreino201AlunosItemStatus = {
+  Ativo: "Ativo",
+  Inativo: "Inativo",
+} as const;
+
+export type GetAlunosTreino201AlunosItem = {
+  nome: string;
+  Status: GetAlunosTreino201AlunosItemStatus;
+};
+
+export type GetAlunosTreino201 = {
+  alunos: GetAlunosTreino201AlunosItem[];
+};
+
+export type GetAlunosTreino401 = {
+  error: string;
+  code: string;
+};
+
+export type GetAlunosTreino403 = {
+  error: string;
+  code: string;
+};
+
+export type GetAlunosTreino404 = {
+  error: string;
+  code: string;
+};
+
+export type GetAlunosTreino409 = {
+  error: string;
+  code: string;
+};
+
+export type GetAlunosTreino500 = {
+  error: string;
+  code: string;
+};
+
 /**
  * @summary Create User
  */
@@ -1297,4 +1592,535 @@ export const getFinanceiroHistory = async (
       method: "GET",
     },
   );
+};
+
+/**
+ * @summary Create Exercicio
+ */
+export type createExercicioResponse201 = {
+  data: CreateExercicio201;
+  status: 201;
+};
+
+export type createExercicioResponse401 = {
+  data: CreateExercicio401;
+  status: 401;
+};
+
+export type createExercicioResponse403 = {
+  data: CreateExercicio403;
+  status: 403;
+};
+
+export type createExercicioResponse404 = {
+  data: CreateExercicio404;
+  status: 404;
+};
+
+export type createExercicioResponse409 = {
+  data: CreateExercicio409;
+  status: 409;
+};
+
+export type createExercicioResponse500 = {
+  data: CreateExercicio500;
+  status: 500;
+};
+
+export type createExercicioResponseSuccess = createExercicioResponse201 & {
+  headers: Headers;
+};
+export type createExercicioResponseError = (
+  | createExercicioResponse401
+  | createExercicioResponse403
+  | createExercicioResponse404
+  | createExercicioResponse409
+  | createExercicioResponse500
+) & {
+  headers: Headers;
+};
+
+export type createExercicioResponse =
+  | createExercicioResponseSuccess
+  | createExercicioResponseError;
+
+export const getCreateExercicioUrl = () => {
+  return `/exercicio/exercicio`;
+};
+
+export const createExercicio = async (
+  createExercicioBody: CreateExercicioBody,
+  options?: RequestInit,
+): Promise<createExercicioResponse> => {
+  return customFetch<createExercicioResponse>(getCreateExercicioUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(createExercicioBody),
+  });
+};
+
+/**
+ * @summary Get Exercicios
+ */
+export type getExerciciosResponse201 = {
+  data: GetExercicios201;
+  status: 201;
+};
+
+export type getExerciciosResponse401 = {
+  data: GetExercicios401;
+  status: 401;
+};
+
+export type getExerciciosResponse403 = {
+  data: GetExercicios403;
+  status: 403;
+};
+
+export type getExerciciosResponse404 = {
+  data: GetExercicios404;
+  status: 404;
+};
+
+export type getExerciciosResponse409 = {
+  data: GetExercicios409;
+  status: 409;
+};
+
+export type getExerciciosResponse500 = {
+  data: GetExercicios500;
+  status: 500;
+};
+
+export type getExerciciosResponseSuccess = getExerciciosResponse201 & {
+  headers: Headers;
+};
+export type getExerciciosResponseError = (
+  | getExerciciosResponse401
+  | getExerciciosResponse403
+  | getExerciciosResponse404
+  | getExerciciosResponse409
+  | getExerciciosResponse500
+) & {
+  headers: Headers;
+};
+
+export type getExerciciosResponse =
+  | getExerciciosResponseSuccess
+  | getExerciciosResponseError;
+
+export const getGetExerciciosUrl = () => {
+  return `/exercicio/exercicios`;
+};
+
+export const getExercicios = async (
+  options?: RequestInit,
+): Promise<getExerciciosResponse> => {
+  return customFetch<getExerciciosResponse>(getGetExerciciosUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+/**
+ * @summary Get Treino Detalhado
+ */
+export type getTreinoDetalhadoResponse201 = {
+  data: GetTreinoDetalhado201;
+  status: 201;
+};
+
+export type getTreinoDetalhadoResponse401 = {
+  data: GetTreinoDetalhado401;
+  status: 401;
+};
+
+export type getTreinoDetalhadoResponse403 = {
+  data: GetTreinoDetalhado403;
+  status: 403;
+};
+
+export type getTreinoDetalhadoResponse404 = {
+  data: GetTreinoDetalhado404;
+  status: 404;
+};
+
+export type getTreinoDetalhadoResponse409 = {
+  data: GetTreinoDetalhado409;
+  status: 409;
+};
+
+export type getTreinoDetalhadoResponse500 = {
+  data: GetTreinoDetalhado500;
+  status: 500;
+};
+
+export type getTreinoDetalhadoResponseSuccess =
+  getTreinoDetalhadoResponse201 & {
+    headers: Headers;
+  };
+export type getTreinoDetalhadoResponseError = (
+  | getTreinoDetalhadoResponse401
+  | getTreinoDetalhadoResponse403
+  | getTreinoDetalhadoResponse404
+  | getTreinoDetalhadoResponse409
+  | getTreinoDetalhadoResponse500
+) & {
+  headers: Headers;
+};
+
+export type getTreinoDetalhadoResponse =
+  | getTreinoDetalhadoResponseSuccess
+  | getTreinoDetalhadoResponseError;
+
+export const getGetTreinoDetalhadoUrl = (treinoId: string) => {
+  return `/exercicio/${treinoId}`;
+};
+
+export const getTreinoDetalhado = async (
+  treinoId: string,
+  options?: RequestInit,
+): Promise<getTreinoDetalhadoResponse> => {
+  return customFetch<getTreinoDetalhadoResponse>(
+    getGetTreinoDetalhadoUrl(treinoId),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+/**
+ * @summary Create Treino
+ */
+export type createTreinoResponse201 = {
+  data: CreateTreino201;
+  status: 201;
+};
+
+export type createTreinoResponse401 = {
+  data: CreateTreino401;
+  status: 401;
+};
+
+export type createTreinoResponse403 = {
+  data: CreateTreino403;
+  status: 403;
+};
+
+export type createTreinoResponse404 = {
+  data: CreateTreino404;
+  status: 404;
+};
+
+export type createTreinoResponse409 = {
+  data: CreateTreino409;
+  status: 409;
+};
+
+export type createTreinoResponse500 = {
+  data: CreateTreino500;
+  status: 500;
+};
+
+export type createTreinoResponseSuccess = createTreinoResponse201 & {
+  headers: Headers;
+};
+export type createTreinoResponseError = (
+  | createTreinoResponse401
+  | createTreinoResponse403
+  | createTreinoResponse404
+  | createTreinoResponse409
+  | createTreinoResponse500
+) & {
+  headers: Headers;
+};
+
+export type createTreinoResponse =
+  | createTreinoResponseSuccess
+  | createTreinoResponseError;
+
+export const getCreateTreinoUrl = () => {
+  return `/treino/treino`;
+};
+
+export const createTreino = async (
+  createTreinoBody: CreateTreinoBody,
+  options?: RequestInit,
+): Promise<createTreinoResponse> => {
+  return customFetch<createTreinoResponse>(getCreateTreinoUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(createTreinoBody),
+  });
+};
+
+/**
+ * @summary Get Treinos
+ */
+export type getTreinosResponse201 = {
+  data: GetTreinos201;
+  status: 201;
+};
+
+export type getTreinosResponse401 = {
+  data: GetTreinos401;
+  status: 401;
+};
+
+export type getTreinosResponse403 = {
+  data: GetTreinos403;
+  status: 403;
+};
+
+export type getTreinosResponse404 = {
+  data: GetTreinos404;
+  status: 404;
+};
+
+export type getTreinosResponse409 = {
+  data: GetTreinos409;
+  status: 409;
+};
+
+export type getTreinosResponse500 = {
+  data: GetTreinos500;
+  status: 500;
+};
+
+export type getTreinosResponseSuccess = getTreinosResponse201 & {
+  headers: Headers;
+};
+export type getTreinosResponseError = (
+  | getTreinosResponse401
+  | getTreinosResponse403
+  | getTreinosResponse404
+  | getTreinosResponse409
+  | getTreinosResponse500
+) & {
+  headers: Headers;
+};
+
+export type getTreinosResponse =
+  | getTreinosResponseSuccess
+  | getTreinosResponseError;
+
+export const getGetTreinosUrl = () => {
+  return `/treino/treinos`;
+};
+
+export const getTreinos = async (
+  options?: RequestInit,
+): Promise<getTreinosResponse> => {
+  return customFetch<getTreinosResponse>(getGetTreinosUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+/**
+ * @summary Create Treino Exercicio
+ */
+export type createTreinoExercioResponse201 = {
+  data: CreateTreinoExercio201;
+  status: 201;
+};
+
+export type createTreinoExercioResponse401 = {
+  data: CreateTreinoExercio401;
+  status: 401;
+};
+
+export type createTreinoExercioResponse403 = {
+  data: CreateTreinoExercio403;
+  status: 403;
+};
+
+export type createTreinoExercioResponse404 = {
+  data: CreateTreinoExercio404;
+  status: 404;
+};
+
+export type createTreinoExercioResponse409 = {
+  data: CreateTreinoExercio409;
+  status: 409;
+};
+
+export type createTreinoExercioResponse500 = {
+  data: CreateTreinoExercio500;
+  status: 500;
+};
+
+export type createTreinoExercioResponseSuccess =
+  createTreinoExercioResponse201 & {
+    headers: Headers;
+  };
+export type createTreinoExercioResponseError = (
+  | createTreinoExercioResponse401
+  | createTreinoExercioResponse403
+  | createTreinoExercioResponse404
+  | createTreinoExercioResponse409
+  | createTreinoExercioResponse500
+) & {
+  headers: Headers;
+};
+
+export type createTreinoExercioResponse =
+  | createTreinoExercioResponseSuccess
+  | createTreinoExercioResponseError;
+
+export const getCreateTreinoExercioUrl = (treinoId: string) => {
+  return `/treinoExerc/${treinoId}`;
+};
+
+export const createTreinoExercio = async (
+  treinoId: string,
+  createTreinoExercioBody: CreateTreinoExercioBody,
+  options?: RequestInit,
+): Promise<createTreinoExercioResponse> => {
+  return customFetch<createTreinoExercioResponse>(
+    getCreateTreinoExercioUrl(treinoId),
+    {
+      ...options,
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      body: JSON.stringify(createTreinoExercioBody),
+    },
+  );
+};
+
+/**
+ * @summary Create vinculo Aluno ao Treino
+ */
+export type createAlunoTreinoResponse201 = {
+  data: CreateAlunoTreino201;
+  status: 201;
+};
+
+export type createAlunoTreinoResponse401 = {
+  data: CreateAlunoTreino401;
+  status: 401;
+};
+
+export type createAlunoTreinoResponse403 = {
+  data: CreateAlunoTreino403;
+  status: 403;
+};
+
+export type createAlunoTreinoResponse404 = {
+  data: CreateAlunoTreino404;
+  status: 404;
+};
+
+export type createAlunoTreinoResponse409 = {
+  data: CreateAlunoTreino409;
+  status: 409;
+};
+
+export type createAlunoTreinoResponse500 = {
+  data: CreateAlunoTreino500;
+  status: 500;
+};
+
+export type createAlunoTreinoResponseSuccess = createAlunoTreinoResponse201 & {
+  headers: Headers;
+};
+export type createAlunoTreinoResponseError = (
+  | createAlunoTreinoResponse401
+  | createAlunoTreinoResponse403
+  | createAlunoTreinoResponse404
+  | createAlunoTreinoResponse409
+  | createAlunoTreinoResponse500
+) & {
+  headers: Headers;
+};
+
+export type createAlunoTreinoResponse =
+  | createAlunoTreinoResponseSuccess
+  | createAlunoTreinoResponseError;
+
+export const getCreateAlunoTreinoUrl = (treinoId: string) => {
+  return `/alunoTreino/${treinoId}`;
+};
+
+export const createAlunoTreino = async (
+  treinoId: string,
+  createAlunoTreinoBody: CreateAlunoTreinoBody,
+  options?: RequestInit,
+): Promise<createAlunoTreinoResponse> => {
+  return customFetch<createAlunoTreinoResponse>(
+    getCreateAlunoTreinoUrl(treinoId),
+    {
+      ...options,
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      body: JSON.stringify(createAlunoTreinoBody),
+    },
+  );
+};
+
+/**
+ * @summary Get Alunos Vinculados
+ */
+export type getAlunosTreinoResponse201 = {
+  data: GetAlunosTreino201;
+  status: 201;
+};
+
+export type getAlunosTreinoResponse401 = {
+  data: GetAlunosTreino401;
+  status: 401;
+};
+
+export type getAlunosTreinoResponse403 = {
+  data: GetAlunosTreino403;
+  status: 403;
+};
+
+export type getAlunosTreinoResponse404 = {
+  data: GetAlunosTreino404;
+  status: 404;
+};
+
+export type getAlunosTreinoResponse409 = {
+  data: GetAlunosTreino409;
+  status: 409;
+};
+
+export type getAlunosTreinoResponse500 = {
+  data: GetAlunosTreino500;
+  status: 500;
+};
+
+export type getAlunosTreinoResponseSuccess = getAlunosTreinoResponse201 & {
+  headers: Headers;
+};
+export type getAlunosTreinoResponseError = (
+  | getAlunosTreinoResponse401
+  | getAlunosTreinoResponse403
+  | getAlunosTreinoResponse404
+  | getAlunosTreinoResponse409
+  | getAlunosTreinoResponse500
+) & {
+  headers: Headers;
+};
+
+export type getAlunosTreinoResponse =
+  | getAlunosTreinoResponseSuccess
+  | getAlunosTreinoResponseError;
+
+export const getGetAlunosTreinoUrl = (treinoId: string) => {
+  return `/alunoTreino/${treinoId}/alunos`;
+};
+
+export const getAlunosTreino = async (
+  treinoId: string,
+  options?: RequestInit,
+): Promise<getAlunosTreinoResponse> => {
+  return customFetch<getAlunosTreinoResponse>(getGetAlunosTreinoUrl(treinoId), {
+    ...options,
+    method: "GET",
+  });
 };
