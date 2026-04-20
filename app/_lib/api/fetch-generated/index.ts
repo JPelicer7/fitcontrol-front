@@ -725,6 +725,7 @@ export type GetTreinoDetalhado201ExerciciosItemNomeTreino = {
 };
 
 export type GetTreinoDetalhado201ExerciciosItem = {
+  id: string;
   series: number;
   repeticoes: string;
   carga?: string;
@@ -832,6 +833,35 @@ export type GetTreinos500 = {
   code: string;
 };
 
+export type DeleteTreino200 = {
+  message: string;
+};
+
+export type DeleteTreino401 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteTreino403 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteTreino404 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteTreino409 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteTreino500 = {
+  error: string;
+  code: string;
+};
+
 export type CreateTreinoExercioBody = {
   exercicioId: string;
   series: number;
@@ -865,6 +895,73 @@ export type CreateTreinoExercio409 = {
 };
 
 export type CreateTreinoExercio500 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateTreinoExercicioBody = {
+  series?: number;
+  carga?: string;
+  repeticoes?: string;
+};
+
+export type UpdateTreinoExercicio201 = {
+  series: number;
+  /** @nullable */
+  carga: string | null;
+  repeticoes: string;
+};
+
+export type UpdateTreinoExercicio401 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateTreinoExercicio403 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateTreinoExercicio404 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateTreinoExercicio409 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateTreinoExercicio500 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteTreinoExercicio200 = {
+  message: string;
+};
+
+export type DeleteTreinoExercicio401 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteTreinoExercicio403 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteTreinoExercicio404 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteTreinoExercicio409 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteTreinoExercicio500 = {
   error: string;
   code: string;
 };
@@ -911,6 +1008,7 @@ export const GetAlunosTreino201AlunosItemStatus = {
 } as const;
 
 export type GetAlunosTreino201AlunosItem = {
+  id: string;
   nome: string;
   Status: GetAlunosTreino201AlunosItemStatus;
 };
@@ -940,6 +1038,30 @@ export type GetAlunosTreino409 = {
 };
 
 export type GetAlunosTreino500 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteAlunoTreino200 = {
+  message: string;
+};
+
+export type DeleteAlunoTreino401 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteAlunoTreino403 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteAlunoTreino404 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteAlunoTreino500 = {
   error: string;
   code: string;
 };
@@ -1921,6 +2043,70 @@ export const getTreinos = async (
 };
 
 /**
+ * @summary Delete Treino
+ */
+export type deleteTreinoResponse200 = {
+  data: DeleteTreino200;
+  status: 200;
+};
+
+export type deleteTreinoResponse401 = {
+  data: DeleteTreino401;
+  status: 401;
+};
+
+export type deleteTreinoResponse403 = {
+  data: DeleteTreino403;
+  status: 403;
+};
+
+export type deleteTreinoResponse404 = {
+  data: DeleteTreino404;
+  status: 404;
+};
+
+export type deleteTreinoResponse409 = {
+  data: DeleteTreino409;
+  status: 409;
+};
+
+export type deleteTreinoResponse500 = {
+  data: DeleteTreino500;
+  status: 500;
+};
+
+export type deleteTreinoResponseSuccess = deleteTreinoResponse200 & {
+  headers: Headers;
+};
+export type deleteTreinoResponseError = (
+  | deleteTreinoResponse401
+  | deleteTreinoResponse403
+  | deleteTreinoResponse404
+  | deleteTreinoResponse409
+  | deleteTreinoResponse500
+) & {
+  headers: Headers;
+};
+
+export type deleteTreinoResponse =
+  | deleteTreinoResponseSuccess
+  | deleteTreinoResponseError;
+
+export const getDeleteTreinoUrl = (treinoId: string) => {
+  return `/treino/${treinoId}`;
+};
+
+export const deleteTreino = async (
+  treinoId: string,
+  options?: RequestInit,
+): Promise<deleteTreinoResponse> => {
+  return customFetch<deleteTreinoResponse>(getDeleteTreinoUrl(treinoId), {
+    ...options,
+    method: "DELETE",
+  });
+};
+
+/**
  * @summary Create Treino Exercicio
  */
 export type createTreinoExercioResponse201 = {
@@ -1987,6 +2173,153 @@ export const createTreinoExercio = async (
       method: "POST",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(createTreinoExercioBody),
+    },
+  );
+};
+
+/**
+ * @summary Update Treino Exercicio
+ */
+export type updateTreinoExercicioResponse201 = {
+  data: UpdateTreinoExercicio201;
+  status: 201;
+};
+
+export type updateTreinoExercicioResponse401 = {
+  data: UpdateTreinoExercicio401;
+  status: 401;
+};
+
+export type updateTreinoExercicioResponse403 = {
+  data: UpdateTreinoExercicio403;
+  status: 403;
+};
+
+export type updateTreinoExercicioResponse404 = {
+  data: UpdateTreinoExercicio404;
+  status: 404;
+};
+
+export type updateTreinoExercicioResponse409 = {
+  data: UpdateTreinoExercicio409;
+  status: 409;
+};
+
+export type updateTreinoExercicioResponse500 = {
+  data: UpdateTreinoExercicio500;
+  status: 500;
+};
+
+export type updateTreinoExercicioResponseSuccess =
+  updateTreinoExercicioResponse201 & {
+    headers: Headers;
+  };
+export type updateTreinoExercicioResponseError = (
+  | updateTreinoExercicioResponse401
+  | updateTreinoExercicioResponse403
+  | updateTreinoExercicioResponse404
+  | updateTreinoExercicioResponse409
+  | updateTreinoExercicioResponse500
+) & {
+  headers: Headers;
+};
+
+export type updateTreinoExercicioResponse =
+  | updateTreinoExercicioResponseSuccess
+  | updateTreinoExercicioResponseError;
+
+export const getUpdateTreinoExercicioUrl = (
+  treinoId: string,
+  treinoExercicioId: string,
+) => {
+  return `/treinoExerc/${treinoId}/update/${treinoExercicioId}`;
+};
+
+export const updateTreinoExercicio = async (
+  treinoId: string,
+  treinoExercicioId: string,
+  updateTreinoExercicioBody: UpdateTreinoExercicioBody,
+  options?: RequestInit,
+): Promise<updateTreinoExercicioResponse> => {
+  return customFetch<updateTreinoExercicioResponse>(
+    getUpdateTreinoExercicioUrl(treinoId, treinoExercicioId),
+    {
+      ...options,
+      method: "PUT",
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      body: JSON.stringify(updateTreinoExercicioBody),
+    },
+  );
+};
+
+/**
+ * @summary Delete Treino Exercicio
+ */
+export type deleteTreinoExercicioResponse200 = {
+  data: DeleteTreinoExercicio200;
+  status: 200;
+};
+
+export type deleteTreinoExercicioResponse401 = {
+  data: DeleteTreinoExercicio401;
+  status: 401;
+};
+
+export type deleteTreinoExercicioResponse403 = {
+  data: DeleteTreinoExercicio403;
+  status: 403;
+};
+
+export type deleteTreinoExercicioResponse404 = {
+  data: DeleteTreinoExercicio404;
+  status: 404;
+};
+
+export type deleteTreinoExercicioResponse409 = {
+  data: DeleteTreinoExercicio409;
+  status: 409;
+};
+
+export type deleteTreinoExercicioResponse500 = {
+  data: DeleteTreinoExercicio500;
+  status: 500;
+};
+
+export type deleteTreinoExercicioResponseSuccess =
+  deleteTreinoExercicioResponse200 & {
+    headers: Headers;
+  };
+export type deleteTreinoExercicioResponseError = (
+  | deleteTreinoExercicioResponse401
+  | deleteTreinoExercicioResponse403
+  | deleteTreinoExercicioResponse404
+  | deleteTreinoExercicioResponse409
+  | deleteTreinoExercicioResponse500
+) & {
+  headers: Headers;
+};
+
+export type deleteTreinoExercicioResponse =
+  | deleteTreinoExercicioResponseSuccess
+  | deleteTreinoExercicioResponseError;
+
+export const getDeleteTreinoExercicioUrl = (
+  treinoId: string,
+  treinoExercicioId: string,
+) => {
+  return `/treinoExerc/${treinoId}/delete/${treinoExercicioId}`;
+};
+
+export const deleteTreinoExercicio = async (
+  treinoId: string,
+  treinoExercicioId: string,
+  options?: RequestInit,
+): Promise<deleteTreinoExercicioResponse> => {
+  return customFetch<deleteTreinoExercicioResponse>(
+    getDeleteTreinoExercicioUrl(treinoId, treinoExercicioId),
+    {
+      ...options,
+      method: "DELETE",
     },
   );
 };
@@ -2123,4 +2456,66 @@ export const getAlunosTreino = async (
     ...options,
     method: "GET",
   });
+};
+
+/**
+ * @summary Desvincular um aluno do Treino
+ */
+export type deleteAlunoTreinoResponse200 = {
+  data: DeleteAlunoTreino200;
+  status: 200;
+};
+
+export type deleteAlunoTreinoResponse401 = {
+  data: DeleteAlunoTreino401;
+  status: 401;
+};
+
+export type deleteAlunoTreinoResponse403 = {
+  data: DeleteAlunoTreino403;
+  status: 403;
+};
+
+export type deleteAlunoTreinoResponse404 = {
+  data: DeleteAlunoTreino404;
+  status: 404;
+};
+
+export type deleteAlunoTreinoResponse500 = {
+  data: DeleteAlunoTreino500;
+  status: 500;
+};
+
+export type deleteAlunoTreinoResponseSuccess = deleteAlunoTreinoResponse200 & {
+  headers: Headers;
+};
+export type deleteAlunoTreinoResponseError = (
+  | deleteAlunoTreinoResponse401
+  | deleteAlunoTreinoResponse403
+  | deleteAlunoTreinoResponse404
+  | deleteAlunoTreinoResponse500
+) & {
+  headers: Headers;
+};
+
+export type deleteAlunoTreinoResponse =
+  | deleteAlunoTreinoResponseSuccess
+  | deleteAlunoTreinoResponseError;
+
+export const getDeleteAlunoTreinoUrl = (treinoId: string, userId: string) => {
+  return `/alunoTreino/${treinoId}/aluno/${userId}`;
+};
+
+export const deleteAlunoTreino = async (
+  treinoId: string,
+  userId: string,
+  options?: RequestInit,
+): Promise<deleteAlunoTreinoResponse> => {
+  return customFetch<deleteAlunoTreinoResponse>(
+    getDeleteAlunoTreinoUrl(treinoId, userId),
+    {
+      ...options,
+      method: "DELETE",
+    },
+  );
 };

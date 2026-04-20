@@ -21,6 +21,9 @@ interface NovoTreinoDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
+const NOME_MAX = 60;
+const DESCRICAO_MAX = 120;
+
 export function NovoTreinoDialog({ open, onOpenChange }: NovoTreinoDialogProps) {
   const router = useRouter();
   const [isPending, setIsPending] = useState(false);
@@ -32,6 +35,11 @@ export function NovoTreinoDialog({ open, onOpenChange }: NovoTreinoDialogProps) 
   };
 
   const handleSubmit = async () => {
+    if (form.nome.trim().length < 2) {
+      toast.error("Nome deve ter pelo menos 2 caracteres.");
+      return;
+    }
+
     setIsPending(true);
     const result = await criarTreinoAction({
       nome: form.nome,
@@ -57,22 +65,35 @@ export function NovoTreinoDialog({ open, onOpenChange }: NovoTreinoDialogProps) 
 
         <div className="space-y-4 mt-2">
           <div className="space-y-1.5">
-            <Label>Nome do Treino</Label>
+            <div className="flex items-center justify-between">
+              <Label>Nome do Treino</Label>
+              <span className={`text-xs ${form.nome.length >= NOME_MAX ? "text-destructive" : "text-muted-foreground"}`}>
+                {form.nome.length}/{NOME_MAX}
+              </span>
+            </div>
             <Input
               placeholder="Ex: Treino A - Peito / Tríceps"
               value={form.nome}
+              maxLength={NOME_MAX}
               onChange={(e) => setForm((f) => ({ ...f, nome: e.target.value }))}
               autoFocus
             />
           </div>
+
           <div className="space-y-1.5">
-            <Label>
-              Descrição{" "}
-              <span className="text-muted-foreground font-normal">(opcional)</span>
-            </Label>
+            <div className="flex items-center justify-between">
+              <Label>
+                Descrição{" "}
+                <span className="text-muted-foreground font-normal">(opcional)</span>
+              </Label>
+              <span className={`text-xs ${form.descricao.length >= DESCRICAO_MAX ? "text-destructive" : "text-muted-foreground"}`}>
+                {form.descricao.length}/{DESCRICAO_MAX}
+              </span>
+            </div>
             <Textarea
-              placeholder="Ex: Foco em hipertrofia de empurrar"
+              placeholder="Ex: Foco em hipertrofia"
               value={form.descricao}
+              maxLength={DESCRICAO_MAX}
               onChange={(e) => setForm((f) => ({ ...f, descricao: e.target.value }))}
               rows={3}
             />
@@ -83,7 +104,10 @@ export function NovoTreinoDialog({ open, onOpenChange }: NovoTreinoDialogProps) 
           <Button variant="outline" onClick={() => handleFechar(false)}>
             Cancelar
           </Button>
-          <Button onClick={handleSubmit} disabled={isPending || !form.nome.trim()}>
+          <Button
+            onClick={handleSubmit}
+            disabled={isPending || form.nome.trim().length < 2}
+          >
             {isPending ? "Criando..." : "Criar Treino"}
           </Button>
         </DialogFooter>

@@ -6,6 +6,11 @@ import {
   createTreino,
   CreateTreinoBody,
   createTreinoExercio,
+  deleteAlunoTreino,
+  deleteTreino,
+  deleteTreinoExercicio,
+  updateTreinoExercicio,
+  UpdateTreinoExercicioBody,
   type CreateExercicioBody,
   type CreateTreinoExercioBody,
 } from "@/app/_lib/api/fetch-generated";
@@ -113,6 +118,86 @@ export async function vincularAlunoAoTreinoAction(
     return {
       sucesso: false,
       mensagem: (response as any).data?.error || "Erro ao vincular aluno.",
+    };
+  } catch {
+    return { sucesso: false, mensagem: "Erro interno no servidor." };
+  }
+}
+
+export async function atualizarExercicioDoTreinoAction(
+  treinoId: string,
+  treinoExercicioId: string,
+  body: UpdateTreinoExercicioBody
+) {
+  if (!treinoId || !treinoExercicioId)
+    return { sucesso: false, mensagem: "IDs inválidos." };
+  if (body.series !== undefined && body.series < 1)
+    return { sucesso: false, mensagem: "Séries inválidas." };
+
+  try {
+    const response = await updateTreinoExercicio(treinoId, treinoExercicioId, body);
+    if (response.status === 201) {
+      revalidatePath("/treinos");
+      return { sucesso: true };
+    }
+    return { sucesso: false, mensagem: (response as any).data?.error || "Erro ao atualizar exercício." };
+  } catch {
+    return { sucesso: false, mensagem: "Erro interno no servidor." };
+  }
+}
+
+export async function deletarExercicioDoTreinoAction(
+  treinoId: string,
+  treinoExercicioId: string
+) {
+  if (!treinoId || !treinoExercicioId)
+    return { sucesso: false, mensagem: "IDs inválidos." };
+
+  try {
+    const response = await deleteTreinoExercicio(treinoId, treinoExercicioId);
+    if (response.status === 200) {
+      revalidatePath("/treinos");
+      return { sucesso: true };
+    }
+    return { sucesso: false, mensagem: (response as any).data?.error || "Erro ao remover exercício." };
+  } catch {
+    return { sucesso: false, mensagem: "Erro interno no servidor." };
+  }
+}
+
+export async function deletarTreinoAction(treinoId: string) {
+  if (!treinoId) return { sucesso: false, mensagem: "Treino inválido." };
+
+  try {
+    const response = await deleteTreino(treinoId);
+    if (response.status === 200) {
+      revalidatePath("/treinos");
+      return { sucesso: true };
+    }
+    return {
+      sucesso: false,
+      mensagem: (response as any).data?.error || "Erro ao deletar treino.",
+    };
+  } catch {
+    return { sucesso: false, mensagem: "Erro interno no servidor." };
+  }
+}
+
+export async function desvincularAlunoDoTreinoAction(
+  treinoId: string,
+  userId: string
+) {
+  if (!treinoId || !userId) return { sucesso: false, mensagem: "IDs inválidos." };
+
+  try {
+    const response = await deleteAlunoTreino(treinoId, userId);
+    if (response.status === 200) {
+      revalidatePath("/treinos");
+      return { sucesso: true };
+    }
+    return {
+      sucesso: false,
+      mensagem: (response as any).data?.error || "Erro ao desvincular aluno.",
     };
   } catch {
     return { sucesso: false, mensagem: "Erro interno no servidor." };

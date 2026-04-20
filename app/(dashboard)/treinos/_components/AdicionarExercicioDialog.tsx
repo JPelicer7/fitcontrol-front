@@ -18,10 +18,14 @@ import { toast } from "sonner";
 import { type GetExercicios201ExerciciosItem } from "@/app/_lib/api/fetch-generated";
 import { criarExercicioAction, adicionarExercicioAoTreinoAction } from "../actions";
 
-
 type ExercicioItem = GetExercicios201ExerciciosItem & { id: string };
-
 type Etapa = "selecionar" | "criar" | "configurar";
+
+const NOME_EXERCICIO_MAX = 60;
+const REPETICOES_MAX = 10; 
+const CARGA_MAX = 3;      
+const SERIES_MAX = 20;
+const SERIES_MIN = 1;
 
 interface AdicionarExercicioDialogProps {
   open: boolean;
@@ -46,14 +50,8 @@ export function AdicionarExercicioDialog({
 
   const [etapa, setEtapa] = useState<Etapa>("selecionar");
   const [isPending, setIsPending] = useState(false);
-
-  // Etapa selecionar
   const [busca, setBusca] = useState("");
-
-  // Etapa criar
   const [novoNome, setNovoNome] = useState("");
-
-  // Etapa configurar
   const [exercicioSelecionado, setExercicioSelecionado] = useState<ExercicioItem | null>(null);
   const [configForm, setConfigForm] = useState<ConfigForm>({
     series: 3,
@@ -68,11 +66,6 @@ export function AdicionarExercicioDialog({
     );
   }, [exercicios, busca]);
 
-  const handleFechar = (open: boolean) => {
-    if (!open) resetar();
-    onOpenChange(open);
-  };
-
   const resetar = () => {
     setEtapa("selecionar");
     setBusca("");
@@ -81,14 +74,19 @@ export function AdicionarExercicioDialog({
     setConfigForm({ series: 3, repeticoes: "12", carga: "" });
   };
 
+  const handleFechar = (open: boolean) => {
+    if (!open) resetar();
+    onOpenChange(open);
+  };
+
   const handleSelecionarExercicio = (exercicio: ExercicioItem) => {
     setExercicioSelecionado(exercicio);
     setEtapa("configurar");
   };
 
   const handleCriarExercicio = async () => {
-    if (!novoNome.trim()) {
-      toast.error("Informe o nome do exercício.");
+    if (novoNome.trim().length < 2) {
+      toast.error("Nome deve ter pelo menos 2 caracteres.");
       return;
     }
 
@@ -101,7 +99,6 @@ export function AdicionarExercicioDialog({
       return;
     }
 
-    
     const criado: ExercicioItem = { id: result.id, nome: novoNome.trim() };
     setExercicioSelecionado(criado);
     setEtapa("configurar");
@@ -109,11 +106,6 @@ export function AdicionarExercicioDialog({
 
   const handleAdicionarAoTreino = async () => {
     if (!exercicioSelecionado) return;
-
-    if (configForm.series < 1) {
-      toast.error("Informe um número de séries válido.");
-      return;
-    }
     if (!configForm.repeticoes.trim()) {
       toast.error("Informe as repetições.");
       return;
@@ -207,7 +199,7 @@ export function AdicionarExercicioDialog({
           </>
         )}
 
-        {/* Etapa 2 — Criar exercício global */}
+        {/* Etapa 2 — Criar exercício */}
         {etapa === "criar" && (
           <>
             <DialogHeader>
@@ -217,30 +209,37 @@ export function AdicionarExercicioDialog({
               O exercício será salvo e poderá ser reutilizado em outros treinos.
             </p>
 
-            <div className="mt-2 space-y-3">
-              <div className="space-y-1.5">
+            <div className="mt-2 space-y-1.5">
+              <div className="flex items-center justify-between">
                 <Label>Nome do Exercício</Label>
-                <Input
-                  placeholder="Ex: Rosca Scott"
-                  value={novoNome}
-                  onChange={(e) => setNovoNome(e.target.value)}
-                  autoFocus
-                />
+                <span className={`text-xs ${novoNome.length >= NOME_EXERCICIO_MAX ? "text-destructive" : "text-muted-foreground"}`}>
+                  {novoNome.length}/{NOME_EXERCICIO_MAX}
+                </span>
               </div>
+              <Input
+                placeholder="Ex: Rosca Scott"
+                value={novoNome}
+                maxLength={NOME_EXERCICIO_MAX}
+                onChange={(e) => setNovoNome(e.target.value)}
+                autoFocus
+              />
             </div>
 
             <DialogFooter>
               <Button variant="outline" onClick={() => setEtapa("selecionar")}>
                 Voltar
               </Button>
-              <Button onClick={handleCriarExercicio} disabled={isPending}>
+              <Button
+                onClick={handleCriarExercicio}
+                disabled={isPending || novoNome.trim().length < 2}
+              >
                 {isPending ? "Criando..." : "Criar e Selecionar"}
               </Button>
             </DialogFooter>
           </>
         )}
 
-        {/* Etapa 3 — Configurar séries/reps/carga */}
+        {/* Etapa 3 — Configurar */}
         {etapa === "configurar" && exercicioSelecionado && (
           <>
             <DialogHeader>
@@ -267,28 +266,45 @@ export function AdicionarExercicioDialog({
                 <Label>Séries</Label>
                 <Input
                   type="number"
-                  min={1}
+                  min={SERIES_MIN}
+                  max={SERIES_MAX}
                   value={configForm.series}
-                  onChange={(e) =>
-                    setConfigForm((f) => ({ ...f, series: Number(e.target.value) }))
-                  }
+                  onChange={(e) => {
+                    const val = Math.min(
+                      SERIES_MAX,
+                      Math.max(SERIES_MIN, Number(e.target.value))
+                    );
+                    setConfigForm((f) => ({ ...f, series: val }));
+                  }}
                 />
               </div>
               <div className="space-y-1.5">
-                <Label>Repetições</Label>
+                <Label>
+                  Repetições
+                  {/* <span className="text-muted-foreground font-normal ml-1 text-xs">
+                    (máx. {REPETICOES_MAX})
+                  </span> */}
+                </Label>
                 <Input
                   placeholder="10-12"
                   value={configForm.repeticoes}
+                  maxLength={REPETICOES_MAX}
                   onChange={(e) =>
                     setConfigForm((f) => ({ ...f, repeticoes: e.target.value }))
                   }
                 />
               </div>
               <div className="space-y-1.5">
-                <Label>Carga</Label>
+                <Label>
+                  Carga
+                  {/* <span className="text-muted-foreground font-normal ml-1 text-xs">
+                    (máx. {CARGA_MAX})
+                  </span> */}
+                </Label>
                 <Input
                   placeholder="60 kg"
                   value={configForm.carga}
+                  maxLength={CARGA_MAX}
                   onChange={(e) =>
                     setConfigForm((f) => ({ ...f, carga: e.target.value }))
                   }
@@ -306,7 +322,10 @@ export function AdicionarExercicioDialog({
               >
                 Voltar
               </Button>
-              <Button onClick={handleAdicionarAoTreino} disabled={isPending}>
+              <Button
+                onClick={handleAdicionarAoTreino}
+                disabled={isPending || !configForm.repeticoes.trim()}
+              >
                 {isPending ? "Adicionando..." : "Adicionar ao Treino"}
               </Button>
             </DialogFooter>
