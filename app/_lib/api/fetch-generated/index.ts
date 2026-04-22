@@ -5,31 +5,31 @@
  * API para Gerenciamento de Academia
  * OpenAPI spec version: 1.0.0
  */
-import { customFetch } from "../../fetch";
-export type CreateUserBodyPlano =
-  (typeof CreateUserBodyPlano)[keyof typeof CreateUserBodyPlano];
+import { customFetch } from '../../fetch';
+export type CreateUserBodyPlano = typeof CreateUserBodyPlano[keyof typeof CreateUserBodyPlano];
+
 
 export const CreateUserBodyPlano = {
-  Mensal: "Mensal",
-  Trimestral: "Trimestral",
-  Semestral: "Semestral",
-  Anual: "Anual",
+  Mensal: 'Mensal',
+  Trimestral: 'Trimestral',
+  Semestral: 'Semestral',
+  Anual: 'Anual',
 } as const;
 
-export type CreateUserBodyRole =
-  (typeof CreateUserBodyRole)[keyof typeof CreateUserBodyRole];
+export type CreateUserBodyRole = typeof CreateUserBodyRole[keyof typeof CreateUserBodyRole];
+
 
 export const CreateUserBodyRole = {
-  Dono: "Dono",
-  Aluno: "Aluno",
+  Dono: 'Dono',
+  Aluno: 'Aluno',
 } as const;
 
-export type CreateUserBodyStatus =
-  (typeof CreateUserBodyStatus)[keyof typeof CreateUserBodyStatus];
+export type CreateUserBodyStatus = typeof CreateUserBodyStatus[keyof typeof CreateUserBodyStatus];
+
 
 export const CreateUserBodyStatus = {
-  Ativo: "Ativo",
-  Inativo: "Inativo",
+  Ativo: 'Ativo',
+  Inativo: 'Inativo',
 } as const;
 
 export type CreateUserBody = {
@@ -68,36 +68,36 @@ export type CreateUser500 = {
 };
 
 export type GetUsersParams = {
-  name?: string;
-  Status?: unknown;
-  plano?: unknown;
-  /**
-   * @minimum 1
-   */
-  page?: number;
-  /**
-   * @minimum 1
-   * @maximum 100
-   */
-  limit?: number;
+name?: string;
+Status?: unknown;
+plano?: unknown;
+/**
+ * @minimum 1
+ */
+page?: number;
+/**
+ * @minimum 1
+ * @maximum 100
+ */
+limit?: number;
 };
 
-export type GetUsers201UsersItemStatus =
-  (typeof GetUsers201UsersItemStatus)[keyof typeof GetUsers201UsersItemStatus];
+export type GetUsers201UsersItemStatus = typeof GetUsers201UsersItemStatus[keyof typeof GetUsers201UsersItemStatus];
+
 
 export const GetUsers201UsersItemStatus = {
-  Ativo: "Ativo",
-  Inativo: "Inativo",
+  Ativo: 'Ativo',
+  Inativo: 'Inativo',
 } as const;
 
-export type GetUsers201UsersItemPlano =
-  (typeof GetUsers201UsersItemPlano)[keyof typeof GetUsers201UsersItemPlano];
+export type GetUsers201UsersItemPlano = typeof GetUsers201UsersItemPlano[keyof typeof GetUsers201UsersItemPlano];
+
 
 export const GetUsers201UsersItemPlano = {
-  Mensal: "Mensal",
-  Trimestral: "Trimestral",
-  Semestral: "Semestral",
-  Anual: "Anual",
+  Mensal: 'Mensal',
+  Trimestral: 'Trimestral',
+  Semestral: 'Semestral',
+  Anual: 'Anual',
 } as const;
 
 export type GetUsers201UsersItem = {
@@ -133,22 +133,22 @@ export type GetUsers500 = {
   code: string;
 };
 
-export type UpdateUserBodyPlano =
-  (typeof UpdateUserBodyPlano)[keyof typeof UpdateUserBodyPlano];
+export type UpdateUserBodyPlano = typeof UpdateUserBodyPlano[keyof typeof UpdateUserBodyPlano];
+
 
 export const UpdateUserBodyPlano = {
-  Mensal: "Mensal",
-  Trimestral: "Trimestral",
-  Semestral: "Semestral",
-  Anual: "Anual",
+  Mensal: 'Mensal',
+  Trimestral: 'Trimestral',
+  Semestral: 'Semestral',
+  Anual: 'Anual',
 } as const;
 
-export type UpdateUserBodyStatus =
-  (typeof UpdateUserBodyStatus)[keyof typeof UpdateUserBodyStatus];
+export type UpdateUserBodyStatus = typeof UpdateUserBodyStatus[keyof typeof UpdateUserBodyStatus];
+
 
 export const UpdateUserBodyStatus = {
-  Ativo: "Ativo",
-  Inativo: "Inativo",
+  Ativo: 'Ativo',
+  Inativo: 'Inativo',
 } as const;
 
 export type UpdateUserBody = {
@@ -158,22 +158,22 @@ export type UpdateUserBody = {
   telefone?: string;
 };
 
-export type UpdateUser201Plano =
-  (typeof UpdateUser201Plano)[keyof typeof UpdateUser201Plano];
+export type UpdateUser201Plano = typeof UpdateUser201Plano[keyof typeof UpdateUser201Plano];
+
 
 export const UpdateUser201Plano = {
-  Mensal: "Mensal",
-  Trimestral: "Trimestral",
-  Semestral: "Semestral",
-  Anual: "Anual",
+  Mensal: 'Mensal',
+  Trimestral: 'Trimestral',
+  Semestral: 'Semestral',
+  Anual: 'Anual',
 } as const;
 
-export type UpdateUser201Status =
-  (typeof UpdateUser201Status)[keyof typeof UpdateUser201Status];
+export type UpdateUser201Status = typeof UpdateUser201Status[keyof typeof UpdateUser201Status];
+
 
 export const UpdateUser201Status = {
-  Ativo: "Ativo",
-  Inativo: "Inativo",
+  Ativo: 'Ativo',
+  Inativo: 'Inativo',
 } as const;
 
 export type UpdateUser201 = {
@@ -199,22 +199,22 @@ export type UpdateUser500 = {
   code: string;
 };
 
-export type GetUser200UserPlano =
-  (typeof GetUser200UserPlano)[keyof typeof GetUser200UserPlano];
+export type GetUser200UserPlano = typeof GetUser200UserPlano[keyof typeof GetUser200UserPlano];
+
 
 export const GetUser200UserPlano = {
-  Mensal: "Mensal",
-  Trimestral: "Trimestral",
-  Semestral: "Semestral",
-  Anual: "Anual",
+  Mensal: 'Mensal',
+  Trimestral: 'Trimestral',
+  Semestral: 'Semestral',
+  Anual: 'Anual',
 } as const;
 
-export type GetUser200UserStatus =
-  (typeof GetUser200UserStatus)[keyof typeof GetUser200UserStatus];
+export type GetUser200UserStatus = typeof GetUser200UserStatus[keyof typeof GetUser200UserStatus];
+
 
 export const GetUser200UserStatus = {
-  Ativo: "Ativo",
-  Inativo: "Inativo",
+  Ativo: 'Ativo',
+  Inativo: 'Inativo',
 } as const;
 
 export type GetUser200User = {
@@ -287,13 +287,11 @@ export type GetUser200MedidasTodasItem = {
 /**
  * @nullable
  */
-export type GetUser200MedidasComparacao = {
-  [key: string]: {
-    atual: number;
-    anterior: number;
-    diferenca: number;
-  };
-} | null;
+export type GetUser200MedidasComparacao = {[key: string]: {
+  atual: number;
+  anterior: number;
+  diferenca: number;
+}} | null;
 
 export type GetUser200Medidas = {
   todas: GetUser200MedidasTodasItem[];
@@ -455,34 +453,34 @@ export type UpdateMedidas500 = {
   code: string;
 };
 
-export type CreateTransactionBodyType =
-  (typeof CreateTransactionBodyType)[keyof typeof CreateTransactionBodyType];
+export type CreateTransactionBodyType = typeof CreateTransactionBodyType[keyof typeof CreateTransactionBodyType];
+
 
 export const CreateTransactionBodyType = {
-  Receita: "Receita",
-  Despesa: "Despesa",
+  Receita: 'Receita',
+  Despesa: 'Despesa',
 } as const;
 
-export type CreateTransactionBodyCategoria =
-  (typeof CreateTransactionBodyCategoria)[keyof typeof CreateTransactionBodyCategoria];
+export type CreateTransactionBodyCategoria = typeof CreateTransactionBodyCategoria[keyof typeof CreateTransactionBodyCategoria];
+
 
 export const CreateTransactionBodyCategoria = {
-  Mensalidade: "Mensalidade",
-  Aluguel: "Aluguel",
-  Equipamentos: "Equipamentos",
-  Energia: "Energia",
-  Agua: "Agua",
-  Manutencao: "Manutencao",
-  Outros: "Outros",
+  Mensalidade: 'Mensalidade',
+  Aluguel: 'Aluguel',
+  Equipamentos: 'Equipamentos',
+  Energia: 'Energia',
+  Agua: 'Agua',
+  Manutencao: 'Manutencao',
+  Outros: 'Outros',
 } as const;
 
-export type CreateTransactionBodyStatus =
-  (typeof CreateTransactionBodyStatus)[keyof typeof CreateTransactionBodyStatus];
+export type CreateTransactionBodyStatus = typeof CreateTransactionBodyStatus[keyof typeof CreateTransactionBodyStatus];
+
 
 export const CreateTransactionBodyStatus = {
-  Pago: "Pago",
-  Pendente: "Pendente",
-  Cancelado: "Cancelado",
+  Pago: 'Pago',
+  Pendente: 'Pendente',
+  Cancelado: 'Cancelado',
 } as const;
 
 export type CreateTransactionBody = {
@@ -525,25 +523,25 @@ export type GetTransactions201GraficoDespesasItem = {
   valor: number;
 };
 
-export type GetTransactions201TransactionsItemType =
-  (typeof GetTransactions201TransactionsItemType)[keyof typeof GetTransactions201TransactionsItemType];
+export type GetTransactions201TransactionsItemType = typeof GetTransactions201TransactionsItemType[keyof typeof GetTransactions201TransactionsItemType];
+
 
 export const GetTransactions201TransactionsItemType = {
-  Receita: "Receita",
-  Despesa: "Despesa",
+  Receita: 'Receita',
+  Despesa: 'Despesa',
 } as const;
 
-export type GetTransactions201TransactionsItemCategoria =
-  (typeof GetTransactions201TransactionsItemCategoria)[keyof typeof GetTransactions201TransactionsItemCategoria];
+export type GetTransactions201TransactionsItemCategoria = typeof GetTransactions201TransactionsItemCategoria[keyof typeof GetTransactions201TransactionsItemCategoria];
+
 
 export const GetTransactions201TransactionsItemCategoria = {
-  Mensalidade: "Mensalidade",
-  Aluguel: "Aluguel",
-  Equipamentos: "Equipamentos",
-  Energia: "Energia",
-  Agua: "Agua",
-  Manutencao: "Manutencao",
-  Outros: "Outros",
+  Mensalidade: 'Mensalidade',
+  Aluguel: 'Aluguel',
+  Equipamentos: 'Equipamentos',
+  Energia: 'Energia',
+  Agua: 'Agua',
+  Manutencao: 'Manutencao',
+  Outros: 'Outros',
 } as const;
 
 export type GetTransactions201TransactionsItem = {
@@ -999,12 +997,12 @@ export type CreateAlunoTreino500 = {
   code: string;
 };
 
-export type GetAlunosTreino201AlunosItemStatus =
-  (typeof GetAlunosTreino201AlunosItemStatus)[keyof typeof GetAlunosTreino201AlunosItemStatus];
+export type GetAlunosTreino201AlunosItemStatus = typeof GetAlunosTreino201AlunosItemStatus[keyof typeof GetAlunosTreino201AlunosItemStatus];
+
 
 export const GetAlunosTreino201AlunosItemStatus = {
-  Ativo: "Ativo",
-  Inativo: "Inativo",
+  Ativo: 'Ativo',
+  Inativo: 'Inativo',
 } as const;
 
 export type GetAlunosTreino201AlunosItem = {
@@ -1066,1456 +1064,1848 @@ export type DeleteAlunoTreino500 = {
   code: string;
 };
 
+export type CreateAgendamentoBodyCategoria = typeof CreateAgendamentoBodyCategoria[keyof typeof CreateAgendamentoBodyCategoria];
+
+
+export const CreateAgendamentoBodyCategoria = {
+  Reuniao: 'Reuniao',
+  Personal: 'Personal',
+  Avaliacao: 'Avaliacao',
+  Outro: 'Outro',
+} as const;
+
+export type CreateAgendamentoBody = {
+  userId?: string;
+  titulo: string;
+  data: string;
+  duracao?: number;
+  observacao?: string;
+  categoria: CreateAgendamentoBodyCategoria;
+};
+
+export type CreateAgendamento201 = {
+  id: string;
+  titulo: string;
+};
+
+export type CreateAgendamento401 = {
+  error: string;
+  code: string;
+};
+
+export type CreateAgendamento403 = {
+  error: string;
+  code: string;
+};
+
+export type CreateAgendamento404 = {
+  error: string;
+  code: string;
+};
+
+export type CreateAgendamento500 = {
+  error: string;
+  code: string;
+};
+
+export type GetAgendamentosDiaParams = {
+data: string;
+};
+
+export type GetAgendamentosDia201AgendamentosItemCategoria = typeof GetAgendamentosDia201AgendamentosItemCategoria[keyof typeof GetAgendamentosDia201AgendamentosItemCategoria];
+
+
+export const GetAgendamentosDia201AgendamentosItemCategoria = {
+  Reuniao: 'Reuniao',
+  Personal: 'Personal',
+  Avaliacao: 'Avaliacao',
+  Outro: 'Outro',
+} as const;
+
+export type GetAgendamentosDia201AgendamentosItemAluno = {
+  userId: string;
+  nome: string;
+} | null;
+
+export type GetAgendamentosDia201AgendamentosItem = {
+  id: string;
+  titulo: string;
+  /** @nullable */
+  duracao: number | null;
+  /** @nullable */
+  observacao: string | null;
+  categoria: GetAgendamentosDia201AgendamentosItemCategoria;
+  data: string;
+  aluno: GetAgendamentosDia201AgendamentosItemAluno;
+};
+
+export type GetAgendamentosDia201 = {
+  agendamentos: GetAgendamentosDia201AgendamentosItem[];
+};
+
+export type GetAgendamentosDia400 = {
+  error: string;
+  code: string;
+};
+
+export type GetAgendamentosDia401 = {
+  error: string;
+  code: string;
+};
+
+export type GetAgendamentosDia403 = {
+  error: string;
+  code: string;
+};
+
+export type GetAgendamentosDia404 = {
+  error: string;
+  code: string;
+};
+
+export type GetAgendamentosDia500 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteAgendamento200 = {
+  message: string;
+};
+
+export type DeleteAgendamento400 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteAgendamento401 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteAgendamento403 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteAgendamento404 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteAgendamento500 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateAgendamentosBodyCategoria = typeof UpdateAgendamentosBodyCategoria[keyof typeof UpdateAgendamentosBodyCategoria];
+
+
+export const UpdateAgendamentosBodyCategoria = {
+  Reuniao: 'Reuniao',
+  Personal: 'Personal',
+  Avaliacao: 'Avaliacao',
+  Outro: 'Outro',
+} as const;
+
+export type UpdateAgendamentosBody = {
+  titulo?: string;
+  duracao?: number;
+  observacao?: string;
+  userId?: string;
+  data?: string;
+  categoria?: UpdateAgendamentosBodyCategoria;
+};
+
+export type UpdateAgendamentos201 = {
+  message: string;
+};
+
+export type UpdateAgendamentos400 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateAgendamentos401 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateAgendamentos403 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateAgendamentos404 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateAgendamentos500 = {
+  error: string;
+  code: string;
+};
+
 /**
  * @summary Create User
  */
 export type createUserResponse201 = {
-  data: CreateUser201;
-  status: 201;
-};
+  data: CreateUser201
+  status: 201
+}
 
 export type createUserResponse401 = {
-  data: CreateUser401;
-  status: 401;
-};
+  data: CreateUser401
+  status: 401
+}
 
 export type createUserResponse404 = {
-  data: CreateUser404;
-  status: 404;
-};
+  data: CreateUser404
+  status: 404
+}
 
 export type createUserResponse409 = {
-  data: CreateUser409;
-  status: 409;
-};
+  data: CreateUser409
+  status: 409
+}
 
 export type createUserResponse500 = {
-  data: CreateUser500;
-  status: 500;
-};
-
-export type createUserResponseSuccess = createUserResponse201 & {
+  data: CreateUser500
+  status: 500
+}
+    
+export type createUserResponseSuccess = (createUserResponse201) & {
   headers: Headers;
 };
-export type createUserResponseError = (
-  | createUserResponse401
-  | createUserResponse404
-  | createUserResponse409
-  | createUserResponse500
-) & {
+export type createUserResponseError = (createUserResponse401 | createUserResponse404 | createUserResponse409 | createUserResponse500) & {
   headers: Headers;
 };
 
-export type createUserResponse =
-  | createUserResponseSuccess
-  | createUserResponseError;
+export type createUserResponse = (createUserResponseSuccess | createUserResponseError)
 
 export const getCreateUserUrl = () => {
-  return `/user/`;
-};
 
-export const createUser = async (
-  createUserBody: CreateUserBody,
-  options?: RequestInit,
-): Promise<createUserResponse> => {
-  return customFetch<createUserResponse>(getCreateUserUrl(), {
+
+  
+
+  return `/user/`
+}
+
+export const createUser = async (createUserBody: CreateUserBody, options?: RequestInit): Promise<createUserResponse> => {
+  
+  return customFetch<createUserResponse>(getCreateUserUrl(),
+  {      
     ...options,
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    body: JSON.stringify(createUserBody),
-  });
-};
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createUserBody,)
+  }
+);}
+
+
 
 /**
  * @summary Get Users
  */
 export type getUsersResponse201 = {
-  data: GetUsers201;
-  status: 201;
-};
+  data: GetUsers201
+  status: 201
+}
 
 export type getUsersResponse401 = {
-  data: GetUsers401;
-  status: 401;
-};
+  data: GetUsers401
+  status: 401
+}
 
 export type getUsersResponse404 = {
-  data: GetUsers404;
-  status: 404;
-};
+  data: GetUsers404
+  status: 404
+}
 
 export type getUsersResponse500 = {
-  data: GetUsers500;
-  status: 500;
-};
-
-export type getUsersResponseSuccess = getUsersResponse201 & {
+  data: GetUsers500
+  status: 500
+}
+    
+export type getUsersResponseSuccess = (getUsersResponse201) & {
   headers: Headers;
 };
-export type getUsersResponseError = (
-  | getUsersResponse401
-  | getUsersResponse404
-  | getUsersResponse500
-) & {
+export type getUsersResponseError = (getUsersResponse401 | getUsersResponse404 | getUsersResponse500) & {
   headers: Headers;
 };
 
-export type getUsersResponse = getUsersResponseSuccess | getUsersResponseError;
+export type getUsersResponse = (getUsersResponseSuccess | getUsersResponseError)
 
-export const getGetUsersUrl = (params?: GetUsersParams) => {
+export const getGetUsersUrl = (params?: GetUsersParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
+    
     if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
     }
   });
 
   const stringifiedParams = normalizedParams.toString();
 
-  return stringifiedParams.length > 0
-    ? `/user/?${stringifiedParams}`
-    : `/user/`;
-};
+  return stringifiedParams.length > 0 ? `/user/?${stringifiedParams}` : `/user/`
+}
 
-export const getUsers = async (
-  params?: GetUsersParams,
-  options?: RequestInit,
-): Promise<getUsersResponse> => {
-  return customFetch<getUsersResponse>(getGetUsersUrl(params), {
+export const getUsers = async (params?: GetUsersParams, options?: RequestInit): Promise<getUsersResponse> => {
+  
+  return customFetch<getUsersResponse>(getGetUsersUrl(params),
+  {      
     ...options,
-    method: "GET",
-  });
-};
+    method: 'GET'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Update User
  */
 export type updateUserResponse201 = {
-  data: UpdateUser201;
-  status: 201;
-};
+  data: UpdateUser201
+  status: 201
+}
 
 export type updateUserResponse401 = {
-  data: UpdateUser401;
-  status: 401;
-};
+  data: UpdateUser401
+  status: 401
+}
 
 export type updateUserResponse404 = {
-  data: UpdateUser404;
-  status: 404;
-};
+  data: UpdateUser404
+  status: 404
+}
 
 export type updateUserResponse500 = {
-  data: UpdateUser500;
-  status: 500;
-};
-
-export type updateUserResponseSuccess = updateUserResponse201 & {
+  data: UpdateUser500
+  status: 500
+}
+    
+export type updateUserResponseSuccess = (updateUserResponse201) & {
   headers: Headers;
 };
-export type updateUserResponseError = (
-  | updateUserResponse401
-  | updateUserResponse404
-  | updateUserResponse500
-) & {
+export type updateUserResponseError = (updateUserResponse401 | updateUserResponse404 | updateUserResponse500) & {
   headers: Headers;
 };
 
-export type updateUserResponse =
-  | updateUserResponseSuccess
-  | updateUserResponseError;
+export type updateUserResponse = (updateUserResponseSuccess | updateUserResponseError)
 
-export const getUpdateUserUrl = (userId: string) => {
-  return `/user/${userId}`;
-};
+export const getUpdateUserUrl = (userId: string,) => {
 
-export const updateUser = async (
-  userId: string,
-  updateUserBody: UpdateUserBody,
-  options?: RequestInit,
-): Promise<updateUserResponse> => {
-  return customFetch<updateUserResponse>(getUpdateUserUrl(userId), {
+
+  
+
+  return `/user/${userId}`
+}
+
+export const updateUser = async (userId: string,
+    updateUserBody: UpdateUserBody, options?: RequestInit): Promise<updateUserResponse> => {
+  
+  return customFetch<updateUserResponse>(getUpdateUserUrl(userId),
+  {      
     ...options,
-    method: "PUT",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    body: JSON.stringify(updateUserBody),
-  });
-};
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      updateUserBody,)
+  }
+);}
+
+
 
 /**
  * @summary Get User by ID
  */
 export type getUserResponse200 = {
-  data: GetUser200;
-  status: 200;
-};
+  data: GetUser200
+  status: 200
+}
 
 export type getUserResponse401 = {
-  data: GetUser401;
-  status: 401;
-};
+  data: GetUser401
+  status: 401
+}
 
 export type getUserResponse403 = {
-  data: GetUser403;
-  status: 403;
-};
+  data: GetUser403
+  status: 403
+}
 
 export type getUserResponse404 = {
-  data: GetUser404;
-  status: 404;
-};
+  data: GetUser404
+  status: 404
+}
 
 export type getUserResponse500 = {
-  data: GetUser500;
-  status: 500;
-};
-
-export type getUserResponseSuccess = getUserResponse200 & {
+  data: GetUser500
+  status: 500
+}
+    
+export type getUserResponseSuccess = (getUserResponse200) & {
   headers: Headers;
 };
-export type getUserResponseError = (
-  | getUserResponse401
-  | getUserResponse403
-  | getUserResponse404
-  | getUserResponse500
-) & {
+export type getUserResponseError = (getUserResponse401 | getUserResponse403 | getUserResponse404 | getUserResponse500) & {
   headers: Headers;
 };
 
-export type getUserResponse = getUserResponseSuccess | getUserResponseError;
+export type getUserResponse = (getUserResponseSuccess | getUserResponseError)
 
-export const getGetUserUrl = (userId: string) => {
-  return `/user/${userId}`;
-};
+export const getGetUserUrl = (userId: string,) => {
 
-export const getUser = async (
-  userId: string,
-  options?: RequestInit,
-): Promise<getUserResponse> => {
-  return customFetch<getUserResponse>(getGetUserUrl(userId), {
+
+  
+
+  return `/user/${userId}`
+}
+
+export const getUser = async (userId: string, options?: RequestInit): Promise<getUserResponse> => {
+  
+  return customFetch<getUserResponse>(getGetUserUrl(userId),
+  {      
     ...options,
-    method: "GET",
-  });
-};
+    method: 'GET'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Get Grafico
  */
 export type getGraficoResponse200 = {
-  data: GetGrafico200;
-  status: 200;
-};
+  data: GetGrafico200
+  status: 200
+}
 
 export type getGraficoResponse401 = {
-  data: GetGrafico401;
-  status: 401;
-};
+  data: GetGrafico401
+  status: 401
+}
 
 export type getGraficoResponse403 = {
-  data: GetGrafico403;
-  status: 403;
-};
+  data: GetGrafico403
+  status: 403
+}
 
 export type getGraficoResponse404 = {
-  data: GetGrafico404;
-  status: 404;
-};
+  data: GetGrafico404
+  status: 404
+}
 
 export type getGraficoResponse500 = {
-  data: GetGrafico500;
-  status: 500;
-};
-
-export type getGraficoResponseSuccess = getGraficoResponse200 & {
+  data: GetGrafico500
+  status: 500
+}
+    
+export type getGraficoResponseSuccess = (getGraficoResponse200) & {
   headers: Headers;
 };
-export type getGraficoResponseError = (
-  | getGraficoResponse401
-  | getGraficoResponse403
-  | getGraficoResponse404
-  | getGraficoResponse500
-) & {
+export type getGraficoResponseError = (getGraficoResponse401 | getGraficoResponse403 | getGraficoResponse404 | getGraficoResponse500) & {
   headers: Headers;
 };
 
-export type getGraficoResponse =
-  | getGraficoResponseSuccess
-  | getGraficoResponseError;
+export type getGraficoResponse = (getGraficoResponseSuccess | getGraficoResponseError)
 
-export const getGetGraficoUrl = (userId: string) => {
-  return `/user/${userId}/getGrafico`;
-};
+export const getGetGraficoUrl = (userId: string,) => {
 
-export const getGrafico = async (
-  userId: string,
-  options?: RequestInit,
-): Promise<getGraficoResponse> => {
-  return customFetch<getGraficoResponse>(getGetGraficoUrl(userId), {
+
+  
+
+  return `/user/${userId}/getGrafico`
+}
+
+export const getGrafico = async (userId: string, options?: RequestInit): Promise<getGraficoResponse> => {
+  
+  return customFetch<getGraficoResponse>(getGetGraficoUrl(userId),
+  {      
     ...options,
-    method: "GET",
-  });
-};
+    method: 'GET'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Create medidas User
  */
 export type createMedidasResponse201 = {
-  data: CreateMedidas201;
-  status: 201;
-};
+  data: CreateMedidas201
+  status: 201
+}
 
 export type createMedidasResponse401 = {
-  data: CreateMedidas401;
-  status: 401;
-};
+  data: CreateMedidas401
+  status: 401
+}
 
 export type createMedidasResponse404 = {
-  data: CreateMedidas404;
-  status: 404;
-};
+  data: CreateMedidas404
+  status: 404
+}
 
 export type createMedidasResponse500 = {
-  data: CreateMedidas500;
-  status: 500;
-};
-
-export type createMedidasResponseSuccess = createMedidasResponse201 & {
+  data: CreateMedidas500
+  status: 500
+}
+    
+export type createMedidasResponseSuccess = (createMedidasResponse201) & {
   headers: Headers;
 };
-export type createMedidasResponseError = (
-  | createMedidasResponse401
-  | createMedidasResponse404
-  | createMedidasResponse500
-) & {
+export type createMedidasResponseError = (createMedidasResponse401 | createMedidasResponse404 | createMedidasResponse500) & {
   headers: Headers;
 };
 
-export type createMedidasResponse =
-  | createMedidasResponseSuccess
-  | createMedidasResponseError;
+export type createMedidasResponse = (createMedidasResponseSuccess | createMedidasResponseError)
 
-export const getCreateMedidasUrl = (userId: string) => {
-  return `/medidas/${userId}`;
-};
+export const getCreateMedidasUrl = (userId: string,) => {
 
-export const createMedidas = async (
-  userId: string,
-  createMedidasBody: CreateMedidasBody,
-  options?: RequestInit,
-): Promise<createMedidasResponse> => {
-  return customFetch<createMedidasResponse>(getCreateMedidasUrl(userId), {
+
+  
+
+  return `/medidas/${userId}`
+}
+
+export const createMedidas = async (userId: string,
+    createMedidasBody: CreateMedidasBody, options?: RequestInit): Promise<createMedidasResponse> => {
+  
+  return customFetch<createMedidasResponse>(getCreateMedidasUrl(userId),
+  {      
     ...options,
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    body: JSON.stringify(createMedidasBody),
-  });
-};
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createMedidasBody,)
+  }
+);}
+
+
 
 /**
  * @summary Update medidas User
  */
 export type updateMedidasResponse201 = {
-  data: UpdateMedidas201;
-  status: 201;
-};
+  data: UpdateMedidas201
+  status: 201
+}
 
 export type updateMedidasResponse401 = {
-  data: UpdateMedidas401;
-  status: 401;
-};
+  data: UpdateMedidas401
+  status: 401
+}
 
 export type updateMedidasResponse404 = {
-  data: UpdateMedidas404;
-  status: 404;
-};
+  data: UpdateMedidas404
+  status: 404
+}
 
 export type updateMedidasResponse500 = {
-  data: UpdateMedidas500;
-  status: 500;
-};
-
-export type updateMedidasResponseSuccess = updateMedidasResponse201 & {
+  data: UpdateMedidas500
+  status: 500
+}
+    
+export type updateMedidasResponseSuccess = (updateMedidasResponse201) & {
   headers: Headers;
 };
-export type updateMedidasResponseError = (
-  | updateMedidasResponse401
-  | updateMedidasResponse404
-  | updateMedidasResponse500
-) & {
+export type updateMedidasResponseError = (updateMedidasResponse401 | updateMedidasResponse404 | updateMedidasResponse500) & {
   headers: Headers;
 };
 
-export type updateMedidasResponse =
-  | updateMedidasResponseSuccess
-  | updateMedidasResponseError;
+export type updateMedidasResponse = (updateMedidasResponseSuccess | updateMedidasResponseError)
 
-export const getUpdateMedidasUrl = (userId: string, medidaId: string) => {
-  return `/medidas/user/${userId}/${medidaId}`;
-};
+export const getUpdateMedidasUrl = (userId: string,
+    medidaId: string,) => {
 
-export const updateMedidas = async (
-  userId: string,
-  medidaId: string,
-  updateMedidasBody: UpdateMedidasBody,
-  options?: RequestInit,
-): Promise<updateMedidasResponse> => {
-  return customFetch<updateMedidasResponse>(
-    getUpdateMedidasUrl(userId, medidaId),
-    {
-      ...options,
-      method: "PUT",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(updateMedidasBody),
-    },
-  );
-};
+
+  
+
+  return `/medidas/user/${userId}/${medidaId}`
+}
+
+export const updateMedidas = async (userId: string,
+    medidaId: string,
+    updateMedidasBody: UpdateMedidasBody, options?: RequestInit): Promise<updateMedidasResponse> => {
+  
+  return customFetch<updateMedidasResponse>(getUpdateMedidasUrl(userId,medidaId),
+  {      
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      updateMedidasBody,)
+  }
+);}
+
+
 
 /**
  * @summary Create Transaction
  */
 export type createTransactionResponse201 = {
-  data: CreateTransaction201;
-  status: 201;
-};
+  data: CreateTransaction201
+  status: 201
+}
 
 export type createTransactionResponse401 = {
-  data: CreateTransaction401;
-  status: 401;
-};
+  data: CreateTransaction401
+  status: 401
+}
 
 export type createTransactionResponse404 = {
-  data: CreateTransaction404;
-  status: 404;
-};
+  data: CreateTransaction404
+  status: 404
+}
 
 export type createTransactionResponse409 = {
-  data: CreateTransaction409;
-  status: 409;
-};
+  data: CreateTransaction409
+  status: 409
+}
 
 export type createTransactionResponse500 = {
-  data: CreateTransaction500;
-  status: 500;
-};
-
-export type createTransactionResponseSuccess = createTransactionResponse201 & {
+  data: CreateTransaction500
+  status: 500
+}
+    
+export type createTransactionResponseSuccess = (createTransactionResponse201) & {
   headers: Headers;
 };
-export type createTransactionResponseError = (
-  | createTransactionResponse401
-  | createTransactionResponse404
-  | createTransactionResponse409
-  | createTransactionResponse500
-) & {
+export type createTransactionResponseError = (createTransactionResponse401 | createTransactionResponse404 | createTransactionResponse409 | createTransactionResponse500) & {
   headers: Headers;
 };
 
-export type createTransactionResponse =
-  | createTransactionResponseSuccess
-  | createTransactionResponseError;
+export type createTransactionResponse = (createTransactionResponseSuccess | createTransactionResponseError)
 
 export const getCreateTransactionUrl = () => {
-  return `/financeiro/`;
-};
 
-export const createTransaction = async (
-  createTransactionBody: CreateTransactionBody,
-  options?: RequestInit,
-): Promise<createTransactionResponse> => {
-  return customFetch<createTransactionResponse>(getCreateTransactionUrl(), {
+
+  
+
+  return `/financeiro/`
+}
+
+export const createTransaction = async (createTransactionBody: CreateTransactionBody, options?: RequestInit): Promise<createTransactionResponse> => {
+  
+  return customFetch<createTransactionResponse>(getCreateTransactionUrl(),
+  {      
     ...options,
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    body: JSON.stringify(createTransactionBody),
-  });
-};
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createTransactionBody,)
+  }
+);}
+
+
 
 /**
  * @summary Get Transactions
  */
 export type getTransactionsResponse201 = {
-  data: GetTransactions201;
-  status: 201;
-};
+  data: GetTransactions201
+  status: 201
+}
 
 export type getTransactionsResponse401 = {
-  data: GetTransactions401;
-  status: 401;
-};
+  data: GetTransactions401
+  status: 401
+}
 
 export type getTransactionsResponse404 = {
-  data: GetTransactions404;
-  status: 404;
-};
+  data: GetTransactions404
+  status: 404
+}
 
 export type getTransactionsResponse409 = {
-  data: GetTransactions409;
-  status: 409;
-};
+  data: GetTransactions409
+  status: 409
+}
 
 export type getTransactionsResponse500 = {
-  data: GetTransactions500;
-  status: 500;
-};
-
-export type getTransactionsResponseSuccess = getTransactionsResponse201 & {
+  data: GetTransactions500
+  status: 500
+}
+    
+export type getTransactionsResponseSuccess = (getTransactionsResponse201) & {
   headers: Headers;
 };
-export type getTransactionsResponseError = (
-  | getTransactionsResponse401
-  | getTransactionsResponse404
-  | getTransactionsResponse409
-  | getTransactionsResponse500
-) & {
+export type getTransactionsResponseError = (getTransactionsResponse401 | getTransactionsResponse404 | getTransactionsResponse409 | getTransactionsResponse500) & {
   headers: Headers;
 };
 
-export type getTransactionsResponse =
-  | getTransactionsResponseSuccess
-  | getTransactionsResponseError;
+export type getTransactionsResponse = (getTransactionsResponseSuccess | getTransactionsResponseError)
 
 export const getGetTransactionsUrl = () => {
-  return `/financeiro/dashboard`;
-};
 
-export const getTransactions = async (
-  options?: RequestInit,
-): Promise<getTransactionsResponse> => {
-  return customFetch<getTransactionsResponse>(getGetTransactionsUrl(), {
+
+  
+
+  return `/financeiro/dashboard`
+}
+
+export const getTransactions = async ( options?: RequestInit): Promise<getTransactionsResponse> => {
+  
+  return customFetch<getTransactionsResponse>(getGetTransactionsUrl(),
+  {      
     ...options,
-    method: "GET",
-  });
-};
+    method: 'GET'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Fechamento do Mês
  */
 export type fechaMesResponse201 = {
-  data: FechaMes201;
-  status: 201;
-};
+  data: FechaMes201
+  status: 201
+}
 
 export type fechaMesResponse401 = {
-  data: FechaMes401;
-  status: 401;
-};
+  data: FechaMes401
+  status: 401
+}
 
 export type fechaMesResponse404 = {
-  data: FechaMes404;
-  status: 404;
-};
+  data: FechaMes404
+  status: 404
+}
 
 export type fechaMesResponse405 = {
-  data: FechaMes405;
-  status: 405;
-};
+  data: FechaMes405
+  status: 405
+}
 
 export type fechaMesResponse409 = {
-  data: FechaMes409;
-  status: 409;
-};
+  data: FechaMes409
+  status: 409
+}
 
 export type fechaMesResponse500 = {
-  data: FechaMes500;
-  status: 500;
-};
-
-export type fechaMesResponseSuccess = fechaMesResponse201 & {
+  data: FechaMes500
+  status: 500
+}
+    
+export type fechaMesResponseSuccess = (fechaMesResponse201) & {
   headers: Headers;
 };
-export type fechaMesResponseError = (
-  | fechaMesResponse401
-  | fechaMesResponse404
-  | fechaMesResponse405
-  | fechaMesResponse409
-  | fechaMesResponse500
-) & {
+export type fechaMesResponseError = (fechaMesResponse401 | fechaMesResponse404 | fechaMesResponse405 | fechaMesResponse409 | fechaMesResponse500) & {
   headers: Headers;
 };
 
-export type fechaMesResponse = fechaMesResponseSuccess | fechaMesResponseError;
+export type fechaMesResponse = (fechaMesResponseSuccess | fechaMesResponseError)
 
 export const getFechaMesUrl = () => {
-  return `/financeiro/fechaMes`;
-};
 
-export const fechaMes = async (
-  options?: RequestInit,
-): Promise<fechaMesResponse> => {
-  return customFetch<fechaMesResponse>(getFechaMesUrl(), {
+
+  
+
+  return `/financeiro/fechaMes`
+}
+
+export const fechaMes = async ( options?: RequestInit): Promise<fechaMesResponse> => {
+  
+  return customFetch<fechaMesResponse>(getFechaMesUrl(),
+  {      
     ...options,
-    method: "POST",
-  });
-};
+    method: 'POST'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Get Historico de meses fechados
  */
 export type getFinanceiroHistoryResponse201 = {
-  data: GetFinanceiroHistory201;
-  status: 201;
-};
+  data: GetFinanceiroHistory201
+  status: 201
+}
 
 export type getFinanceiroHistoryResponse401 = {
-  data: GetFinanceiroHistory401;
-  status: 401;
-};
+  data: GetFinanceiroHistory401
+  status: 401
+}
 
 export type getFinanceiroHistoryResponse404 = {
-  data: GetFinanceiroHistory404;
-  status: 404;
-};
+  data: GetFinanceiroHistory404
+  status: 404
+}
 
 export type getFinanceiroHistoryResponse405 = {
-  data: GetFinanceiroHistory405;
-  status: 405;
-};
+  data: GetFinanceiroHistory405
+  status: 405
+}
 
 export type getFinanceiroHistoryResponse409 = {
-  data: GetFinanceiroHistory409;
-  status: 409;
-};
+  data: GetFinanceiroHistory409
+  status: 409
+}
 
 export type getFinanceiroHistoryResponse500 = {
-  data: GetFinanceiroHistory500;
-  status: 500;
+  data: GetFinanceiroHistory500
+  status: 500
+}
+    
+export type getFinanceiroHistoryResponseSuccess = (getFinanceiroHistoryResponse201) & {
+  headers: Headers;
 };
-
-export type getFinanceiroHistoryResponseSuccess =
-  getFinanceiroHistoryResponse201 & {
-    headers: Headers;
-  };
-export type getFinanceiroHistoryResponseError = (
-  | getFinanceiroHistoryResponse401
-  | getFinanceiroHistoryResponse404
-  | getFinanceiroHistoryResponse405
-  | getFinanceiroHistoryResponse409
-  | getFinanceiroHistoryResponse500
-) & {
+export type getFinanceiroHistoryResponseError = (getFinanceiroHistoryResponse401 | getFinanceiroHistoryResponse404 | getFinanceiroHistoryResponse405 | getFinanceiroHistoryResponse409 | getFinanceiroHistoryResponse500) & {
   headers: Headers;
 };
 
-export type getFinanceiroHistoryResponse =
-  | getFinanceiroHistoryResponseSuccess
-  | getFinanceiroHistoryResponseError;
+export type getFinanceiroHistoryResponse = (getFinanceiroHistoryResponseSuccess | getFinanceiroHistoryResponseError)
 
 export const getGetFinanceiroHistoryUrl = () => {
-  return `/financeiro/getHistory`;
-};
 
-export const getFinanceiroHistory = async (
-  options?: RequestInit,
-): Promise<getFinanceiroHistoryResponse> => {
-  return customFetch<getFinanceiroHistoryResponse>(
-    getGetFinanceiroHistoryUrl(),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/financeiro/getHistory`
+}
+
+export const getFinanceiroHistory = async ( options?: RequestInit): Promise<getFinanceiroHistoryResponse> => {
+  
+  return customFetch<getFinanceiroHistoryResponse>(getGetFinanceiroHistoryUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Create Exercicio
  */
 export type createExercicioResponse201 = {
-  data: CreateExercicio201;
-  status: 201;
-};
+  data: CreateExercicio201
+  status: 201
+}
 
 export type createExercicioResponse401 = {
-  data: CreateExercicio401;
-  status: 401;
-};
+  data: CreateExercicio401
+  status: 401
+}
 
 export type createExercicioResponse403 = {
-  data: CreateExercicio403;
-  status: 403;
-};
+  data: CreateExercicio403
+  status: 403
+}
 
 export type createExercicioResponse404 = {
-  data: CreateExercicio404;
-  status: 404;
-};
+  data: CreateExercicio404
+  status: 404
+}
 
 export type createExercicioResponse409 = {
-  data: CreateExercicio409;
-  status: 409;
-};
+  data: CreateExercicio409
+  status: 409
+}
 
 export type createExercicioResponse500 = {
-  data: CreateExercicio500;
-  status: 500;
-};
-
-export type createExercicioResponseSuccess = createExercicioResponse201 & {
+  data: CreateExercicio500
+  status: 500
+}
+    
+export type createExercicioResponseSuccess = (createExercicioResponse201) & {
   headers: Headers;
 };
-export type createExercicioResponseError = (
-  | createExercicioResponse401
-  | createExercicioResponse403
-  | createExercicioResponse404
-  | createExercicioResponse409
-  | createExercicioResponse500
-) & {
+export type createExercicioResponseError = (createExercicioResponse401 | createExercicioResponse403 | createExercicioResponse404 | createExercicioResponse409 | createExercicioResponse500) & {
   headers: Headers;
 };
 
-export type createExercicioResponse =
-  | createExercicioResponseSuccess
-  | createExercicioResponseError;
+export type createExercicioResponse = (createExercicioResponseSuccess | createExercicioResponseError)
 
 export const getCreateExercicioUrl = () => {
-  return `/exercicio/exercicio`;
-};
 
-export const createExercicio = async (
-  createExercicioBody: CreateExercicioBody,
-  options?: RequestInit,
-): Promise<createExercicioResponse> => {
-  return customFetch<createExercicioResponse>(getCreateExercicioUrl(), {
+
+  
+
+  return `/exercicio/exercicio`
+}
+
+export const createExercicio = async (createExercicioBody: CreateExercicioBody, options?: RequestInit): Promise<createExercicioResponse> => {
+  
+  return customFetch<createExercicioResponse>(getCreateExercicioUrl(),
+  {      
     ...options,
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    body: JSON.stringify(createExercicioBody),
-  });
-};
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createExercicioBody,)
+  }
+);}
+
+
 
 /**
  * @summary Get Exercicios
  */
 export type getExerciciosResponse201 = {
-  data: GetExercicios201;
-  status: 201;
-};
+  data: GetExercicios201
+  status: 201
+}
 
 export type getExerciciosResponse401 = {
-  data: GetExercicios401;
-  status: 401;
-};
+  data: GetExercicios401
+  status: 401
+}
 
 export type getExerciciosResponse403 = {
-  data: GetExercicios403;
-  status: 403;
-};
+  data: GetExercicios403
+  status: 403
+}
 
 export type getExerciciosResponse404 = {
-  data: GetExercicios404;
-  status: 404;
-};
+  data: GetExercicios404
+  status: 404
+}
 
 export type getExerciciosResponse409 = {
-  data: GetExercicios409;
-  status: 409;
-};
+  data: GetExercicios409
+  status: 409
+}
 
 export type getExerciciosResponse500 = {
-  data: GetExercicios500;
-  status: 500;
-};
-
-export type getExerciciosResponseSuccess = getExerciciosResponse201 & {
+  data: GetExercicios500
+  status: 500
+}
+    
+export type getExerciciosResponseSuccess = (getExerciciosResponse201) & {
   headers: Headers;
 };
-export type getExerciciosResponseError = (
-  | getExerciciosResponse401
-  | getExerciciosResponse403
-  | getExerciciosResponse404
-  | getExerciciosResponse409
-  | getExerciciosResponse500
-) & {
+export type getExerciciosResponseError = (getExerciciosResponse401 | getExerciciosResponse403 | getExerciciosResponse404 | getExerciciosResponse409 | getExerciciosResponse500) & {
   headers: Headers;
 };
 
-export type getExerciciosResponse =
-  | getExerciciosResponseSuccess
-  | getExerciciosResponseError;
+export type getExerciciosResponse = (getExerciciosResponseSuccess | getExerciciosResponseError)
 
 export const getGetExerciciosUrl = () => {
-  return `/exercicio/exercicios`;
-};
 
-export const getExercicios = async (
-  options?: RequestInit,
-): Promise<getExerciciosResponse> => {
-  return customFetch<getExerciciosResponse>(getGetExerciciosUrl(), {
+
+  
+
+  return `/exercicio/exercicios`
+}
+
+export const getExercicios = async ( options?: RequestInit): Promise<getExerciciosResponse> => {
+  
+  return customFetch<getExerciciosResponse>(getGetExerciciosUrl(),
+  {      
     ...options,
-    method: "GET",
-  });
-};
+    method: 'GET'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Get Treino Detalhado
  */
 export type getTreinoDetalhadoResponse201 = {
-  data: GetTreinoDetalhado201;
-  status: 201;
-};
+  data: GetTreinoDetalhado201
+  status: 201
+}
 
 export type getTreinoDetalhadoResponse401 = {
-  data: GetTreinoDetalhado401;
-  status: 401;
-};
+  data: GetTreinoDetalhado401
+  status: 401
+}
 
 export type getTreinoDetalhadoResponse403 = {
-  data: GetTreinoDetalhado403;
-  status: 403;
-};
+  data: GetTreinoDetalhado403
+  status: 403
+}
 
 export type getTreinoDetalhadoResponse404 = {
-  data: GetTreinoDetalhado404;
-  status: 404;
-};
+  data: GetTreinoDetalhado404
+  status: 404
+}
 
 export type getTreinoDetalhadoResponse409 = {
-  data: GetTreinoDetalhado409;
-  status: 409;
-};
+  data: GetTreinoDetalhado409
+  status: 409
+}
 
 export type getTreinoDetalhadoResponse500 = {
-  data: GetTreinoDetalhado500;
-  status: 500;
+  data: GetTreinoDetalhado500
+  status: 500
+}
+    
+export type getTreinoDetalhadoResponseSuccess = (getTreinoDetalhadoResponse201) & {
+  headers: Headers;
 };
-
-export type getTreinoDetalhadoResponseSuccess =
-  getTreinoDetalhadoResponse201 & {
-    headers: Headers;
-  };
-export type getTreinoDetalhadoResponseError = (
-  | getTreinoDetalhadoResponse401
-  | getTreinoDetalhadoResponse403
-  | getTreinoDetalhadoResponse404
-  | getTreinoDetalhadoResponse409
-  | getTreinoDetalhadoResponse500
-) & {
+export type getTreinoDetalhadoResponseError = (getTreinoDetalhadoResponse401 | getTreinoDetalhadoResponse403 | getTreinoDetalhadoResponse404 | getTreinoDetalhadoResponse409 | getTreinoDetalhadoResponse500) & {
   headers: Headers;
 };
 
-export type getTreinoDetalhadoResponse =
-  | getTreinoDetalhadoResponseSuccess
-  | getTreinoDetalhadoResponseError;
+export type getTreinoDetalhadoResponse = (getTreinoDetalhadoResponseSuccess | getTreinoDetalhadoResponseError)
 
-export const getGetTreinoDetalhadoUrl = (treinoId: string) => {
-  return `/exercicio/${treinoId}`;
-};
+export const getGetTreinoDetalhadoUrl = (treinoId: string,) => {
 
-export const getTreinoDetalhado = async (
-  treinoId: string,
-  options?: RequestInit,
-): Promise<getTreinoDetalhadoResponse> => {
-  return customFetch<getTreinoDetalhadoResponse>(
-    getGetTreinoDetalhadoUrl(treinoId),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/exercicio/${treinoId}`
+}
+
+export const getTreinoDetalhado = async (treinoId: string, options?: RequestInit): Promise<getTreinoDetalhadoResponse> => {
+  
+  return customFetch<getTreinoDetalhadoResponse>(getGetTreinoDetalhadoUrl(treinoId),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Create Treino
  */
 export type createTreinoResponse201 = {
-  data: CreateTreino201;
-  status: 201;
-};
+  data: CreateTreino201
+  status: 201
+}
 
 export type createTreinoResponse401 = {
-  data: CreateTreino401;
-  status: 401;
-};
+  data: CreateTreino401
+  status: 401
+}
 
 export type createTreinoResponse403 = {
-  data: CreateTreino403;
-  status: 403;
-};
+  data: CreateTreino403
+  status: 403
+}
 
 export type createTreinoResponse404 = {
-  data: CreateTreino404;
-  status: 404;
-};
+  data: CreateTreino404
+  status: 404
+}
 
 export type createTreinoResponse409 = {
-  data: CreateTreino409;
-  status: 409;
-};
+  data: CreateTreino409
+  status: 409
+}
 
 export type createTreinoResponse500 = {
-  data: CreateTreino500;
-  status: 500;
-};
-
-export type createTreinoResponseSuccess = createTreinoResponse201 & {
+  data: CreateTreino500
+  status: 500
+}
+    
+export type createTreinoResponseSuccess = (createTreinoResponse201) & {
   headers: Headers;
 };
-export type createTreinoResponseError = (
-  | createTreinoResponse401
-  | createTreinoResponse403
-  | createTreinoResponse404
-  | createTreinoResponse409
-  | createTreinoResponse500
-) & {
+export type createTreinoResponseError = (createTreinoResponse401 | createTreinoResponse403 | createTreinoResponse404 | createTreinoResponse409 | createTreinoResponse500) & {
   headers: Headers;
 };
 
-export type createTreinoResponse =
-  | createTreinoResponseSuccess
-  | createTreinoResponseError;
+export type createTreinoResponse = (createTreinoResponseSuccess | createTreinoResponseError)
 
 export const getCreateTreinoUrl = () => {
-  return `/treino/treino`;
-};
 
-export const createTreino = async (
-  createTreinoBody: CreateTreinoBody,
-  options?: RequestInit,
-): Promise<createTreinoResponse> => {
-  return customFetch<createTreinoResponse>(getCreateTreinoUrl(), {
+
+  
+
+  return `/treino/treino`
+}
+
+export const createTreino = async (createTreinoBody: CreateTreinoBody, options?: RequestInit): Promise<createTreinoResponse> => {
+  
+  return customFetch<createTreinoResponse>(getCreateTreinoUrl(),
+  {      
     ...options,
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    body: JSON.stringify(createTreinoBody),
-  });
-};
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createTreinoBody,)
+  }
+);}
+
+
 
 /**
  * @summary Get Treinos
  */
 export type getTreinosResponse201 = {
-  data: GetTreinos201;
-  status: 201;
-};
+  data: GetTreinos201
+  status: 201
+}
 
 export type getTreinosResponse401 = {
-  data: GetTreinos401;
-  status: 401;
-};
+  data: GetTreinos401
+  status: 401
+}
 
 export type getTreinosResponse403 = {
-  data: GetTreinos403;
-  status: 403;
-};
+  data: GetTreinos403
+  status: 403
+}
 
 export type getTreinosResponse404 = {
-  data: GetTreinos404;
-  status: 404;
-};
+  data: GetTreinos404
+  status: 404
+}
 
 export type getTreinosResponse409 = {
-  data: GetTreinos409;
-  status: 409;
-};
+  data: GetTreinos409
+  status: 409
+}
 
 export type getTreinosResponse500 = {
-  data: GetTreinos500;
-  status: 500;
-};
-
-export type getTreinosResponseSuccess = getTreinosResponse201 & {
+  data: GetTreinos500
+  status: 500
+}
+    
+export type getTreinosResponseSuccess = (getTreinosResponse201) & {
   headers: Headers;
 };
-export type getTreinosResponseError = (
-  | getTreinosResponse401
-  | getTreinosResponse403
-  | getTreinosResponse404
-  | getTreinosResponse409
-  | getTreinosResponse500
-) & {
+export type getTreinosResponseError = (getTreinosResponse401 | getTreinosResponse403 | getTreinosResponse404 | getTreinosResponse409 | getTreinosResponse500) & {
   headers: Headers;
 };
 
-export type getTreinosResponse =
-  | getTreinosResponseSuccess
-  | getTreinosResponseError;
+export type getTreinosResponse = (getTreinosResponseSuccess | getTreinosResponseError)
 
 export const getGetTreinosUrl = () => {
-  return `/treino/treinos`;
-};
 
-export const getTreinos = async (
-  options?: RequestInit,
-): Promise<getTreinosResponse> => {
-  return customFetch<getTreinosResponse>(getGetTreinosUrl(), {
+
+  
+
+  return `/treino/treinos`
+}
+
+export const getTreinos = async ( options?: RequestInit): Promise<getTreinosResponse> => {
+  
+  return customFetch<getTreinosResponse>(getGetTreinosUrl(),
+  {      
     ...options,
-    method: "GET",
-  });
-};
+    method: 'GET'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Delete Treino
  */
 export type deleteTreinoResponse200 = {
-  data: DeleteTreino200;
-  status: 200;
-};
+  data: DeleteTreino200
+  status: 200
+}
 
 export type deleteTreinoResponse401 = {
-  data: DeleteTreino401;
-  status: 401;
-};
+  data: DeleteTreino401
+  status: 401
+}
 
 export type deleteTreinoResponse403 = {
-  data: DeleteTreino403;
-  status: 403;
-};
+  data: DeleteTreino403
+  status: 403
+}
 
 export type deleteTreinoResponse404 = {
-  data: DeleteTreino404;
-  status: 404;
-};
+  data: DeleteTreino404
+  status: 404
+}
 
 export type deleteTreinoResponse409 = {
-  data: DeleteTreino409;
-  status: 409;
-};
+  data: DeleteTreino409
+  status: 409
+}
 
 export type deleteTreinoResponse500 = {
-  data: DeleteTreino500;
-  status: 500;
-};
-
-export type deleteTreinoResponseSuccess = deleteTreinoResponse200 & {
+  data: DeleteTreino500
+  status: 500
+}
+    
+export type deleteTreinoResponseSuccess = (deleteTreinoResponse200) & {
   headers: Headers;
 };
-export type deleteTreinoResponseError = (
-  | deleteTreinoResponse401
-  | deleteTreinoResponse403
-  | deleteTreinoResponse404
-  | deleteTreinoResponse409
-  | deleteTreinoResponse500
-) & {
+export type deleteTreinoResponseError = (deleteTreinoResponse401 | deleteTreinoResponse403 | deleteTreinoResponse404 | deleteTreinoResponse409 | deleteTreinoResponse500) & {
   headers: Headers;
 };
 
-export type deleteTreinoResponse =
-  | deleteTreinoResponseSuccess
-  | deleteTreinoResponseError;
+export type deleteTreinoResponse = (deleteTreinoResponseSuccess | deleteTreinoResponseError)
 
-export const getDeleteTreinoUrl = (treinoId: string) => {
-  return `/treino/${treinoId}`;
-};
+export const getDeleteTreinoUrl = (treinoId: string,) => {
 
-export const deleteTreino = async (
-  treinoId: string,
-  options?: RequestInit,
-): Promise<deleteTreinoResponse> => {
-  return customFetch<deleteTreinoResponse>(getDeleteTreinoUrl(treinoId), {
+
+  
+
+  return `/treino/${treinoId}`
+}
+
+export const deleteTreino = async (treinoId: string, options?: RequestInit): Promise<deleteTreinoResponse> => {
+  
+  return customFetch<deleteTreinoResponse>(getDeleteTreinoUrl(treinoId),
+  {      
     ...options,
-    method: "DELETE",
-  });
-};
+    method: 'DELETE'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Create Treino Exercicio
  */
 export type createTreinoExercioResponse201 = {
-  data: CreateTreinoExercio201;
-  status: 201;
-};
+  data: CreateTreinoExercio201
+  status: 201
+}
 
 export type createTreinoExercioResponse401 = {
-  data: CreateTreinoExercio401;
-  status: 401;
-};
+  data: CreateTreinoExercio401
+  status: 401
+}
 
 export type createTreinoExercioResponse403 = {
-  data: CreateTreinoExercio403;
-  status: 403;
-};
+  data: CreateTreinoExercio403
+  status: 403
+}
 
 export type createTreinoExercioResponse404 = {
-  data: CreateTreinoExercio404;
-  status: 404;
-};
+  data: CreateTreinoExercio404
+  status: 404
+}
 
 export type createTreinoExercioResponse409 = {
-  data: CreateTreinoExercio409;
-  status: 409;
-};
+  data: CreateTreinoExercio409
+  status: 409
+}
 
 export type createTreinoExercioResponse500 = {
-  data: CreateTreinoExercio500;
-  status: 500;
+  data: CreateTreinoExercio500
+  status: 500
+}
+    
+export type createTreinoExercioResponseSuccess = (createTreinoExercioResponse201) & {
+  headers: Headers;
 };
-
-export type createTreinoExercioResponseSuccess =
-  createTreinoExercioResponse201 & {
-    headers: Headers;
-  };
-export type createTreinoExercioResponseError = (
-  | createTreinoExercioResponse401
-  | createTreinoExercioResponse403
-  | createTreinoExercioResponse404
-  | createTreinoExercioResponse409
-  | createTreinoExercioResponse500
-) & {
+export type createTreinoExercioResponseError = (createTreinoExercioResponse401 | createTreinoExercioResponse403 | createTreinoExercioResponse404 | createTreinoExercioResponse409 | createTreinoExercioResponse500) & {
   headers: Headers;
 };
 
-export type createTreinoExercioResponse =
-  | createTreinoExercioResponseSuccess
-  | createTreinoExercioResponseError;
+export type createTreinoExercioResponse = (createTreinoExercioResponseSuccess | createTreinoExercioResponseError)
 
-export const getCreateTreinoExercioUrl = (treinoId: string) => {
-  return `/treinoExerc/${treinoId}`;
-};
+export const getCreateTreinoExercioUrl = (treinoId: string,) => {
 
-export const createTreinoExercio = async (
-  treinoId: string,
-  createTreinoExercioBody: CreateTreinoExercioBody,
-  options?: RequestInit,
-): Promise<createTreinoExercioResponse> => {
-  return customFetch<createTreinoExercioResponse>(
-    getCreateTreinoExercioUrl(treinoId),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(createTreinoExercioBody),
-    },
-  );
-};
+
+  
+
+  return `/treinoExerc/${treinoId}`
+}
+
+export const createTreinoExercio = async (treinoId: string,
+    createTreinoExercioBody: CreateTreinoExercioBody, options?: RequestInit): Promise<createTreinoExercioResponse> => {
+  
+  return customFetch<createTreinoExercioResponse>(getCreateTreinoExercioUrl(treinoId),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createTreinoExercioBody,)
+  }
+);}
+
+
 
 /**
  * @summary Update Treino Exercicio
  */
 export type updateTreinoExercicioResponse201 = {
-  data: UpdateTreinoExercicio201;
-  status: 201;
-};
+  data: UpdateTreinoExercicio201
+  status: 201
+}
 
 export type updateTreinoExercicioResponse401 = {
-  data: UpdateTreinoExercicio401;
-  status: 401;
-};
+  data: UpdateTreinoExercicio401
+  status: 401
+}
 
 export type updateTreinoExercicioResponse403 = {
-  data: UpdateTreinoExercicio403;
-  status: 403;
-};
+  data: UpdateTreinoExercicio403
+  status: 403
+}
 
 export type updateTreinoExercicioResponse404 = {
-  data: UpdateTreinoExercicio404;
-  status: 404;
-};
+  data: UpdateTreinoExercicio404
+  status: 404
+}
 
 export type updateTreinoExercicioResponse409 = {
-  data: UpdateTreinoExercicio409;
-  status: 409;
-};
+  data: UpdateTreinoExercicio409
+  status: 409
+}
 
 export type updateTreinoExercicioResponse500 = {
-  data: UpdateTreinoExercicio500;
-  status: 500;
+  data: UpdateTreinoExercicio500
+  status: 500
+}
+    
+export type updateTreinoExercicioResponseSuccess = (updateTreinoExercicioResponse201) & {
+  headers: Headers;
 };
-
-export type updateTreinoExercicioResponseSuccess =
-  updateTreinoExercicioResponse201 & {
-    headers: Headers;
-  };
-export type updateTreinoExercicioResponseError = (
-  | updateTreinoExercicioResponse401
-  | updateTreinoExercicioResponse403
-  | updateTreinoExercicioResponse404
-  | updateTreinoExercicioResponse409
-  | updateTreinoExercicioResponse500
-) & {
+export type updateTreinoExercicioResponseError = (updateTreinoExercicioResponse401 | updateTreinoExercicioResponse403 | updateTreinoExercicioResponse404 | updateTreinoExercicioResponse409 | updateTreinoExercicioResponse500) & {
   headers: Headers;
 };
 
-export type updateTreinoExercicioResponse =
-  | updateTreinoExercicioResponseSuccess
-  | updateTreinoExercicioResponseError;
+export type updateTreinoExercicioResponse = (updateTreinoExercicioResponseSuccess | updateTreinoExercicioResponseError)
 
-export const getUpdateTreinoExercicioUrl = (
-  treinoId: string,
-  treinoExercicioId: string,
-) => {
-  return `/treinoExerc/${treinoId}/update/${treinoExercicioId}`;
-};
+export const getUpdateTreinoExercicioUrl = (treinoId: string,
+    treinoExercicioId: string,) => {
 
-export const updateTreinoExercicio = async (
-  treinoId: string,
-  treinoExercicioId: string,
-  updateTreinoExercicioBody: UpdateTreinoExercicioBody,
-  options?: RequestInit,
-): Promise<updateTreinoExercicioResponse> => {
-  return customFetch<updateTreinoExercicioResponse>(
-    getUpdateTreinoExercicioUrl(treinoId, treinoExercicioId),
-    {
-      ...options,
-      method: "PUT",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(updateTreinoExercicioBody),
-    },
-  );
-};
+
+  
+
+  return `/treinoExerc/${treinoId}/update/${treinoExercicioId}`
+}
+
+export const updateTreinoExercicio = async (treinoId: string,
+    treinoExercicioId: string,
+    updateTreinoExercicioBody: UpdateTreinoExercicioBody, options?: RequestInit): Promise<updateTreinoExercicioResponse> => {
+  
+  return customFetch<updateTreinoExercicioResponse>(getUpdateTreinoExercicioUrl(treinoId,treinoExercicioId),
+  {      
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      updateTreinoExercicioBody,)
+  }
+);}
+
+
 
 /**
  * @summary Delete Treino Exercicio
  */
 export type deleteTreinoExercicioResponse200 = {
-  data: DeleteTreinoExercicio200;
-  status: 200;
-};
+  data: DeleteTreinoExercicio200
+  status: 200
+}
 
 export type deleteTreinoExercicioResponse401 = {
-  data: DeleteTreinoExercicio401;
-  status: 401;
-};
+  data: DeleteTreinoExercicio401
+  status: 401
+}
 
 export type deleteTreinoExercicioResponse403 = {
-  data: DeleteTreinoExercicio403;
-  status: 403;
-};
+  data: DeleteTreinoExercicio403
+  status: 403
+}
 
 export type deleteTreinoExercicioResponse404 = {
-  data: DeleteTreinoExercicio404;
-  status: 404;
-};
+  data: DeleteTreinoExercicio404
+  status: 404
+}
 
 export type deleteTreinoExercicioResponse409 = {
-  data: DeleteTreinoExercicio409;
-  status: 409;
-};
+  data: DeleteTreinoExercicio409
+  status: 409
+}
 
 export type deleteTreinoExercicioResponse500 = {
-  data: DeleteTreinoExercicio500;
-  status: 500;
+  data: DeleteTreinoExercicio500
+  status: 500
+}
+    
+export type deleteTreinoExercicioResponseSuccess = (deleteTreinoExercicioResponse200) & {
+  headers: Headers;
 };
-
-export type deleteTreinoExercicioResponseSuccess =
-  deleteTreinoExercicioResponse200 & {
-    headers: Headers;
-  };
-export type deleteTreinoExercicioResponseError = (
-  | deleteTreinoExercicioResponse401
-  | deleteTreinoExercicioResponse403
-  | deleteTreinoExercicioResponse404
-  | deleteTreinoExercicioResponse409
-  | deleteTreinoExercicioResponse500
-) & {
+export type deleteTreinoExercicioResponseError = (deleteTreinoExercicioResponse401 | deleteTreinoExercicioResponse403 | deleteTreinoExercicioResponse404 | deleteTreinoExercicioResponse409 | deleteTreinoExercicioResponse500) & {
   headers: Headers;
 };
 
-export type deleteTreinoExercicioResponse =
-  | deleteTreinoExercicioResponseSuccess
-  | deleteTreinoExercicioResponseError;
+export type deleteTreinoExercicioResponse = (deleteTreinoExercicioResponseSuccess | deleteTreinoExercicioResponseError)
 
-export const getDeleteTreinoExercicioUrl = (
-  treinoId: string,
-  treinoExercicioId: string,
-) => {
-  return `/treinoExerc/${treinoId}/delete/${treinoExercicioId}`;
-};
+export const getDeleteTreinoExercicioUrl = (treinoId: string,
+    treinoExercicioId: string,) => {
 
-export const deleteTreinoExercicio = async (
-  treinoId: string,
-  treinoExercicioId: string,
-  options?: RequestInit,
-): Promise<deleteTreinoExercicioResponse> => {
-  return customFetch<deleteTreinoExercicioResponse>(
-    getDeleteTreinoExercicioUrl(treinoId, treinoExercicioId),
-    {
-      ...options,
-      method: "DELETE",
-    },
-  );
-};
+
+  
+
+  return `/treinoExerc/${treinoId}/delete/${treinoExercicioId}`
+}
+
+export const deleteTreinoExercicio = async (treinoId: string,
+    treinoExercicioId: string, options?: RequestInit): Promise<deleteTreinoExercicioResponse> => {
+  
+  return customFetch<deleteTreinoExercicioResponse>(getDeleteTreinoExercicioUrl(treinoId,treinoExercicioId),
+  {      
+    ...options,
+    method: 'DELETE'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Create vinculo Aluno ao Treino
  */
 export type createAlunoTreinoResponse201 = {
-  data: CreateAlunoTreino201;
-  status: 201;
-};
+  data: CreateAlunoTreino201
+  status: 201
+}
 
 export type createAlunoTreinoResponse401 = {
-  data: CreateAlunoTreino401;
-  status: 401;
-};
+  data: CreateAlunoTreino401
+  status: 401
+}
 
 export type createAlunoTreinoResponse403 = {
-  data: CreateAlunoTreino403;
-  status: 403;
-};
+  data: CreateAlunoTreino403
+  status: 403
+}
 
 export type createAlunoTreinoResponse404 = {
-  data: CreateAlunoTreino404;
-  status: 404;
-};
+  data: CreateAlunoTreino404
+  status: 404
+}
 
 export type createAlunoTreinoResponse409 = {
-  data: CreateAlunoTreino409;
-  status: 409;
-};
+  data: CreateAlunoTreino409
+  status: 409
+}
 
 export type createAlunoTreinoResponse500 = {
-  data: CreateAlunoTreino500;
-  status: 500;
-};
-
-export type createAlunoTreinoResponseSuccess = createAlunoTreinoResponse201 & {
+  data: CreateAlunoTreino500
+  status: 500
+}
+    
+export type createAlunoTreinoResponseSuccess = (createAlunoTreinoResponse201) & {
   headers: Headers;
 };
-export type createAlunoTreinoResponseError = (
-  | createAlunoTreinoResponse401
-  | createAlunoTreinoResponse403
-  | createAlunoTreinoResponse404
-  | createAlunoTreinoResponse409
-  | createAlunoTreinoResponse500
-) & {
+export type createAlunoTreinoResponseError = (createAlunoTreinoResponse401 | createAlunoTreinoResponse403 | createAlunoTreinoResponse404 | createAlunoTreinoResponse409 | createAlunoTreinoResponse500) & {
   headers: Headers;
 };
 
-export type createAlunoTreinoResponse =
-  | createAlunoTreinoResponseSuccess
-  | createAlunoTreinoResponseError;
+export type createAlunoTreinoResponse = (createAlunoTreinoResponseSuccess | createAlunoTreinoResponseError)
 
-export const getCreateAlunoTreinoUrl = (treinoId: string) => {
-  return `/alunoTreino/${treinoId}`;
-};
+export const getCreateAlunoTreinoUrl = (treinoId: string,) => {
 
-export const createAlunoTreino = async (
-  treinoId: string,
-  createAlunoTreinoBody: CreateAlunoTreinoBody,
-  options?: RequestInit,
-): Promise<createAlunoTreinoResponse> => {
-  return customFetch<createAlunoTreinoResponse>(
-    getCreateAlunoTreinoUrl(treinoId),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(createAlunoTreinoBody),
-    },
-  );
-};
+
+  
+
+  return `/alunoTreino/${treinoId}`
+}
+
+export const createAlunoTreino = async (treinoId: string,
+    createAlunoTreinoBody: CreateAlunoTreinoBody, options?: RequestInit): Promise<createAlunoTreinoResponse> => {
+  
+  return customFetch<createAlunoTreinoResponse>(getCreateAlunoTreinoUrl(treinoId),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createAlunoTreinoBody,)
+  }
+);}
+
+
 
 /**
  * @summary Get Alunos Vinculados
  */
 export type getAlunosTreinoResponse201 = {
-  data: GetAlunosTreino201;
-  status: 201;
-};
+  data: GetAlunosTreino201
+  status: 201
+}
 
 export type getAlunosTreinoResponse401 = {
-  data: GetAlunosTreino401;
-  status: 401;
-};
+  data: GetAlunosTreino401
+  status: 401
+}
 
 export type getAlunosTreinoResponse403 = {
-  data: GetAlunosTreino403;
-  status: 403;
-};
+  data: GetAlunosTreino403
+  status: 403
+}
 
 export type getAlunosTreinoResponse404 = {
-  data: GetAlunosTreino404;
-  status: 404;
-};
+  data: GetAlunosTreino404
+  status: 404
+}
 
 export type getAlunosTreinoResponse409 = {
-  data: GetAlunosTreino409;
-  status: 409;
-};
+  data: GetAlunosTreino409
+  status: 409
+}
 
 export type getAlunosTreinoResponse500 = {
-  data: GetAlunosTreino500;
-  status: 500;
-};
-
-export type getAlunosTreinoResponseSuccess = getAlunosTreinoResponse201 & {
+  data: GetAlunosTreino500
+  status: 500
+}
+    
+export type getAlunosTreinoResponseSuccess = (getAlunosTreinoResponse201) & {
   headers: Headers;
 };
-export type getAlunosTreinoResponseError = (
-  | getAlunosTreinoResponse401
-  | getAlunosTreinoResponse403
-  | getAlunosTreinoResponse404
-  | getAlunosTreinoResponse409
-  | getAlunosTreinoResponse500
-) & {
+export type getAlunosTreinoResponseError = (getAlunosTreinoResponse401 | getAlunosTreinoResponse403 | getAlunosTreinoResponse404 | getAlunosTreinoResponse409 | getAlunosTreinoResponse500) & {
   headers: Headers;
 };
 
-export type getAlunosTreinoResponse =
-  | getAlunosTreinoResponseSuccess
-  | getAlunosTreinoResponseError;
+export type getAlunosTreinoResponse = (getAlunosTreinoResponseSuccess | getAlunosTreinoResponseError)
 
-export const getGetAlunosTreinoUrl = (treinoId: string) => {
-  return `/alunoTreino/${treinoId}/alunos`;
-};
+export const getGetAlunosTreinoUrl = (treinoId: string,) => {
 
-export const getAlunosTreino = async (
-  treinoId: string,
-  options?: RequestInit,
-): Promise<getAlunosTreinoResponse> => {
-  return customFetch<getAlunosTreinoResponse>(getGetAlunosTreinoUrl(treinoId), {
+
+  
+
+  return `/alunoTreino/${treinoId}/alunos`
+}
+
+export const getAlunosTreino = async (treinoId: string, options?: RequestInit): Promise<getAlunosTreinoResponse> => {
+  
+  return customFetch<getAlunosTreinoResponse>(getGetAlunosTreinoUrl(treinoId),
+  {      
     ...options,
-    method: "GET",
-  });
-};
+    method: 'GET'
+    
+    
+  }
+);}
+
+
 
 /**
  * @summary Desvincular um aluno do Treino
  */
 export type deleteAlunoTreinoResponse200 = {
-  data: DeleteAlunoTreino200;
-  status: 200;
-};
+  data: DeleteAlunoTreino200
+  status: 200
+}
 
 export type deleteAlunoTreinoResponse401 = {
-  data: DeleteAlunoTreino401;
-  status: 401;
-};
+  data: DeleteAlunoTreino401
+  status: 401
+}
 
 export type deleteAlunoTreinoResponse403 = {
-  data: DeleteAlunoTreino403;
-  status: 403;
-};
+  data: DeleteAlunoTreino403
+  status: 403
+}
 
 export type deleteAlunoTreinoResponse404 = {
-  data: DeleteAlunoTreino404;
-  status: 404;
-};
+  data: DeleteAlunoTreino404
+  status: 404
+}
 
 export type deleteAlunoTreinoResponse500 = {
-  data: DeleteAlunoTreino500;
-  status: 500;
-};
-
-export type deleteAlunoTreinoResponseSuccess = deleteAlunoTreinoResponse200 & {
+  data: DeleteAlunoTreino500
+  status: 500
+}
+    
+export type deleteAlunoTreinoResponseSuccess = (deleteAlunoTreinoResponse200) & {
   headers: Headers;
 };
-export type deleteAlunoTreinoResponseError = (
-  | deleteAlunoTreinoResponse401
-  | deleteAlunoTreinoResponse403
-  | deleteAlunoTreinoResponse404
-  | deleteAlunoTreinoResponse500
-) & {
+export type deleteAlunoTreinoResponseError = (deleteAlunoTreinoResponse401 | deleteAlunoTreinoResponse403 | deleteAlunoTreinoResponse404 | deleteAlunoTreinoResponse500) & {
   headers: Headers;
 };
 
-export type deleteAlunoTreinoResponse =
-  | deleteAlunoTreinoResponseSuccess
-  | deleteAlunoTreinoResponseError;
+export type deleteAlunoTreinoResponse = (deleteAlunoTreinoResponseSuccess | deleteAlunoTreinoResponseError)
 
-export const getDeleteAlunoTreinoUrl = (treinoId: string, userId: string) => {
-  return `/alunoTreino/${treinoId}/aluno/${userId}`;
+export const getDeleteAlunoTreinoUrl = (treinoId: string,
+    userId: string,) => {
+
+
+  
+
+  return `/alunoTreino/${treinoId}/aluno/${userId}`
+}
+
+export const deleteAlunoTreino = async (treinoId: string,
+    userId: string, options?: RequestInit): Promise<deleteAlunoTreinoResponse> => {
+  
+  return customFetch<deleteAlunoTreinoResponse>(getDeleteAlunoTreinoUrl(treinoId,userId),
+  {      
+    ...options,
+    method: 'DELETE'
+    
+    
+  }
+);}
+
+
+
+/**
+ * @summary Create Agendamento
+ */
+export type createAgendamentoResponse201 = {
+  data: CreateAgendamento201
+  status: 201
+}
+
+export type createAgendamentoResponse401 = {
+  data: CreateAgendamento401
+  status: 401
+}
+
+export type createAgendamentoResponse403 = {
+  data: CreateAgendamento403
+  status: 403
+}
+
+export type createAgendamentoResponse404 = {
+  data: CreateAgendamento404
+  status: 404
+}
+
+export type createAgendamentoResponse500 = {
+  data: CreateAgendamento500
+  status: 500
+}
+    
+export type createAgendamentoResponseSuccess = (createAgendamentoResponse201) & {
+  headers: Headers;
+};
+export type createAgendamentoResponseError = (createAgendamentoResponse401 | createAgendamentoResponse403 | createAgendamentoResponse404 | createAgendamentoResponse500) & {
+  headers: Headers;
 };
 
-export const deleteAlunoTreino = async (
-  treinoId: string,
-  userId: string,
-  options?: RequestInit,
-): Promise<deleteAlunoTreinoResponse> => {
-  return customFetch<deleteAlunoTreinoResponse>(
-    getDeleteAlunoTreinoUrl(treinoId, userId),
-    {
-      ...options,
-      method: "DELETE",
-    },
-  );
+export type createAgendamentoResponse = (createAgendamentoResponseSuccess | createAgendamentoResponseError)
+
+export const getCreateAgendamentoUrl = () => {
+
+
+  
+
+  return `/agenda/`
+}
+
+export const createAgendamento = async (createAgendamentoBody: CreateAgendamentoBody, options?: RequestInit): Promise<createAgendamentoResponse> => {
+  
+  return customFetch<createAgendamentoResponse>(getCreateAgendamentoUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createAgendamentoBody,)
+  }
+);}
+
+
+
+/**
+ * @summary Get agendamentos por dia
+ */
+export type getAgendamentosDiaResponse201 = {
+  data: GetAgendamentosDia201
+  status: 201
+}
+
+export type getAgendamentosDiaResponse400 = {
+  data: GetAgendamentosDia400
+  status: 400
+}
+
+export type getAgendamentosDiaResponse401 = {
+  data: GetAgendamentosDia401
+  status: 401
+}
+
+export type getAgendamentosDiaResponse403 = {
+  data: GetAgendamentosDia403
+  status: 403
+}
+
+export type getAgendamentosDiaResponse404 = {
+  data: GetAgendamentosDia404
+  status: 404
+}
+
+export type getAgendamentosDiaResponse500 = {
+  data: GetAgendamentosDia500
+  status: 500
+}
+    
+export type getAgendamentosDiaResponseSuccess = (getAgendamentosDiaResponse201) & {
+  headers: Headers;
 };
+export type getAgendamentosDiaResponseError = (getAgendamentosDiaResponse400 | getAgendamentosDiaResponse401 | getAgendamentosDiaResponse403 | getAgendamentosDiaResponse404 | getAgendamentosDiaResponse500) & {
+  headers: Headers;
+};
+
+export type getAgendamentosDiaResponse = (getAgendamentosDiaResponseSuccess | getAgendamentosDiaResponseError)
+
+export const getGetAgendamentosDiaUrl = (params: GetAgendamentosDiaParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/agenda/dia?${stringifiedParams}` : `/agenda/dia`
+}
+
+export const getAgendamentosDia = async (params: GetAgendamentosDiaParams, options?: RequestInit): Promise<getAgendamentosDiaResponse> => {
+  
+  return customFetch<getAgendamentosDiaResponse>(getGetAgendamentosDiaUrl(params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+
+
+/**
+ * @summary Delete Agendamento
+ */
+export type deleteAgendamentoResponse200 = {
+  data: DeleteAgendamento200
+  status: 200
+}
+
+export type deleteAgendamentoResponse400 = {
+  data: DeleteAgendamento400
+  status: 400
+}
+
+export type deleteAgendamentoResponse401 = {
+  data: DeleteAgendamento401
+  status: 401
+}
+
+export type deleteAgendamentoResponse403 = {
+  data: DeleteAgendamento403
+  status: 403
+}
+
+export type deleteAgendamentoResponse404 = {
+  data: DeleteAgendamento404
+  status: 404
+}
+
+export type deleteAgendamentoResponse500 = {
+  data: DeleteAgendamento500
+  status: 500
+}
+    
+export type deleteAgendamentoResponseSuccess = (deleteAgendamentoResponse200) & {
+  headers: Headers;
+};
+export type deleteAgendamentoResponseError = (deleteAgendamentoResponse400 | deleteAgendamentoResponse401 | deleteAgendamentoResponse403 | deleteAgendamentoResponse404 | deleteAgendamentoResponse500) & {
+  headers: Headers;
+};
+
+export type deleteAgendamentoResponse = (deleteAgendamentoResponseSuccess | deleteAgendamentoResponseError)
+
+export const getDeleteAgendamentoUrl = (agendamentoId: string,) => {
+
+
+  
+
+  return `/agenda/${agendamentoId}`
+}
+
+export const deleteAgendamento = async (agendamentoId: string, options?: RequestInit): Promise<deleteAgendamentoResponse> => {
+  
+  return customFetch<deleteAgendamentoResponse>(getDeleteAgendamentoUrl(agendamentoId),
+  {      
+    ...options,
+    method: 'DELETE'
+    
+    
+  }
+);}
+
+
+
+/**
+ * @summary Update Agendamento
+ */
+export type updateAgendamentosResponse201 = {
+  data: UpdateAgendamentos201
+  status: 201
+}
+
+export type updateAgendamentosResponse400 = {
+  data: UpdateAgendamentos400
+  status: 400
+}
+
+export type updateAgendamentosResponse401 = {
+  data: UpdateAgendamentos401
+  status: 401
+}
+
+export type updateAgendamentosResponse403 = {
+  data: UpdateAgendamentos403
+  status: 403
+}
+
+export type updateAgendamentosResponse404 = {
+  data: UpdateAgendamentos404
+  status: 404
+}
+
+export type updateAgendamentosResponse500 = {
+  data: UpdateAgendamentos500
+  status: 500
+}
+    
+export type updateAgendamentosResponseSuccess = (updateAgendamentosResponse201) & {
+  headers: Headers;
+};
+export type updateAgendamentosResponseError = (updateAgendamentosResponse400 | updateAgendamentosResponse401 | updateAgendamentosResponse403 | updateAgendamentosResponse404 | updateAgendamentosResponse500) & {
+  headers: Headers;
+};
+
+export type updateAgendamentosResponse = (updateAgendamentosResponseSuccess | updateAgendamentosResponseError)
+
+export const getUpdateAgendamentosUrl = (agendamentoId: string,) => {
+
+
+  
+
+  return `/agenda/${agendamentoId}`
+}
+
+export const updateAgendamentos = async (agendamentoId: string,
+    updateAgendamentosBody: UpdateAgendamentosBody, options?: RequestInit): Promise<updateAgendamentosResponse> => {
+  
+  return customFetch<updateAgendamentosResponse>(getUpdateAgendamentosUrl(agendamentoId),
+  {      
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      updateAgendamentosBody,)
+  }
+);}
