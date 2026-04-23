@@ -1125,7 +1125,7 @@ export const GetAgendamentosDia201AgendamentosItemCategoria = {
 export type GetAgendamentosDia201AgendamentosItemAluno = {
   userId: string;
   nome: string;
-} | null;
+} |  null;
 
 export type GetAgendamentosDia201AgendamentosItem = {
   id: string;
