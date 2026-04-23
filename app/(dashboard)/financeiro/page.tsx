@@ -31,3 +31,5 @@ export default async function FinanceiroPage() {
     </div>
   );
 }
+
+export const metadata = { title: "Financeiro" };

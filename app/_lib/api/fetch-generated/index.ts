@@ -732,6 +732,7 @@ export type GetTreinoDetalhado201ExerciciosItem = {
 
 export type GetTreinoDetalhado201 = {
   nome: string;
+  totalSeries: number;
   exercicios: GetTreinoDetalhado201ExerciciosItem[];
 };
 

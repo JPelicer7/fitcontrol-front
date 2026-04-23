@@ -7,8 +7,10 @@ import {
 } from "@/app/_lib/api/fetch-generated";
 import { TreinosListaClient } from "./_components/TreinosListaClient";
 import { TreinosDetalheClient } from "./_components/TreinosDetalheClient";
-import { TreinosHeader } from "./_components/TreinosHeader";
-import { Dumbbell } from "lucide-react";
+
+import { TreinosHero } from "./_components/TreinosHero";
+
+export const metadata = { title: "Treinos" };
 
 export default async function TreinosPage({
   searchParams,
@@ -36,25 +38,20 @@ export default async function TreinosPage({
       : treinos[0]?.id;
 
   let treinoDetalhado = null;
-  let alunosTreino: { nome: string; Status: "Ativo" | "Inativo" }[] = [];
+  let alunosTreino: { id: string; nome: string; Status: "Ativo" | "Inativo" }[] = [];
 
   if (treinoId) {
     const [detalheResponse, alunosTreinoResponse] = await Promise.all([
       getTreinoDetalhado(treinoId),
       getAlunosTreino(treinoId),
     ]);
-
-    if (detalheResponse.status === 201) {
-      treinoDetalhado = detalheResponse.data;
-    }
-    if (alunosTreinoResponse.status === 201) {
-      alunosTreino = alunosTreinoResponse.data.alunos;
-    }
+    if (detalheResponse.status === 201) treinoDetalhado = detalheResponse.data;
+    if (alunosTreinoResponse.status === 201) alunosTreino = alunosTreinoResponse.data.alunos;
   }
 
   return (
-    <div className="space-y-6">
-      <TreinosHeader />
+    <div className="space-y-8">
+      <TreinosHero />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <TreinosListaClient treinos={treinos} treinoSelecionadoId={treinoId} />
@@ -66,14 +63,18 @@ export default async function TreinosPage({
             alunosTreino={alunosTreino}
             exercicios={exercicios}
             alunos={alunos}
+            treinoIndex={treinos.findIndex((t) => t.id === treinoId)}
           />
         ) : (
           treinos.length === 0 && (
             <div className="lg:col-span-2 flex items-center justify-center py-16">
               <div className="text-center">
-                <Dumbbell className="w-10 h-10 mx-auto text-muted-foreground/30 mb-3" />
-                <p className="text-sm text-muted-foreground">
-                  Nenhum treino criado ainda
+                <div className="w-14 h-14 mx-auto rounded-full bg-muted/40 flex items-center justify-center mb-3">
+                  <span className="text-2xl">🏋️</span>
+                </div>
+                <p className="text-sm font-medium text-foreground/70">Nenhum treino criado</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Crie seu primeiro treino pelo botão acima
                 </p>
               </div>
             </div>

@@ -39,3 +39,5 @@ export default async function AgendaPage({
     </div>
   );
 }
+
+export const metadata = { title: "Agenda" };
