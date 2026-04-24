@@ -96,16 +96,12 @@ export function gerarPDFTreino(
     (s, ex) => s + ex.series,
     0
   );
-  const totalRepsAprox = treinoDetalhado.exercicios.reduce((s, ex) => {
-    const m = ex.repeticoes.match(/\d+/);
-    return s + (m ? Number(m[0]) * ex.series : 0);
-  }, 0);
+  
 
   const cards: { label: string; value: string }[] = [
     { label: "ALUNO", value: nomeAluno ?? "—" },
     { label: "EXERCÍCIOS", value: String(treinoDetalhado.exercicios.length) },
     { label: "SÉRIES", value: String(totalSeries) },
-    { label: "REPS APROX.", value: String(totalRepsAprox) },
   ];
 
   const cardGap = 3;
@@ -142,17 +138,17 @@ export function gerarPDFTreino(
   doc.line(margin, sectionY + 1.5, margin + 38, sectionY + 1.5);
   doc.setLineWidth(0.2);
 
+
   // ===== TABELA DE EXERCÍCIOS =====
   autoTable(doc, {
     startY: sectionY + 5,
-    head: [["#", "EXERCÍCIO", "SÉRIES", "REPETIÇÕES", "CARGA", "DESCANSO", "ANOTAÇÕES"]],
+    head: [["#", "EXERCÍCIO", "SÉRIES", "REPETIÇÕES", "CARGA", "ANOTAÇÕES"]],
     body: treinoDetalhado.exercicios.map((ex, i) => [
       String(i + 1).padStart(2, "0"),
       ex.nomeTreino.nome,
       String(ex.series),
       ex.repeticoes,
       ex.carga ?? "—",
-      "60s",
       "",
     ]),
     theme: "plain",
@@ -176,12 +172,11 @@ export function gerarPDFTreino(
     },
     columnStyles: {
       0: { cellWidth: 10, halign: "center", fontStyle: "bold", textColor: accent },
-      1: { cellWidth: 50, fontStyle: "bold" },
+      1: { cellWidth: 55, fontStyle: "bold" },
       2: { cellWidth: 16, halign: "center" },
-      3: { cellWidth: 22, halign: "center" },
-      4: { cellWidth: 22, halign: "center", fontStyle: "bold" },
-      5: { cellWidth: 20, halign: "center", textColor: [120, 120, 130] },
-      6: { cellWidth: "auto" },
+      3: { cellWidth: 25, halign: "center" },
+      4: { cellWidth: 25, halign: "center", fontStyle: "bold" },
+      5: { cellWidth: "auto" },
     },
     alternateRowStyles: { fillColor: [250, 250, 252] },
     didDrawCell: (data) => {
