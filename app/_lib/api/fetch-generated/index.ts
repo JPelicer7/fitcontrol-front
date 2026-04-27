@@ -1126,7 +1126,7 @@ export const GetAgendamentosDia201AgendamentosItemCategoria = {
 export type GetAgendamentosDia201AgendamentosItemAluno = {
   userId: string;
   nome: string;
-} |  null;
+} | null;
 
 export type GetAgendamentosDia201AgendamentosItem = {
   id: string;
@@ -1242,6 +1242,85 @@ export type UpdateAgendamentos404 = {
 };
 
 export type UpdateAgendamentos500 = {
+  error: string;
+  code: string;
+};
+
+export type GetDashboardParams = {
+data: string;
+};
+
+export type GetDashboard201Alunos = {
+  ativos: number;
+  total: number;
+};
+
+export type GetDashboard201Financeiro = {
+  receitaTotal: number;
+  despesaTotal: number;
+};
+
+export type GetDashboard201AgendamentosDiaItemCategoria = typeof GetDashboard201AgendamentosDiaItemCategoria[keyof typeof GetDashboard201AgendamentosDiaItemCategoria];
+
+
+export const GetDashboard201AgendamentosDiaItemCategoria = {
+  Reuniao: 'Reuniao',
+  Personal: 'Personal',
+  Avaliacao: 'Avaliacao',
+  Outro: 'Outro',
+} as const;
+
+export type GetDashboard201AgendamentosDiaItem = {
+  id: string;
+  titulo: string;
+  data: string;
+  categoria: GetDashboard201AgendamentosDiaItemCategoria;
+};
+
+export type GetDashboard201UltimosAlunosItemPlano = typeof GetDashboard201UltimosAlunosItemPlano[keyof typeof GetDashboard201UltimosAlunosItemPlano];
+
+
+export const GetDashboard201UltimosAlunosItemPlano = {
+  Mensal: 'Mensal',
+  Trimestral: 'Trimestral',
+  Semestral: 'Semestral',
+  Anual: 'Anual',
+} as const;
+
+export type GetDashboard201UltimosAlunosItem = {
+  id: string;
+  name: string;
+  plano: GetDashboard201UltimosAlunosItemPlano;
+};
+
+export type GetDashboard201 = {
+  alunos: GetDashboard201Alunos;
+  financeiro: GetDashboard201Financeiro;
+  agendamentosDia: GetDashboard201AgendamentosDiaItem[];
+  ultimosAlunos: GetDashboard201UltimosAlunosItem[];
+};
+
+export type GetDashboard400 = {
+  error: string;
+  code: string;
+};
+
+export type GetDashboard401 = {
+  error: string;
+  code: string;
+};
+
+export type GetDashboard403 = {
+  error: string;
+  code: string;
+};
+
+export type GetDashboard404 = {
+  error: string;
+  code: string;
+};
+
+export type GetDashboard500 = {
   error: string;
   code: string;
 };
@@ -2908,5 +2987,75 @@ export const updateAgendamentos = async (agendamentoId: string,
     headers: { 'Content-Type': 'application/json', ...options?.headers },
     body: JSON.stringify(
       updateAgendamentosBody,)
+  }
+);}
+
+
+
+/**
+ * @summary Get Dashboard data
+ */
+export type getDashboardResponse201 = {
+  data: GetDashboard201
+  status: 201
+}
+
+export type getDashboardResponse400 = {
+  data: GetDashboard400
+  status: 400
+}
+
+export type getDashboardResponse401 = {
+  data: GetDashboard401
+  status: 401
+}
+
+export type getDashboardResponse403 = {
+  data: GetDashboard403
+  status: 403
+}
+
+export type getDashboardResponse404 = {
+  data: GetDashboard404
+  status: 404
+}
+
+export type getDashboardResponse500 = {
+  data: GetDashboard500
+  status: 500
+}
+    
+export type getDashboardResponseSuccess = (getDashboardResponse201) & {
+  headers: Headers;
+};
+export type getDashboardResponseError = (getDashboardResponse400 | getDashboardResponse401 | getDashboardResponse403 | getDashboardResponse404 | getDashboardResponse500) & {
+  headers: Headers;
+};
+
+export type getDashboardResponse = (getDashboardResponseSuccess | getDashboardResponseError)
+
+export const getGetDashboardUrl = (params: GetDashboardParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/dashboard/dashboard?${stringifiedParams}` : `/dashboard/dashboard`
+}
+
+export const getDashboard = async (params: GetDashboardParams, options?: RequestInit): Promise<getDashboardResponse> => {
+  
+  return customFetch<getDashboardResponse>(getGetDashboardUrl(params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
   }
 );}
