@@ -9,55 +9,47 @@ export function AlunosFiltros() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  const timeoutRef = useRef<NodeJS.Timeout>(undefined);
-
-  
   const handleFilter = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    
+
     if (value) {
       params.set(key, value);
     } else {
       params.delete(key);
     }
 
-    // O router.replace muda a URL sem recarregar a página toda
+    // Reseta para página 1 sempre que um filtro muda
+    params.set("page", "1");
+
     startTransition(() => {
       router.replace(`${pathname}?${params.toString()}`);
     });
   };
 
-    const handleSearchNome = (valor: string) => {
-        
-        if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        }
-        
-        
-        timeoutRef.current = setTimeout(() => {
-        handleFilter("name", valor);
-        }, 500);
-    };
+  const handleSearchNome = (valor: string) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      handleFilter("name", valor);
+    }, 500);
+  };
+
   return (
     <div className="flex flex-col sm:flex-row gap-4 mb-6">
-      {/* Busca por Nome */}
       <div className="relative flex-1">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
         <input
           type="text"
           placeholder="Buscar por nome..."
-          defaultValue={searchParams.get("name")?.toString()}
-          
+          defaultValue={searchParams.get("name") ?? ""}
           onChange={(e) => handleSearchNome(e.target.value)}
           className="w-full h-10 pl-9 pr-4 bg-card border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
         />
       </div>
 
-
-      {/* Filtro por Status */}
       <select
-        defaultValue={searchParams.get("status")?.toString() || ""}
+        defaultValue={searchParams.get("status") ?? ""}
         onChange={(e) => handleFilter("status", e.target.value)}
         className="h-10 px-3 bg-card border border-border rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
       >
@@ -66,9 +58,8 @@ export function AlunosFiltros() {
         <option value="Inativo">Inativo</option>
       </select>
 
-      {/* Filtro por Plano */}
       <select
-        defaultValue={searchParams.get("plano")?.toString() || ""}
+        defaultValue={searchParams.get("plano") ?? ""}
         onChange={(e) => handleFilter("plano", e.target.value)}
         className="h-10 px-3 bg-card border border-border rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
       >

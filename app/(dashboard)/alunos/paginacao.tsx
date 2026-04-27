@@ -15,13 +15,11 @@ export function AlunosPaginacao({ currentPage, totalPages }: PaginacaoProps) {
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
-  
   if (totalPages <= 1) return null;
 
   const handlePageChange = (newPage: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", newPage.toString());
-
     startTransition(() => {
       router.replace(`${pathname}?${params.toString()}`);
     });

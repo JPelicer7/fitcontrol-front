@@ -1,21 +1,46 @@
 "use client";
 
-import { useState} from "react";
+import { useState } from "react";
 import { Pencil, Check, X, Weight, Ruler, Activity, Calendar } from "lucide-react";
 import { toast } from "sonner";
-import { updateMedidaAction } from "../actions"; 
+import { updateMedidaAction } from "../actions";
 import { EvolutionCharts } from "./EvolutionCharts";
-
 
 interface Props {
   initialUser: any;
   initialMedidas: any;
   initialHistory: any;
   medidaId: string;
-  userId: string; 
+  userId: string;
 }
 
-export default function StudentProfileClient({ initialMedidas, initialHistory, medidaId, userId }: Props) {
+// Campos que têm limites específicos de validação
+const FIELD_LIMITS: Record<string, { min: number; max: number; label: string }> = {
+  peso:               { min: 10,  max: 400,  label: "Peso" },
+  alturaCentimetros:  { min: 50,  max: 250,  label: "Altura" },
+  percentual_gordura: { min: 1,   max: 90,   label: "% Gordura" },
+  imc:                { min: 5,   max: 70,   label: "IMC" },
+  // medidas corporais 
+  ombro:              { min: 1,   max: 200,  label: "Ombro" },
+  torax:              { min: 1,   max: 200,  label: "Tórax" },
+  cintura:            { min: 1,   max: 200,  label: "Cintura" },
+  abdomen:            { min: 1,   max: 200,  label: "Abdômen" },
+  quadril:            { min: 1,   max: 200,  label: "Quadril" },
+  // dobras — em mm
+  dobra_triceps:      { min: 1,   max: 100,  label: "Dobra Tríceps" },
+  dobra_supraescapular:{ min: 1,  max: 100,  label: "Dobra Supraescapular" },
+  dobra_suprailica:   { min: 1,   max: 100,  label: "Dobra Suprailíaca" },
+  dobra_adbdominal:   { min: 1,   max: 100,  label: "Dobra Abdominal" },
+  dobra_coxa:         { min: 1,   max: 100,  label: "Dobra Coxa" },
+  dobra_peitoral:     { min: 1,   max: 100,  label: "Dobra Peitoral" },
+};
+
+export default function StudentProfileClient({
+  initialMedidas,
+  initialHistory,
+  medidaId,
+  userId,
+}: Props) {
   const [currentMedida, setCurrentMedida] = useState(initialMedidas.todas[0]);
   const [editingField, setEditingField] = useState<string | null>(null);
   const [draftValue, setDraftValue] = useState("");
@@ -23,27 +48,41 @@ export default function StudentProfileClient({ initialMedidas, initialHistory, m
 
   const comparacao = initialMedidas.comparacao;
 
-  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value;
     val = val.replace(/[^0-9.,]/g, "");
-    const dots = val.match(/[.,]/g);
-    if (dots && dots.length > 1) return;
+    const separators = (val.match(/[.,]/g) || []).length;
+    if (separators > 1) return;
+    if (val.length > 7) return;
     setDraftValue(val);
   };
 
   const formatNum = (num?: number | null, suffix = "") => {
     if (num === undefined || num === null) return "-";
-    return `${Number(num).toFixed(2)} ${suffix}`;
+    return `${Number(num).toFixed(2)} ${suffix}`.trim();
   };
+
+  // const renderDiff = (diff?: number) => {
+  //   if (diff === undefined || diff === null) return "-";
+  //   if (diff === 0) return "=";
+  //   const isPositive = diff > 0;
+  //   return (
+  //     <span
+  //       className={`text-sm font-medium ${
+  //         isPositive ? "text-destructive" : "text-primary"
+  //       }`}
+  //     >
+  //       {isPositive ? `+${diff.toFixed(1)}` : diff.toFixed(1)}
+  //     </span>
+  //   );
+  // };
 
   const renderDiff = (diff?: number) => {
     if (diff === undefined || diff === null) return "-";
     if (diff === 0) return "=";
-    const isPositive = diff > 0;
     return (
-      <span className={`text-sm font-medium ${isPositive ? "text-destructive" : "text-primary"}`}>
-        {isPositive ? `+${diff.toFixed(1)}` : diff.toFixed(1)}
+      <span className="text-sm font-medium text-foreground/70">
+        {diff > 0 ? `+${diff.toFixed(1)}` : diff.toFixed(1)}
       </span>
     );
   };
@@ -56,42 +95,88 @@ export default function StudentProfileClient({ initialMedidas, initialHistory, m
   const handleSave = async (field: string) => {
     if (isUpdating) return;
 
-    const numericValue = parseFloat(draftValue.replace(",", "."));
-
-    if (isNaN(numericValue)) {
-      toast.error("Por favor, insira um número válido.");
+    const raw = parseFloat(draftValue.replace(",", "."));
+    if (isNaN(raw) || raw <= 0) {
+      toast.error("Insira um número válido.");
       return;
     }
 
     
-    if (numericValue > 999.99) {
-      toast.error("Valor excede o limite permitido.");
-      return;
+    let valorParaSalvar = raw;
+    if (field === "alturaCentimetros") {
+      valorParaSalvar = raw <= 3 ? Math.round(raw * 100) : Math.round(raw);
+    } else {
+      valorParaSalvar = Number(raw.toFixed(2));
+    }
+
+    // Validação dos limites
+    const limite = FIELD_LIMITS[field];
+    if (limite) {
+      if (valorParaSalvar < limite.min || valorParaSalvar > limite.max) {
+        toast.error(
+          `${limite.label} deve estar entre ${limite.min} e ${limite.max}.`
+        );
+        return;
+      }
     }
 
     setIsUpdating(true);
-    
-    
     const result = await updateMedidaAction(userId, medidaId, {
-      [field]: Number(numericValue.toFixed(2))
+      [field]: valorParaSalvar,
     });
 
     if (result.sucesso) {
-      setCurrentMedida((prev: any) => ({ ...prev, [field]: numericValue }));
+      setCurrentMedida((prev: any) => ({
+        ...prev,
+        [field]: valorParaSalvar,
+      }));
       toast.success("Medida atualizada com sucesso!");
       setEditingField(null);
     } else {
       toast.error(result.mensagem || "Erro ao atualizar.");
     }
-    
     setIsUpdating(false);
   };
 
+  const cancelEdit = () => {
+    if (!isUpdating) {
+      setEditingField(null);
+      setDraftValue("");
+    }
+  };
+
   const quickMetrics = [
-    { label: "Peso", key: "peso", value: currentMedida?.peso, suffix: "kg", icon: Weight },
-    { label: "Altura", key: "alturaCentimetros", value: currentMedida?.alturaCentimetros ? currentMedida.alturaCentimetros / 100 : null, suffix: "m", icon: Ruler },
-    { label: "% Gordura", key: "percentual_gordura", value: currentMedida?.percentual_gordura, suffix: "%", icon: Activity },
-    { label: "IMC", key: "imc", value: currentMedida?.imc, suffix: "", icon: Activity },
+    {
+      label: "Peso",
+      key: "peso",
+      value: currentMedida?.peso,
+      suffix: "kg",
+      icon: Weight,
+    },
+    {
+      label: "Altura",
+      key: "alturaCentimetros",
+      
+      value: currentMedida?.alturaCentimetros
+        ? currentMedida.alturaCentimetros / 100
+        : null,
+      suffix: "m",
+      icon: Ruler,
+    },
+    {
+      label: "% Gordura",
+      key: "percentual_gordura",
+      value: currentMedida?.percentual_gordura,
+      suffix: "%",
+      icon: Activity,
+    },
+    {
+      label: "IMC",
+      key: "imc",
+      value: currentMedida?.imc,
+      suffix: "",
+      icon: Activity,
+    },
   ];
 
   const bodyMeasurements = [
@@ -108,11 +193,11 @@ export default function StudentProfileClient({ initialMedidas, initialHistory, m
     { label: "Antebraço Esq.", key: "antebraco_esq" },
     { label: "Coxa Dir.", key: "coxa_dir" },
     { label: "Coxa Esq.", key: "coxa_esq" },
-    { label: "Panturrilha Dir", key: "panturrilha_dir" },
-    { label: "Panturrilha Esq", key: "panturrilha_esq" },
+    { label: "Panturrilha Dir.", key: "panturrilha_dir" },
+    { label: "Panturrilha Esq.", key: "panturrilha_esq" },
     { label: "Dobra Tríceps", key: "dobra_triceps" },
     { label: "Dobra Supraescapular", key: "dobra_supraescapular" },
-    { label: "Dobra Suprailica", key: "dobra_suprailica" },
+    { label: "Dobra Suprailíaca", key: "dobra_suprailica" },
     { label: "Dobra Abdominal", key: "dobra_adbdominal" },
     { label: "Dobra Coxa", key: "dobra_coxa" },
     { label: "Dobra Peitoral", key: "dobra_peitoral" },
@@ -120,14 +205,18 @@ export default function StudentProfileClient({ initialMedidas, initialHistory, m
 
   return (
     <div className="space-y-6">
+      {/* Cards de métricas rápidas */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {quickMetrics.map((m) => (
-          <div key={m.key} className="metric-card bg-card border border-border p-4 rounded-xl group relative">
+          <div
+            key={m.key}
+            className="metric-card bg-card border border-border p-4 rounded-xl group relative"
+          >
             <div className="flex items-center gap-2 mb-2">
               <m.icon className="w-4 h-4 text-primary" />
               <span className="text-xs text-muted-foreground">{m.label}</span>
             </div>
-            
+
             {editingField === m.key ? (
               <div className="flex items-center gap-1">
                 <input
@@ -136,25 +225,43 @@ export default function StudentProfileClient({ initialMedidas, initialHistory, m
                   className="w-full bg-background border border-primary/50 rounded px-2 py-1 text-lg font-bold outline-none"
                   value={draftValue}
                   onChange={handleInputChange}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSave(m.key)}
-                  onBlur={() => !isUpdating && setEditingField(null)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSave(m.key);
+                    if (e.key === "Escape") cancelEdit();
+                  }}
+                 
                 />
-                <button onClick={() => handleSave(m.key)} className="text-primary hover:scale-110 transition-transform">
-                  <Check className="w-4 h-4"/>
+                <button
+                  onMouseDown={(e) => e.preventDefault()} 
+                  onClick={() => handleSave(m.key)}
+                  disabled={isUpdating}
+                  className="text-primary hover:scale-110 transition-transform disabled:opacity-50"
+                >
+                  <Check className="w-4 h-4" />
+                </button>
+                <button
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={cancelEdit}
+                  className="text-muted-foreground hover:text-destructive transition-colors"
+                >
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             ) : (
               <>
-                <p className="text-2xl font-bold text-foreground">{formatNum(m.value, m.suffix)}</p>
-                <button 
+                <p className="text-2xl font-bold text-foreground">
+                  {formatNum(m.value, m.suffix)}
+                </p>
+                <button
                   onClick={() => startEdit(m.key, m.value)}
-                  className="absolute top-2 right-2 p-1.5 opacity-0 group-hover:opacity-100 transition-all text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md"
+                  //className="absolute top-2 right-2 p-1.5 opacity-0 group-hover:opacity-100 transition-all text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md"
+                  className="absolute top-2 right-2 p-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md"
                 >
                   <Pencil className="w-3.5 h-3.5" />
                 </button>
               </>
             )}
-            
+
             {comparacao?.[m.key as keyof typeof comparacao] && (
               <p className="text-xs mt-1 font-medium flex items-center gap-1">
                 {renderDiff((comparacao as any)[m.key]?.diferenca)} vs último
@@ -164,27 +271,36 @@ export default function StudentProfileClient({ initialMedidas, initialHistory, m
         ))}
       </div>
 
-      {/* 2. GRÁFICOS DE EVOLUÇÃO*/}
+      {/* Gráficos */}
       {initialHistory && initialHistory.length > 0 && (
         <EvolutionCharts data={initialHistory} />
       )}
 
+      {/* Tabela de medidas */}
       <div className="metric-card glow-border overflow-hidden p-0 bg-card rounded-xl border border-border">
-        <div className="px-5 py-4 border-b border-border flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">Evolução das Medidas</h3>
-          </div>
+        <div className="px-5 py-4 border-b border-border flex items-center gap-2">
+          <Calendar className="w-4 h-4 text-primary" />
+          <h3 className="text-lg font-semibold text-foreground">
+            Evolução das Medidas
+          </h3>
         </div>
-        
+
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b border-border bg-muted/20 text-left">
-                <th className="py-3 px-5 text-xs font-semibold text-muted-foreground uppercase">Região</th>
-                <th className="py-3 px-5 text-xs font-semibold text-muted-foreground uppercase">Atual</th>
-                <th className="py-3 px-5 text-xs font-semibold text-muted-foreground uppercase">Anterior</th>
-                <th className="py-3 px-5 text-xs font-semibold text-muted-foreground uppercase">Diferença</th>
+                <th className="py-3 px-5 text-xs font-semibold text-muted-foreground uppercase">
+                  Região
+                </th>
+                <th className="py-3 px-5 text-xs font-semibold text-muted-foreground uppercase">
+                  Atual
+                </th>
+                <th className="py-3 px-5 text-xs font-semibold text-muted-foreground uppercase">
+                  Anterior
+                </th>
+                <th className="py-3 px-5 text-xs font-semibold text-muted-foreground uppercase">
+                  Diferença
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -194,8 +310,13 @@ export default function StudentProfileClient({ initialMedidas, initialHistory, m
                 const isEditing = editingField === m.key;
 
                 return (
-                  <tr key={m.key} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors group">
-                    <td className="py-3 px-5 text-sm font-medium text-foreground">{m.label}</td>
+                  <tr
+                    key={m.key}
+                    className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors group"
+                  >
+                    <td className="py-3 px-5 text-sm font-medium text-foreground">
+                      {m.label}
+                    </td>
                     <td className="py-3 px-5 text-sm text-foreground">
                       {isEditing ? (
                         <div className="flex items-center gap-2">
@@ -205,17 +326,34 @@ export default function StudentProfileClient({ initialMedidas, initialHistory, m
                             className="w-20 bg-background border border-primary/50 rounded px-1.5 py-0.5 outline-none"
                             value={draftValue}
                             onChange={handleInputChange}
-                            onKeyDown={(e) => e.key === 'Enter' && handleSave(m.key)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") handleSave(m.key);
+                              if (e.key === "Escape") cancelEdit();
+                            }}
                           />
-                          <button onClick={() => handleSave(m.key)} className="text-primary"><Check className="w-4 h-4"/></button>
-                          <button onClick={() => setEditingField(null)} className="text-muted-foreground"><X className="w-4 h-4"/></button>
+                          <button
+                            onMouseDown={(e) => e.preventDefault()} // ← fix
+                            onClick={() => handleSave(m.key)}
+                            disabled={isUpdating}
+                            className="text-primary disabled:opacity-50"
+                          >
+                            <Check className="w-4 h-4" />
+                          </button>
+                          <button
+                            onMouseDown={(e) => e.preventDefault()}
+                            onClick={cancelEdit}
+                            className="text-muted-foreground hover:text-destructive"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
                         </div>
                       ) : (
                         <div className="flex items-center justify-between min-w-[100px]">
                           <span>{formatNum(valorAtual, "cm")}</span>
-                          <button 
+                          <button
                             onClick={() => startEdit(m.key, valorAtual)}
-                            className="opacity-0 group-hover:opacity-100 p-1.5 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md transition-all"
+                            //className="opacity-0 group-hover:opacity-100 p-1.5 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md transition-all"
+                            className="opacity-100 md:opacity-0 md:group-hover:opacity-100 p-1.5 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md transition-all"
                           >
                             <Pencil className="w-3.5 h-3.5" />
                           </button>
@@ -223,10 +361,14 @@ export default function StudentProfileClient({ initialMedidas, initialHistory, m
                       )}
                     </td>
                     <td className="py-3 px-5 text-sm text-muted-foreground">
-                      {dadosComparacao ? formatNum(dadosComparacao.anterior, "cm") : "-"}
+                      {dadosComparacao
+                        ? formatNum(dadosComparacao.anterior, "cm")
+                        : "-"}
                     </td>
                     <td className="py-3 px-5">
-                      {dadosComparacao ? renderDiff(dadosComparacao.diferenca) : "-"}
+                      {dadosComparacao
+                        ? renderDiff(dadosComparacao.diferenca)
+                        : "-"}
                     </td>
                   </tr>
                 );
