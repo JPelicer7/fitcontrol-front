@@ -17,7 +17,7 @@ interface Props {
 }
 
 const CATEGORIES = [
-  "Mensalidade", "Aluguel", "Equipamentos", "Energia", 
+  "Mensalidade", "Personal", "Aluguel", "Equipamentos", "Energia", 
   "Agua", "Manutencao", "Outros"
 ];
 

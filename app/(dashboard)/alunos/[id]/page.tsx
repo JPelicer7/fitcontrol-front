@@ -3,8 +3,7 @@ import Link from "next/link";
 import { getUser } from "@/app/_lib/api/fetch-generated";
 import BotaoNovaMedicao from "../_components/BotaoNovaMedicao";
 import AlunoProfile from "./_components/AlunoProfile";
-import { getGraficoAction } from "./actions";
-
+import { getGraficoAction, getHistoricoMedidasAction } from "./actions";
 
 export default async function StudentProfilePage({
   params,
@@ -13,28 +12,28 @@ export default async function StudentProfilePage({
 }) {
   const { id } = await params;
 
-  
-  const [response, historyRes] = await Promise.all([
+  const [response, historyRes, historicoMedidasRes] = await Promise.all([
     getUser(id),
-    getGraficoAction(id)
+    getGraficoAction(id),
+    getHistoricoMedidasAction(id),
   ]);
-  
+
   if (response.status !== 200 || !response.data) {
     return (
       <div className="p-6 text-center text-muted-foreground">
-         <p>Aluno não encontrado ou erro ao carregar dados.</p>
-         <Link href="/alunos" className="text-primary mt-4 inline-block hover:underline">
-           Voltar para listagem
-         </Link>
-       </div>
+        <p>Aluno não encontrado ou erro ao carregar dados.</p>
+        <Link href="/alunos" className="text-primary mt-4 inline-block hover:underline">
+          Voltar para listagem
+        </Link>
+      </div>
     );
   }
 
   const { user, medidas } = response.data;
   const medidaMaisRecente = medidas.todas[0];
-  
-  
+
   const initialHistory = historyRes.sucesso ? historyRes.dados : [];
+  const historicoMedidas = historicoMedidasRes.sucesso ? historicoMedidasRes.dados : [];
 
   return (
     <div className="space-y-6">
@@ -51,7 +50,9 @@ export default async function StudentProfilePage({
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <span className={`text-xs px-3 py-1.5 rounded-full font-medium ${
-            user.status.toUpperCase() === "ATIVO" ? "bg-primary/15 text-primary" : "bg-destructive/15 text-destructive"
+            user.status.toUpperCase() === "ATIVO"
+              ? "bg-primary/15 text-primary"
+              : "bg-destructive/15 text-destructive"
           }`}>
             {user.status}
           </span>
@@ -60,17 +61,18 @@ export default async function StudentProfilePage({
       </div>
 
       {medidaMaisRecente ? (
-        <AlunoProfile 
+        <AlunoProfile
           key={medidaMaisRecente.id}
-          initialUser={user} 
-          initialMedidas={medidas} 
+          initialUser={user}
+          initialMedidas={medidas}
           initialHistory={initialHistory}
-          medidaId={medidaMaisRecente.id} 
+          historicoMedidas={historicoMedidas}
+          medidaId={medidaMaisRecente.id}
           userId={id}
         />
       ) : (
         <div className="metric-card p-12 text-center text-muted-foreground border border-dashed rounded-xl">
-            Nenhuma avaliação física registrada para este aluno ainda.
+          Nenhuma avaliação física registrada para este aluno ainda.
         </div>
       )}
     </div>

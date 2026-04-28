@@ -5,6 +5,8 @@ import { Pencil, Check, X, Weight, Ruler, Activity, Calendar } from "lucide-reac
 import { toast } from "sonner";
 import { updateMedidaAction } from "../actions";
 import { EvolutionCharts } from "./EvolutionCharts";
+import { HistoricoMedidas } from "./HistoricoMedidas";
+import { type GetHistoricoMedidas201HistoricoItem } from "@/app/_lib/api/fetch-generated";
 
 interface Props {
   initialUser: any;
@@ -12,6 +14,7 @@ interface Props {
   initialHistory: any;
   medidaId: string;
   userId: string;
+  historicoMedidas: GetHistoricoMedidas201HistoricoItem[];
 }
 
 // Campos que têm limites específicos de validação
@@ -40,6 +43,7 @@ export default function StudentProfileClient({
   initialHistory,
   medidaId,
   userId,
+  historicoMedidas
 }: Props) {
   const [currentMedida, setCurrentMedida] = useState(initialMedidas.todas[0]);
   const [editingField, setEditingField] = useState<string | null>(null);
@@ -377,6 +381,8 @@ export default function StudentProfileClient({
           </table>
         </div>
       </div>
+          {/* Histórico de Avaliações */}
+        <HistoricoMedidas historico={historicoMedidas} />
     </div>
   );
 }

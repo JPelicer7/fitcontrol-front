@@ -52,6 +52,11 @@ export type CreateUser401 = {
   code: string;
 };
 
+export type CreateUser403 = {
+  error: string;
+  code: string;
+};
+
 export type CreateUser404 = {
   error: string;
   code: string;
@@ -394,6 +399,11 @@ export type CreateMedidas401 = {
   code: string;
 };
 
+export type CreateMedidas403 = {
+  error: string;
+  code: string;
+};
+
 export type CreateMedidas404 = {
   error: string;
   code: string;
@@ -443,12 +453,71 @@ export type UpdateMedidas401 = {
   code: string;
 };
 
+export type UpdateMedidas403 = {
+  error: string;
+  code: string;
+};
+
 export type UpdateMedidas404 = {
   error: string;
   code: string;
 };
 
 export type UpdateMedidas500 = {
+  error: string;
+  code: string;
+};
+
+export type GetHistoricoMedidas201HistoricoItem = {
+  id: string;
+  createdAt: string;
+  peso: number;
+  /** @nullable */
+  torax: number | null;
+  /** @nullable */
+  cintura: number | null;
+  /** @nullable */
+  quadril: number | null;
+  /** @nullable */
+  braco_contrai_direi: number | null;
+  /** @nullable */
+  braco_contrai_esq: number | null;
+  /** @nullable */
+  coxa_dir: number | null;
+  /** @nullable */
+  coxa_esq: number | null;
+  /** @nullable */
+  panturrilha_dir: number | null;
+  /** @nullable */
+  panturrilha_esq: number | null;
+  /** @nullable */
+  percentual_gordura: number | null;
+  /** @nullable */
+  massaGorda: number | null;
+  /** @nullable */
+  massaMagra: number | null;
+};
+
+export type GetHistoricoMedidas201 = {
+  historico: GetHistoricoMedidas201HistoricoItem[];
+};
+
+export type GetHistoricoMedidas401 = {
+  error: string;
+  code: string;
+};
+
+export type GetHistoricoMedidas403 = {
+  error: string;
+  code: string;
+};
+
+export type GetHistoricoMedidas404 = {
+  error: string;
+  code: string;
+};
+
+export type GetHistoricoMedidas500 = {
   error: string;
   code: string;
 };
@@ -466,6 +535,7 @@ export type CreateTransactionBodyCategoria = typeof CreateTransactionBodyCategor
 
 export const CreateTransactionBodyCategoria = {
   Mensalidade: 'Mensalidade',
+  Personal: 'Personal',
   Aluguel: 'Aluguel',
   Equipamentos: 'Equipamentos',
   Energia: 'Energia',
@@ -503,6 +573,11 @@ export type CreateTransaction401 = {
   code: string;
 };
 
+export type CreateTransaction403 = {
+  error: string;
+  code: string;
+};
+
 export type CreateTransaction404 = {
   error: string;
   code: string;
@@ -536,6 +611,7 @@ export type GetTransactions201TransactionsItemCategoria = typeof GetTransactions
 
 export const GetTransactions201TransactionsItemCategoria = {
   Mensalidade: 'Mensalidade',
+  Personal: 'Personal',
   Aluguel: 'Aluguel',
   Equipamentos: 'Equipamentos',
   Energia: 'Energia',
@@ -561,6 +637,11 @@ export type GetTransactions201 = {
 };
 
 export type GetTransactions401 = {
+  error: string;
+  code: string;
+};
+
+export type GetTransactions403 = {
   error: string;
   code: string;
 };
@@ -623,6 +704,11 @@ export type GetFinanceiroHistory201 = {
 };
 
 export type GetFinanceiroHistory401 = {
+  error: string;
+  code: string;
+};
+
+export type GetFinanceiroHistory403 = {
   error: string;
   code: string;
 };
@@ -1338,6 +1424,11 @@ export type createUserResponse401 = {
   status: 401
 }
 
+export type createUserResponse403 = {
+  data: CreateUser403
+  status: 403
+}
+
 export type createUserResponse404 = {
   data: CreateUser404
   status: 404
@@ -1356,7 +1447,7 @@ export type createUserResponse500 = {
 export type createUserResponseSuccess = (createUserResponse201) & {
   headers: Headers;
 };
-export type createUserResponseError = (createUserResponse401 | createUserResponse404 | createUserResponse409 | createUserResponse500) & {
+export type createUserResponseError = (createUserResponse401 | createUserResponse403 | createUserResponse404 | createUserResponse409 | createUserResponse500) & {
   headers: Headers;
 };
 
@@ -1628,6 +1719,11 @@ export type createMedidasResponse401 = {
   status: 401
 }
 
+export type createMedidasResponse403 = {
+  data: CreateMedidas403
+  status: 403
+}
+
 export type createMedidasResponse404 = {
   data: CreateMedidas404
   status: 404
@@ -1641,7 +1737,7 @@ export type createMedidasResponse500 = {
 export type createMedidasResponseSuccess = (createMedidasResponse201) & {
   headers: Headers;
 };
-export type createMedidasResponseError = (createMedidasResponse401 | createMedidasResponse404 | createMedidasResponse500) & {
+export type createMedidasResponseError = (createMedidasResponse401 | createMedidasResponse403 | createMedidasResponse404 | createMedidasResponse500) & {
   headers: Headers;
 };
 
@@ -1683,6 +1779,11 @@ export type updateMedidasResponse401 = {
   status: 401
 }
 
+export type updateMedidasResponse403 = {
+  data: UpdateMedidas403
+  status: 403
+}
+
 export type updateMedidasResponse404 = {
   data: UpdateMedidas404
   status: 404
@@ -1696,7 +1797,7 @@ export type updateMedidasResponse500 = {
 export type updateMedidasResponseSuccess = (updateMedidasResponse201) & {
   headers: Headers;
 };
-export type updateMedidasResponseError = (updateMedidasResponse401 | updateMedidasResponse404 | updateMedidasResponse500) & {
+export type updateMedidasResponseError = (updateMedidasResponse401 | updateMedidasResponse403 | updateMedidasResponse404 | updateMedidasResponse500) & {
   headers: Headers;
 };
 
@@ -1728,6 +1829,64 @@ export const updateMedidas = async (userId: string,
 
 
 /**
+ * @summary Get histórico de medidas de um aluno
+ */
+export type getHistoricoMedidasResponse201 = {
+  data: GetHistoricoMedidas201
+  status: 201
+}
+
+export type getHistoricoMedidasResponse401 = {
+  data: GetHistoricoMedidas401
+  status: 401
+}
+
+export type getHistoricoMedidasResponse403 = {
+  data: GetHistoricoMedidas403
+  status: 403
+}
+
+export type getHistoricoMedidasResponse404 = {
+  data: GetHistoricoMedidas404
+  status: 404
+}
+
+export type getHistoricoMedidasResponse500 = {
+  data: GetHistoricoMedidas500
+  status: 500
+}
+    
+export type getHistoricoMedidasResponseSuccess = (getHistoricoMedidasResponse201) & {
+  headers: Headers;
+};
+export type getHistoricoMedidasResponseError = (getHistoricoMedidasResponse401 | getHistoricoMedidasResponse403 | getHistoricoMedidasResponse404 | getHistoricoMedidasResponse500) & {
+  headers: Headers;
+};
+
+export type getHistoricoMedidasResponse = (getHistoricoMedidasResponseSuccess | getHistoricoMedidasResponseError)
+
+export const getGetHistoricoMedidasUrl = (userId: string,) => {
+
+
+  
+
+  return `/medidas/${userId}/historico`
+}
+
+export const getHistoricoMedidas = async (userId: string, options?: RequestInit): Promise<getHistoricoMedidasResponse> => {
+  
+  return customFetch<getHistoricoMedidasResponse>(getGetHistoricoMedidasUrl(userId),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+
+
+/**
  * @summary Create Transaction
  */
 export type createTransactionResponse201 = {
@@ -1738,6 +1897,11 @@ export type createTransactionResponse201 = {
 export type createTransactionResponse401 = {
   data: CreateTransaction401
   status: 401
+}
+
+export type createTransactionResponse403 = {
+  data: CreateTransaction403
+  status: 403
 }
 
 export type createTransactionResponse404 = {
@@ -1758,7 +1922,7 @@ export type createTransactionResponse500 = {
 export type createTransactionResponseSuccess = (createTransactionResponse201) & {
   headers: Headers;
 };
-export type createTransactionResponseError = (createTransactionResponse401 | createTransactionResponse404 | createTransactionResponse409 | createTransactionResponse500) & {
+export type createTransactionResponseError = (createTransactionResponse401 | createTransactionResponse403 | createTransactionResponse404 | createTransactionResponse409 | createTransactionResponse500) & {
   headers: Headers;
 };
 
@@ -1799,6 +1963,11 @@ export type getTransactionsResponse401 = {
   status: 401
 }
 
+export type getTransactionsResponse403 = {
+  data: GetTransactions403
+  status: 403
+}
+
 export type getTransactionsResponse404 = {
   data: GetTransactions404
   status: 404
@@ -1817,7 +1986,7 @@ export type getTransactionsResponse500 = {
 export type getTransactionsResponseSuccess = (getTransactionsResponse201) & {
   headers: Headers;
 };
-export type getTransactionsResponseError = (getTransactionsResponse401 | getTransactionsResponse404 | getTransactionsResponse409 | getTransactionsResponse500) & {
+export type getTransactionsResponseError = (getTransactionsResponse401 | getTransactionsResponse403 | getTransactionsResponse404 | getTransactionsResponse409 | getTransactionsResponse500) & {
   headers: Headers;
 };
 
@@ -1920,6 +2089,11 @@ export type getFinanceiroHistoryResponse401 = {
   status: 401
 }
 
+export type getFinanceiroHistoryResponse403 = {
+  data: GetFinanceiroHistory403
+  status: 403
+}
+
 export type getFinanceiroHistoryResponse404 = {
   data: GetFinanceiroHistory404
   status: 404
@@ -1943,7 +2117,7 @@ export type getFinanceiroHistoryResponse500 = {
 export type getFinanceiroHistoryResponseSuccess = (getFinanceiroHistoryResponse201) & {
   headers: Headers;
 };
-export type getFinanceiroHistoryResponseError = (getFinanceiroHistoryResponse401 | getFinanceiroHistoryResponse404 | getFinanceiroHistoryResponse405 | getFinanceiroHistoryResponse409 | getFinanceiroHistoryResponse500) & {
+export type getFinanceiroHistoryResponseError = (getFinanceiroHistoryResponse401 | getFinanceiroHistoryResponse403 | getFinanceiroHistoryResponse404 | getFinanceiroHistoryResponse405 | getFinanceiroHistoryResponse409 | getFinanceiroHistoryResponse500) & {
   headers: Headers;
 };
 
