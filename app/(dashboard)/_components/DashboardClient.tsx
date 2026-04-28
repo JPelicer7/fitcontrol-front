@@ -44,8 +44,12 @@ interface DashboardClientProps {
 }
 
 export function DashboardClient({ data, dataHoje }: DashboardClientProps) {
-  const { data: session } = useSession();
-  const nomeUsuario = session?.user?.name?.split(" ")[0] ?? "Bem-vindo";
+  // const { data: session } = useSession();
+  // const nomeUsuario = session?.user?.name?.split(" ")[0] ?? "Bem-vindo";
+  const { data: session, isPending } = useSession();
+  const nomeUsuario = isPending
+    ? null
+    : session?.user?.name?.split(" ")[0] ?? "Bem-vindo";
 
   const alunos = data?.alunos ?? { ativos: 0, total: 0 };
   const financeiro = data?.financeiro ?? { receitaTotal: 0, despesaTotal: 0 };
@@ -73,7 +77,7 @@ export function DashboardClient({ data, dataHoje }: DashboardClientProps) {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30" />
         <div className="relative h-full flex flex-col justify-center p-6 md:p-8 max-w-2xl">
           <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-2">
-            Bem-vindo de volta, {nomeUsuario}
+            {nomeUsuario ? `Bem-vindo de volta, ${nomeUsuario}` : "Bem-vindo de volta"}
           </p>
           <h1 className="text-2xl md:text-3xl font-bold text-foreground leading-tight">
             Hoje você tem{" "}

@@ -1151,6 +1151,49 @@ export type DeleteAlunoTreino500 = {
   code: string;
 };
 
+export type GetMeusTreinos200TreinosItemExerciciosItem = {
+  id: string;
+  series: number;
+  repeticoes: string;
+  /** @nullable */
+  carga: string | null;
+  nome: string;
+  /** @nullable */
+  grupoMuscular: string | null;
+};
+
+export type GetMeusTreinos200TreinosItem = {
+  id: string;
+  nome: string;
+  /** @nullable */
+  descricao: string | null;
+  exercicios: GetMeusTreinos200TreinosItemExerciciosItem[];
+};
+
+export type GetMeusTreinos200 = {
+  treinos: GetMeusTreinos200TreinosItem[];
+};
+
+export type GetMeusTreinos401 = {
+  error: string;
+  code: string;
+};
+
+export type GetMeusTreinos403 = {
+  error: string;
+  code: string;
+};
+
+export type GetMeusTreinos404 = {
+  error: string;
+  code: string;
+};
+
+export type GetMeusTreinos500 = {
+  error: string;
+  code: string;
+};
+
 export type CreateAgendamentoBodyCategoria = typeof CreateAgendamentoBodyCategoria[keyof typeof CreateAgendamentoBodyCategoria];
 
 
@@ -2902,6 +2945,64 @@ export const deleteAlunoTreino = async (treinoId: string,
   {      
     ...options,
     method: 'DELETE'
+    
+    
+  }
+);}
+
+
+
+/**
+ * @summary Get treinos de um aluno
+ */
+export type getMeusTreinosResponse200 = {
+  data: GetMeusTreinos200
+  status: 200
+}
+
+export type getMeusTreinosResponse401 = {
+  data: GetMeusTreinos401
+  status: 401
+}
+
+export type getMeusTreinosResponse403 = {
+  data: GetMeusTreinos403
+  status: 403
+}
+
+export type getMeusTreinosResponse404 = {
+  data: GetMeusTreinos404
+  status: 404
+}
+
+export type getMeusTreinosResponse500 = {
+  data: GetMeusTreinos500
+  status: 500
+}
+    
+export type getMeusTreinosResponseSuccess = (getMeusTreinosResponse200) & {
+  headers: Headers;
+};
+export type getMeusTreinosResponseError = (getMeusTreinosResponse401 | getMeusTreinosResponse403 | getMeusTreinosResponse404 | getMeusTreinosResponse500) & {
+  headers: Headers;
+};
+
+export type getMeusTreinosResponse = (getMeusTreinosResponseSuccess | getMeusTreinosResponseError)
+
+export const getGetMeusTreinosUrl = (userId: string,) => {
+
+
+  
+
+  return `/alunoTreino/${userId}/meus-treinos`
+}
+
+export const getMeusTreinos = async (userId: string, options?: RequestInit): Promise<getMeusTreinosResponse> => {
+  
+  return customFetch<getMeusTreinosResponse>(getGetMeusTreinosUrl(userId),
+  {      
+    ...options,
+    method: 'GET'
     
     
   }

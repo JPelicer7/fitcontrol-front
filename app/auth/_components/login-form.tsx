@@ -33,7 +33,12 @@ export function LoginForm() {
     }
 
     toast.success("Login realizado com sucesso!");
-    router.push("/");
+    //router.push("/");
+    
+    // Redireciona para onde tentou acessar antes, ou para o dashboard
+      const params = new URLSearchParams(window.location.search);
+      const callbackUrl = params.get("callbackUrl") || "/";
+      router.push(callbackUrl);
   };
 
   return (
