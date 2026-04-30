@@ -53,8 +53,8 @@ function renderDiff(diff?: number) {
 }
 
 const quickMetrics = [
-  { label: "Peso", key: "peso", suffix: "kg", icon: Weight, accent: true },
-  { label: "Altura", key: "alturaCentimetros", suffix: "m", icon: Ruler, divide: 100 },
+  { label: "Peso", key: "peso", suffix: "kg", icon: Weight, accent: true, decimais: 2 },
+  { label: "Altura", key: "alturaCentimetros", suffix: "m", icon: Ruler, divide: 100, decimais: 2 },
   { label: "% Gordura", key: "percentual_gordura", suffix: "%", icon: Flame },
   { label: "IMC", key: "imc", suffix: "", icon: Activity },
 ];
@@ -215,8 +215,13 @@ export function MinhasMedidasClient({
                   {m.label}
                 </p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-2xl font-black text-foreground tabular-nums">
+                  {/* <span className="text-2xl font-black text-foreground tabular-nums">
                     {formatNum(value)}
+                  </span> */}
+                  <span className="text-2xl font-black text-foreground tabular-nums">
+                      {value !== null && value !== undefined
+                        ? `${Number(value).toFixed(m.decimais ?? 1)}`
+                        : "—"}
                   </span>
                   <span className="text-xs font-medium text-muted-foreground">{m.suffix}</span>
                 </div>

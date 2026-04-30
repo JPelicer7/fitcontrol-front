@@ -1,21 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, Check, User } from "lucide-react";
+import { ArrowLeft, Check, User, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-
-
 import { cadastrarAlunoAction } from "./actions";
-//import type { CreateUserBodyPlano } from "@/app/_lib/api/fetch-generated";
 
 const initialForm = {
   name: "",
   email: "",
   password: "",
+  confirmPassword: "",
   telefone: "",
-  plano: "Mensal" 
+  plano: "Mensal",
 };
 
 type FormKeys = keyof typeof initialForm;
@@ -23,6 +21,8 @@ type FormKeys = keyof typeof initialForm;
 export default function NovoAlunoPage() {
   const [form, setForm] = useState(initialForm);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
 
   const updateField = (field: FormKeys, value: string) => {
@@ -40,15 +40,18 @@ export default function NovoAlunoPage() {
       return;
     }
 
-    if(form.telefone.length !== 11) {
-      toast.error("Telefone Inválido.")
-      return
+    if (form.password !== form.confirmPassword) {
+      toast.error("As senhas não coincidem.");
+      return;
+    }
+
+    if (form.telefone.length !== 11) {
+      toast.error("Telefone inválido.");
+      return;
     }
 
     try {
       setIsLoading(true);
-
-      
       const resposta = await cadastrarAlunoAction({
         name: form.name,
         email: form.email,
@@ -57,18 +60,17 @@ export default function NovoAlunoPage() {
         role: "Aluno",
         Status: "Ativo",
         telefone: form.telefone,
-      } as any); 
+      } as any);
 
       if (resposta.sucesso) {
         toast.success("Aluno cadastrado com sucesso!");
         setForm(initialForm);
         router.push("/alunos");
-        router.refresh(); 
+        router.refresh();
       } else {
         toast.error(resposta.mensagem);
       }
-    } catch (error) {
-      console.error("Erro ao enviar formulário:", error);
+    } catch {
       toast.error("Erro interno ao tentar cadastrar o aluno.");
     } finally {
       setIsLoading(false);
@@ -76,8 +78,8 @@ export default function NovoAlunoPage() {
   };
 
   const renderInput = (
-    label: string, 
-    field: FormKeys, 
+    label: string,
+    field: FormKeys,
     opts?: { type?: string; placeholder?: string; required?: boolean }
   ) => (
     <div className="space-y-1.5">
@@ -93,6 +95,39 @@ export default function NovoAlunoPage() {
         disabled={isLoading}
         className="w-full h-10 px-3 bg-background border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/40 focus:border-primary/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       />
+    </div>
+  );
+
+  const renderPasswordInput = (
+    label: string,
+    field: "password" | "confirmPassword",
+    show: boolean,
+    onToggle: () => void,
+    placeholder: string
+  ) => (
+    <div className="space-y-1.5">
+      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+        {label}
+        <span className="text-destructive ml-0.5">*</span>
+      </label>
+      <div className="relative">
+        <input
+          type={show ? "text" : "password"}
+          value={form[field]}
+          onChange={(e) => updateField(field, e.target.value)}
+          placeholder={placeholder}
+          disabled={isLoading}
+          autoComplete="new-password"
+          className="w-full h-10 px-3 pr-10 bg-background border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/40 focus:border-primary/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed [&::-ms-reveal]:hidden [&::-ms-clear]:hidden [&::-webkit-credentials-auto-fill-button]:hidden"
+        />
+        <button
+          type="button"
+          onClick={onToggle}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+        </button>
+      </div>
     </div>
   );
 
@@ -120,11 +155,29 @@ export default function NovoAlunoPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {renderInput("Nome completo", "name", { placeholder: "Ex: Maria da Silva", required: true })}
           {renderInput("Email", "email", { type: "email", placeholder: "aluno@email.com", required: true })}
-          {renderInput("Senha", "password", { type: "password", placeholder: "Senha de acesso", required: true })}
+
+          {renderPasswordInput(
+            "Senha",
+            "password",
+            showPassword,
+            () => setShowPassword((v) => !v),
+            "Mínimo 8 caracteres"
+          )}
+
+          {renderPasswordInput(
+            "Confirmar Senha",
+            "confirmPassword",
+            showConfirmPassword,
+            () => setShowConfirmPassword((v) => !v),
+            "Repita a senha"
+          )}
+
           {renderInput("Telefone", "telefone", { placeholder: "(00) 00000-0000", required: true })}
-          
+
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Plano</label>
+            <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+              Plano
+            </label>
             <select
               value={form.plano}
               onChange={(e) => updateField("plano", e.target.value)}

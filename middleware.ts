@@ -20,9 +20,17 @@ export async function middleware(request: NextRequest) {
   const sessionToken =
     request.cookies.get("better-auth.session_token")?.value;
 
+  // if (!sessionToken) {
+  //   const loginUrl = new URL("/auth", request.url);
+  //   loginUrl.searchParams.set("callbackUrl", pathname);
+  //   return NextResponse.redirect(loginUrl);
+  // }
+
   if (!sessionToken) {
     const loginUrl = new URL("/auth", request.url);
-    loginUrl.searchParams.set("callbackUrl", pathname);
+    if (pathname !== "/") {
+      loginUrl.searchParams.set("callbackUrl", pathname);
+    }
     return NextResponse.redirect(loginUrl);
   }
 

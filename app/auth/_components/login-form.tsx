@@ -6,7 +6,7 @@ import { Dumbbell, Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signIn } from "@/app/_lib/auth-client";
+import { signIn, authClient } from "@/app/_lib/auth-client";
 import { toast } from "sonner";
 
 export function LoginForm() {
@@ -19,31 +19,48 @@ export function LoginForm() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
-    const { error } = await signIn.email({
-      email,
-      password,
-    });
 
-    setLoading(false);
+    const { error } = await signIn.email({ email, password });
 
     if (error) {
+      setLoading(false);
       toast.error(error.message || "Email ou senha inválidos");
       return;
     }
 
+    // Busca o role após login para redirecionar corretamente
+    const session = await authClient.getSession();
+    const role = (session.data?.user as any)?.role;
+
+    const params = new URLSearchParams(window.location.search);
+    const callbackUrl = params.get("callbackUrl");
+
+    // Valida o callbackUrl — só usa se for rota válida e compatível com o role
+    const defaultRedirect = role === "Aluno" ? "/aluno/meu-treino" : "/";
+
+    let redirectTo = defaultRedirect;
+
+    if (
+      callbackUrl &&
+      callbackUrl.startsWith("/") &&
+      !callbackUrl.startsWith("/auth") &&
+      !callbackUrl.includes("login")
+    ) {
+      
+      const isRotaAluno = callbackUrl.startsWith("/aluno");
+      const isRotaDono = !isRotaAluno && callbackUrl !== "/auth";
+
+      if (role === "Aluno" && isRotaAluno) redirectTo = callbackUrl;
+      if (role === "Dono" && isRotaDono) redirectTo = callbackUrl;
+    }
+
     toast.success("Login realizado com sucesso!");
-    //router.push("/");
-    
-    // Redireciona para onde tentou acessar antes, ou para o dashboard
-      const params = new URLSearchParams(window.location.search);
-      const callbackUrl = params.get("callbackUrl") || "/";
-      router.push(callbackUrl);
+    setLoading(false);
+    router.push(redirectTo);
   };
 
   return (
     <div className="w-full relative z-10">
-      {/* Logo */}
       <div className="flex flex-col items-center mb-8">
         <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-4 glow-border">
           <Dumbbell className="w-8 h-8 text-primary" />
@@ -52,7 +69,6 @@ export function LoginForm() {
         <p className="text-sm text-muted-foreground mt-1">Gestão de Academia</p>
       </div>
 
-      {/* Card de Login */}
       <div className="bg-card border border-border rounded-2xl p-8 glow-border">
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-foreground">Entrar</h2>

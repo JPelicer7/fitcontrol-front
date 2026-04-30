@@ -25,11 +25,11 @@ const alunoNav = [
 export function AppSidebarAluno() {
   const pathname = usePathname();
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, isPending } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
 
-  const nomeUsuario = session?.user?.name ?? "Carregando...";
+  const nomeUsuario = isPending ? null : session?.user?.name ?? "";
 
   const handleLogout = async () => {
     await signOut();
@@ -97,7 +97,7 @@ export function AppSidebarAluno() {
               Logado como
             </p>
             <p className="text-sm font-bold text-foreground mt-1 truncate">
-              {nomeUsuario}
+              {nomeUsuario ?? "..."}
             </p>
             <p className="text-xs text-muted-foreground">Aluno</p>
           </div>

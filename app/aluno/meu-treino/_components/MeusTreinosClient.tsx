@@ -74,9 +74,9 @@ export function MeusTreinosClient({ treinos, nomeAluno }: MeusTreinosClientProps
             {/* "A dor que você sente hoje é a força que você sentirá amanhã." */}
             &ldquo;A dor que você sente hoje é a força que você sentirá amanhã.&rdquo;
           </p>
-          <p className="text-xs text-muted-foreground mt-1.5 uppercase tracking-wider">
+          {/* <p className="text-xs text-muted-foreground mt-1.5 uppercase tracking-wider">
             Frase do dia
-          </p>
+          </p> */}
         </div>
       </div>
 

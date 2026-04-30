@@ -45,19 +45,20 @@ const studentNav = [
 export function AppSidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, isPending } = useSession();
   const [viewMode, setViewMode] = useState<"professional" | "student">("professional");
   const [isOpen, setIsOpen] = useState(false);
   const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
 
   const navItems = viewMode === "professional" ? professionalNav : studentNav;
 
-  const nomeUsuario = session?.user?.name ?? "Carregando...";
+ // const nomeUsuario = session?.user?.name ?? "Carregando...";
+  const nomeUsuario = isPending ? null : session?.user?.name ?? "";
   const roleUsuario = (session?.user as any)?.role === "Dono" ? "Proprietário" : "Aluno";
 
   const handleLogout = async () => {
     await signOut();
-    router.push("/login");
+    router.push("/auth");
   };
 
   return (
@@ -137,7 +138,7 @@ export function AppSidebar() {
               Logado como
             </p>
             <p className="text-sm font-bold text-foreground mt-1 truncate">
-              {nomeUsuario}
+              {nomeUsuario ?? "..."}
             </p>
             <p className="text-xs text-muted-foreground">{roleUsuario}</p>
           </div>
