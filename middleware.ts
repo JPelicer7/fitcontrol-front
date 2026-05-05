@@ -21,6 +21,11 @@ export async function middleware(request: NextRequest) {
     request.cookies.get("_Secure-better-auth.session_token")?.value ??
     request.cookies.get("better-auth.session_token")?.value;
 
+
+    const cookieName = sessionToken === request.cookies.get("_Secure-better-auth.session_token")?.value
+    ? "_Secure-better-auth.session_token"
+    : "better-auth.session_token";
+
   // if (!sessionToken) {
   //   const loginUrl = new URL("/auth", request.url);
   //   loginUrl.searchParams.set("callbackUrl", pathname);
@@ -40,7 +45,7 @@ export async function middleware(request: NextRequest) {
       `${process.env.NEXT_PUBLIC_API_URL}/api/auth/get-session`,
       {
         headers: {
-          cookie: `better-auth.session_token=${sessionToken}`,
+          cookie: `${cookieName}=${sessionToken}`,
         },
       }
     );
