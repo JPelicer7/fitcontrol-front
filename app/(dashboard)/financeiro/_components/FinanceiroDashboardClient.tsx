@@ -211,7 +211,11 @@ export function FinanceiroDashboardClient({ initialData, history }: Props) {
                   ))}
                 </Pie>
                 <Tooltip 
-                  formatter={(val: number) => formatCurrency(val)}
+                  // formatter={(val: number) => formatCurrency(val)}
+                  formatter={(val) => {
+                    const num = typeof val === "number" ? val : Number(val);
+                    return formatCurrency(num);
+                  }}
                   contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: "8px" }}
                 />
               </PieChart>
