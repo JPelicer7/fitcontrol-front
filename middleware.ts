@@ -22,8 +22,13 @@ export async function middleware(request: NextRequest) {
     request.cookies.get("better-auth.session_token")?.value;
 
 
-    const cookieName = sessionToken === request.cookies.get("_Secure-better-auth.session_token")?.value
-    ? "_Secure-better-auth.session_token"
+  //   const cookieName = sessionToken === request.cookies.get("_Secure-better-auth.session_token")?.value
+  //   ? "_Secure-better-auth.session_token"
+  //   : "better-auth.session_token";
+
+  const isSecure = !!request.cookies.get("_Secure-better-auth.session_token")?.value;
+  const cookieName = isSecure 
+    ? "_Secure-better-auth.session_token" 
     : "better-auth.session_token";
 
   // if (!sessionToken) {
