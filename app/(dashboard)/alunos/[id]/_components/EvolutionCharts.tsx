@@ -62,7 +62,11 @@ export function EvolutionCharts({ data }: EvolutionChartsProps) {
                   borderRadius: "8px",
                   color: "hsl(var(--foreground))",
                 }}
-                formatter={(value: number) => [`${value} kg`, "Peso"]}
+                // formatter={(value: number) => [`${value} kg`, "Peso"]}
+                formatter={(value) => {
+                  const num = typeof value === "number" ? value : Number(value);
+                  return [`${num} kg`, "Peso"];
+                }}
               />
               <Line 
                 type="monotone" 
@@ -105,7 +109,11 @@ export function EvolutionCharts({ data }: EvolutionChartsProps) {
                   borderRadius: "8px",
                   color: "hsl(var(--foreground))",
                 }}
-                formatter={(value: number) => [`${value}%`, "Gordura"]}
+                // formatter={(value: number) => [`${value}%`, "Gordura"]}
+                formatter={(value) => {
+                  const num = typeof value === "number" ? value : Number(value);
+                  return [`${num}%`, "Gordura"];
+                }}
               />
               <Line 
                 type="monotone" 
