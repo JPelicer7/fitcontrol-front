@@ -8,7 +8,6 @@ import {
   DollarSign,
   Dumbbell,
   Activity,
-  ArrowLeftRight,
   Menu,
   X,
   CalendarDays,
@@ -36,10 +35,10 @@ const professionalNav = [
   { href: "/financeiro", icon: DollarSign, label: "Financeiro" },
 ];
 
-const studentNav = [
-  { href: "/aluno/meu-treino", icon: Dumbbell, label: "Meu Treino" },
-  { href: "/aluno/minhas-medidas", icon: Activity, label: "Minhas Medidas" },
-];
+// const studentNav = [
+//   { href: "/aluno/meu-treino", icon: Dumbbell, label: "Meu Treino" },
+//   { href: "/aluno/minhas-medidas", icon: Activity, label: "Minhas Medidas" },
+// ];
 
 
 export function AppSidebar() {
@@ -50,7 +49,7 @@ export function AppSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
 
-  const navItems = viewMode === "professional" ? professionalNav : studentNav;
+  const navItems = professionalNav;
 
  // const nomeUsuario = session?.user?.name ?? "Carregando...";
   const nomeUsuario = isPending ? null : session?.user?.name ?? "";
@@ -95,18 +94,8 @@ export function AppSidebar() {
           </div>
         </div>
 
-        <div className="px-3 mb-2">
-          <button
-            onClick={() =>
-              setViewMode(viewMode === "professional" ? "student" : "professional")
-            }
-            className="w-full flex items-center gap-2 px-4 py-2.5 rounded-lg bg-muted/50 border border-border text-[11px] font-bold text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all cursor-pointer uppercase tracking-wider"
-          >
-            <ArrowLeftRight className="w-3.5 h-3.5" />
-            {viewMode === "professional" ? "Visão: Profissional" : "Visão: Aluno"}
-          </button>
-        </div>
-
+        <hr className="mx-4 border-border mb-2" />
+        
         <nav className="flex-1 px-3 mt-2 space-y-1">
           {navItems.map((item) => {
             const isActive =

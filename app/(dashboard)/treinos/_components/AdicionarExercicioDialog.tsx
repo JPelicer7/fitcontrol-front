@@ -265,17 +265,28 @@ export function AdicionarExercicioDialog({
               <div className="space-y-1.5">
                 <Label>Séries</Label>
                 <Input
-                  type="number"
-                  min={SERIES_MIN}
-                  max={SERIES_MAX}
+                  type="text"
+                  inputMode="numeric"
                   value={configForm.series}
                   onChange={(e) => {
-                    const val = Math.min(
-                      SERIES_MAX,
-                      Math.max(SERIES_MIN, Number(e.target.value))
-                    );
-                    setConfigForm((f) => ({ ...f, series: val }));
+                    const val = e.target.value.replace(/\D/g, "");
+                    const num = Number(val)
+                    if(val === "") {
+                      setConfigForm((f) => ({...f, series: 0}))
+                      return;
+                    }
+                    if (num >= SERIES_MIN && num <= SERIES_MAX) {
+                      setConfigForm((f) => ({ ...f, series: num }));
+                    }
                   }}
+
+                  onBlur={(e) => {
+                    const num = Number(e.target.value);
+                    if (!num || num < SERIES_MIN) {
+                      setConfigForm((f) => ({ ...f, series: SERIES_MIN }));
+                    }
+                  }}
+
                 />
               </div>
               <div className="space-y-1.5">

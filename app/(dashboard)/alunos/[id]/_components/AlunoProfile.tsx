@@ -93,7 +93,11 @@ export default function StudentProfileClient({
 
   const startEdit = (field: string, value: any) => {
     setEditingField(field);
-    setDraftValue(value?.toString().replace(".", ",") || "");
+    const formatted = field === "imc"
+      ? Number(value).toFixed(2).replace(".", ",")
+      : value?.toString().replace(".", ",") || "";
+    //setDraftValue(value?.toString().replace(".", ",") || "");
+    setDraftValue(formatted)
   };
 
   const handleSave = async (field: string) => {
